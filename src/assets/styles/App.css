@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+.HeaderText{
+  margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  color: yellow;
+}
+
+.App-intro {
+  font-size: large;
+}
