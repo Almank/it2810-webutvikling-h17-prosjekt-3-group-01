@@ -1,0 +1,6 @@
+.SideBar {
+    display: flex;
+    width: 100px;
+    background-color: dimgrey;
+    height: 100vh;
+}

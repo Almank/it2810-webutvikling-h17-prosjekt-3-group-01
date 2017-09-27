@@ -1,14 +1,14 @@
 import React from 'react';
 import '../assets/styles/App.css';
+import {SideBar} from "./SideBar";
+import {Content} from "./Content";
 
 export class App extends React.Component {
     render(){
         return (
             <div className="App">
-                <h2 className="HeaderText">Header</h2>
-                <p className="App-intro">
-                    This is an introduction
-                </p>
+                <SideBar/>
+                <Content/>
             </div>
         );
     }
