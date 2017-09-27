@@ -15,6 +15,6 @@ export class Button extends React.Component {
 
 Button.PropTypes = {
     link: PropTypes.string.isRequired,
-}
+};
 
 export default Button;
