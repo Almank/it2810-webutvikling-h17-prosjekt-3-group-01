@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import DayBox from './components/calendar/DayBox';
+import '../assets/styles/calendar.css';
 
 export class Calendar extends React.Component {
 
@@ -12,9 +13,9 @@ export class Calendar extends React.Component {
         return ( <div>
                 <h1>This is your schedule!</h1>
 
-                <DayBox />
+                <DayBox className={'weekBox'}>
 
-                <div>button</div>
+                </DayBox>
 
                 <div className={'calendarBox'}>
 

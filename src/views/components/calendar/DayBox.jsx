@@ -45,13 +45,13 @@ export default class DayBox extends React.Component {
             }
         }
         let dayElements = dayList.map(function(dayName){
-            return <div key={dayName}>
-                    <div>{dayName[0]}</div>
-                    <h1>{dayName[1]}</h1>
+            return <div key={dayName} className={'dayBox'}>
+                    <div className={'dayName'}>{dayName[0]}</div>
+                    <h1 className={'dayDate'}>{dayName[1]}</h1>
             </div>
         });
 
-        return <div>{dayElements}</div>
+        return <div className={'weekBox'}>{dayElements}</div>
     }
 
     render(
@@ -60,9 +60,7 @@ export default class DayBox extends React.Component {
 
     ){
         return (
-            <div>
-                <h2>{this.createDays()}</h2>
-            </div>
+            <div>{this.createDays()}</div>
         );
     }
 }
