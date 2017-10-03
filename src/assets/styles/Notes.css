@@ -1,0 +1,19 @@
+.NoteBook{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.NoteList{
+    width: 20%;
+    min-width: 250px;
+    height: 100%;
+    background-color: beige;
+}
+
+.NoteEdit{
+    width: 80%;
+    min-width: 430px;
+    height: 100%;
+    background-color: lightgray;
+}
