@@ -54,11 +54,7 @@ export default class DayBox extends React.Component {
         return <div className={'weekBox'}>{dayElements}</div>
     }
 
-    render(
-
-
-
-    ){
+    render(){
         return (
             <div>{this.createDays()}</div>
         );
