@@ -10,6 +10,19 @@ import {NoteContent} from "./container/NoteContent";
 
 export class Notes extends React.Component {
     constructor(props){
+        //Initiate local storage if no data is stored.
+        if(localStorage.getItem("notes") === null){
+            let data = {
+                notes: {
+                    'default': {
+                        title: 'default',
+                        content: 'no content'
+                    }
+                }
+            };
+            localStorage.setItem("notes", JSON.stringify(data));
+        }
+
         let notes = localStorage.getItem("notes");
         notes = JSON.parse(notes);
         super(props);
@@ -31,7 +44,6 @@ export class Notes extends React.Component {
     }
 
     removeClick(title){
-        console.log(title);
         delete this.state.notes[title];
         this.updateLocalStorage();
     }
