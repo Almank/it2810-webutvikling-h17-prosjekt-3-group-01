@@ -9,14 +9,14 @@
     width: 20%;
     min-width: 250px;
     height: 100%;
-    background-color: beige;
+    background-color: #D7BEA8;
 }
 
 .NoteEdit{
     width: 80%;
     min-width: 430px;
     height: 100%;
-    background-color: lightgray;
+    background-color: #f0f0f0;
 }
 
 .NoteEdit .content{
@@ -29,14 +29,17 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid gainsboro;
+}
 
+.NoteLinkContainer:hover{
+    background-color: #c6ad9a;
 }
 
 .NoteButton{
     display: flex;
     padding-left: 10px;
     text-decoration: none;
-    color: black;
+    color: #ececec;
     font-size: 10px;
     width: 70%;
     font-family: "Helvetica", serif;
