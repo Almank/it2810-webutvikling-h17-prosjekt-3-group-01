@@ -12,25 +12,34 @@ export class Notes extends React.Component {
     constructor(props){
         let notes = localStorage.getItem("notes");
         notes = JSON.parse(notes);
-
         super(props);
         this.state = {
             notes: notes['notes'],
         };
+        this.removeClick = this.removeClick.bind(this);
     };
 
+    updateLocalStorage(){
+        let data = this.state;
+        localStorage.setItem("notes", JSON.stringify(data));
+    }
 
     onChange(title, content){
         this.state.notes[title].title = title;
         this.state.notes[title].content = content;
-        let data = this.state;
-        localStorage.setItem("notes", JSON.stringify(data));
+        this.updateLocalStorage();
+    }
+
+    removeClick(title){
+        console.log(title);
+        delete this.state.notes[title];
+        this.updateLocalStorage();
     }
 
     render(){
         return (
             <div className="NoteBook">
-                <NoteList notes={this.state.notes}/>
+                <NoteList notes={this.state.notes} removeClick={(value) => this.removeClick(value)}/>
                 <div className="NoteEdit">
                     <div className="content">
                         <Route exact path="/notebook/:name" render={ (id) =>

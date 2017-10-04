@@ -13,6 +13,7 @@ export class NoteList extends React.Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
     }
 
     onSubmit(event){
@@ -24,12 +25,22 @@ export class NoteList extends React.Component {
         event.preventDefault();
     }
 
+    handleRemoveClick(event){
+        let title = event.target.value;
+        this.props.removeClick(title);
+        this.forceUpdate();
+    }
+
     renderListedNotes(){
         let dataSet = [];
         const data = this.state.notes;
         let index = 0;
         for(let key in data){
-            dataSet.push(<NoteLink title={ data[key].title } content={data[key].content} key={index}/>);
+            dataSet.push(<NoteLink title={ data[key].title }
+                                   content={data[key].content}
+                                   key={index}
+                                   onClick={this.handleRemoveClick}
+            />);
             index++;
         }
         return dataSet;
