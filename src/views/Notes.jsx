@@ -18,7 +18,8 @@ export class Notes extends React.Component {
                         title: 'default',
                         content: 'no content'
                     }
-                }
+                },
+                update: false
             };
             localStorage.setItem("notes", JSON.stringify(data));
         }
@@ -46,6 +47,8 @@ export class Notes extends React.Component {
     removeClick(title){
         delete this.state.notes[title];
         this.updateLocalStorage();
+        this.setState({update: true});
+        window.location.pathname = "/notebook";
     }
 
     render(){
@@ -59,6 +62,7 @@ export class Notes extends React.Component {
                                          key={id}
                                          id={id}
                                          onChange={this.onChange.bind(this)}
+                                         update={this.state.update}
                             />}/>
                     </div>
                 </div>
