@@ -5,8 +5,7 @@ import React from 'react';
 import '../assets/styles/Notes.css';
 import {NoteList} from "./container/NoteList";
 import {Route} from 'react-router-dom';
-import {NoteContent} from "./components/NoteList/NoteContent";
-import {BrowserRouter} from 'react-router-dom';
+import {NoteContent} from "./container/NoteContent";
 
 
 export class Notes extends React.Component {
@@ -15,24 +14,19 @@ export class Notes extends React.Component {
         this.state = {
             notes: { 'tittel': {
                         title: "tittel",
-                        subject: "subjekt",
                         content: "This is some kind of content"
                     },
                     'note': {
                         title: "note",
-                        subject: "subjekt",
-                        content: "You need to write something"
+                        content: "stahp"
                     },
             },
         };
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onNavigation = this.onNavigation(this);
     }
 
-    onSubmit(id, content){
-        console.log(id);
-        console.log(content);
-        // Lagre content til local storage
+    onChange(title, content){
+        this.state.notes[title].title = title;
+        this.state.notes[title].content = content;
     }
 
     render(){
@@ -41,10 +35,12 @@ export class Notes extends React.Component {
                 <NoteList notes={this.state.notes}/>
                 <div className="NoteEdit">
                     <div className="content">
-                        <Route path="/notebook/:name" render={ (id) =>
-                            <NoteContent data={this.state.notes}
+                        <Route exact path="/notebook/:name" render={ (id) =>
+                            <NoteContent data={this.state.notes[id.match.params.name]}
+                                         key={id}
                                          id={id}
-                                         onClick={() => this.onSubmit(id.match.params.name, this.state.content)} />}/>
+                                         onChange={this.onChange.bind(this)}
+                            />}/>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import '../../assets/styles/Notes.css';
-import {Note} from "../components/NoteList/Note";
+import {NoteLink} from "../components/NoteList/NoteLink";
 
 export class NoteList extends React.Component {
     constructor(props) {
@@ -29,10 +29,9 @@ export class NoteList extends React.Component {
         const data = this.state.notes;
         let index = 0;
         for(let key in data){
-            dataSet.push(<Note title={ data[key].title } subject={ data[key].subject } key={index}/>);
+            dataSet.push(<NoteLink title={ data[key].title } content={data[key].content} key={index}/>);
             index++;
         }
-        console.log(dataSet);
         return dataSet;
     }
 
