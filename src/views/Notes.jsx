@@ -54,7 +54,10 @@ export class Notes extends React.Component {
     render(){
         return (
             <div className="NoteBook">
-                <NoteList notes={this.state.notes} removeClick={(value) => this.removeClick(value)}/>
+                <NoteList notes={this.state.notes}
+                          removeClick={(value) => this.removeClick(value)}
+                          updateStorage={() => this.updateLocalStorage()}
+                />
                 <div className="NoteEdit">
                     <div className="content">
                         <Route exact path="/notebook/:name" render={ (id) =>

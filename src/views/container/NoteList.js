@@ -22,6 +22,7 @@ export class NoteList extends React.Component {
             title: event.target.title.value,
         };
         this.setState({notes: data});
+        this.props.updateStorage();
         event.preventDefault();
     }
 
@@ -49,9 +50,9 @@ export class NoteList extends React.Component {
     render(){
         return (
             <div className="NoteList">
-                <form onSubmit={this.onSubmit}>
-                    <input name="title" type="text"/>
-                    <input type="submit" value="Add"/>
+                <form className="NoteForm" onSubmit={this.onSubmit}>
+                    <input className="NoteField" name="title" type="text"/>
+                    <input className="NoteAdd" type="submit" value="Add"/>
                 </form>
                 <div className="CurrentNotes">
                     { this.renderListedNotes() }

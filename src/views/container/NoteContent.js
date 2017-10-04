@@ -37,7 +37,7 @@ export class NoteContent extends React.Component {
         }
 
         return(
-            <div>
+            <div className="NoteContentContainer">
                 <h1>{ this.state.title }</h1>
                 <textarea value={ textValue } onChange={this.handleChange} />
             </div>

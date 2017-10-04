@@ -12,14 +12,17 @@ export class NoteLink extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="NoteLinkContainer">
                 <Link className="NoteButton"
                       key={this.props.index}
                       to={`/notebook/${this.props.title}`}>
 
                     <h1>{this.props.title}</h1>
                 </Link>
-                <button type="button" onClick={this.props.onClick} value={this.props.title}>Remove</button>
+                <button className="RemoveButton"
+                        type="button"
+                        onClick={this.props.onClick}
+                        value={this.props.title}>Remove</button>
             </div>
         );
     }
