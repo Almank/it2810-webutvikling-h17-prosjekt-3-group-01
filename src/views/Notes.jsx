@@ -10,23 +10,21 @@ import {NoteContent} from "./container/NoteContent";
 
 export class Notes extends React.Component {
     constructor(props){
+        let notes = localStorage.getItem("notes");
+        notes = JSON.parse(notes);
+
         super(props);
         this.state = {
-            notes: { 'tittel': {
-                        title: "tittel",
-                        content: "This is some kind of content"
-                    },
-                    'note': {
-                        title: "note",
-                        content: "stahp"
-                    },
-            },
+            notes: notes['notes'],
         };
-    }
+    };
+
 
     onChange(title, content){
         this.state.notes[title].title = title;
         this.state.notes[title].content = content;
+        let data = this.state;
+        localStorage.setItem("notes", JSON.stringify(data));
     }
 
     render(){

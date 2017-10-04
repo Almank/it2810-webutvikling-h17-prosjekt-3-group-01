@@ -25,10 +25,8 @@ export class NoteLink extends React.Component {
 
 NoteLink.propTypes = {
     title: propTypes.string,
-    content: propTypes.string,
 };
 
 NoteLink.defaultProps = {
     title: 'Note',
-    content: 'Write your notes here'
 };

@@ -6,7 +6,6 @@ import React from 'react';
 export class NoteContent extends React.Component {
     constructor(props){
         super(props);
-        console.log("Constructor runs");
         this.state = {
             title: this.props.data.title,
             content: this.props.data.content
