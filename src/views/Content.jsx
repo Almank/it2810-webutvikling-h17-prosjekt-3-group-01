@@ -12,8 +12,8 @@ export class Content extends React.Component {
         return (
             <div className="content">
                 <Route path="/1" render={ () => <TodoList/>}/>
-                <Route path="/2" render={ () => <Calendar/>}/>
-                <Route path="/3" render={ () => <h1>WebApp3</h1>}/>
+                <Route path="/2" render={ () => <h1>Notes</h1>}/>
+                <Route path="/calendar" render={ () => <Calendar/>}/>
             </div>
         );
     }
