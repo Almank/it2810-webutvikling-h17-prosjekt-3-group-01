@@ -9,25 +9,31 @@ export class NoteList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            notes: [],
+            notes: this.props.notes,
         };
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(event){
-        const list = this.state.notes;
-        list.push(event.target.title.value);
-        this.setState({notes: list});
+        const data = this.state.notes;
+        data[event.target.title.value] = {
+            title: event.target.title.value,
+        };
+        this.setState({notes: data});
         event.preventDefault();
-
-        console.log(this.state.notes);
     }
 
     renderListedNotes(){
-        return this.state.notes.map((note, index) =>
-            <Note key={index} title={note}/>
-        );
+        let dataSet = [];
+        const data = this.state.notes;
+        let index = 0;
+        for(let key in data){
+            dataSet.push(<Note title={ data[key].title } subject={ data[key].subject } key={index}/>);
+            index++;
+        }
+        console.log(dataSet);
+        return dataSet;
     }
 
     render(){
