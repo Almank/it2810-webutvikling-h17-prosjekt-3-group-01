@@ -1,0 +1,101 @@
+
+.background-image {background-image: url("../images/background.jpg");
+    position: fixed !important;
+}
+
+
+/*----------------
+ 	Hero Section
+----------------*/
+
+.hero{
+    position: relative;
+    justify-content: center;
+    min-height: 100vh;
+    color: #fff;
+    text-align: center;
+}
+
+.hero .background-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    z-index: -1;
+}
+
+.hero .background-image:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #414a4f;
+    opacity: 0.70;
+}
+
+.hero h1{
+    font: bold 60px 'Open Sans', sans-serif;
+    margin-bottom: 15px;
+}
+
+.hero h3{
+    font: normal 28px 'Open Sans', sans-serif;
+    margin-bottom: 40px;
+}
+
+.hero a.btn{
+    padding: 20px 46px;
+}
+
+@media (max-width: 800px){
+
+    .hero{
+        min-height: 600px;
+    }
+
+    .hero h1{
+        font-size: 48px;
+    }
+
+    .hero h3{
+        font-size: 24px;
+    }
+
+    .hero a.btn{
+        padding: 15px 40px;
+    }
+
+}
+
+.LogoWrapper {
+    width: 250px;
+    height: 235px;
+    border-radius: 50%;
+    background-color: #59cbe8;
+    background-image: -webkit-linear-gradient(to bottom, #59cbe8, #59cbe8);
+    background-image: linear-gradient(to bottom, #59cbe8, #59cbe8);
+    box-shadow: 0px 8px 10px 0px grey, inset 0px 4px 1px 1px #59cbe8, inset 0px -3px 1px 1px #59cbe8;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+    margin: auto;
+    opacity: 0.95;
+}
+
+/*-------------
+Logo
+-------------*/
+
+.WLogo {
+    font-family: "Noteworthy" !important;
+    font-size: 150px !important;
+    color: white;
+    text-align: center;}
+
+.WeeboLogin{
+    font-family: "Noteworthy" !important;
+    font-size: 40px !important;
+}

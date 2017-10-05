@@ -1,7 +1,7 @@
 .SideBar {
     display: flex;
     width: 100px;
-    background-color: dimgrey;
+    background-color: #93c3cf;
     height: 100vh;
     flex-direction: column;
     align-items: center;
@@ -10,7 +10,17 @@
 .SideBar .Button{
     width: 80px;
     height: 80px;
-    background-color: black;
+    background-color: #3c7f90;
     border-radius: 15px;
     margin-top: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.Glyphicon{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 24.5px;
 }
