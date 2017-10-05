@@ -1,0 +1,101 @@
+.NoteBook{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+/* Main flexboxes */
+.NoteList{
+    width: 20%;
+    min-width: 250px;
+    height: 100%;
+    background-color: #D7BEA8;
+}
+
+.NoteEdit{
+    width: 80%;
+    min-width: 430px;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+
+.NoteEdit .content{
+    height: 100%;
+}
+
+/* NoteLink Component */
+.NoteLinkContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid gainsboro;
+}
+
+.NoteLinkContainer:hover{
+    background-color: #c6ad9a;
+}
+
+.NoteButton{
+    display: flex;
+    padding-left: 10px;
+    text-decoration: none;
+    color: #ececec;
+    font-size: 10px;
+    width: 70%;
+    font-family: "Helvetica", serif;
+}
+
+.RemoveButton{
+    display: flex;
+    max-height: 20px;
+    margin-right: 5px;
+}
+
+/* NoteList - Form component */
+.NoteForm{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid darkgrey;
+}
+
+.NoteAdd{
+    margin-right: 5px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding-left: 17.5px;
+    padding-right: 17.5px;
+}
+
+.NoteField{
+    padding: 2.5px 0px 2.5px 0px;
+    width: 165px;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+}
+
+/* NoteContent Component */
+.NoteContentContainer{
+    padding: 20px;
+    height: 95%;
+}
+
+.NoteContentContainer h1{
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+}
+
+.NoteContentContainer textarea{
+    max-width: 100%;
+    width: 96%;
+    padding: 2%;
+    height: 85%;
+    border: 0;
+    margin: 0;
+    outline: none;
+    resize: none;
+}
