@@ -1,0 +1,19 @@
+.weekBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.dayBox {
+    display: flex;
+    flex-direction: column;
+    width:100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dayDate {
+    margin:0px;
+    padding: 20px;
+}

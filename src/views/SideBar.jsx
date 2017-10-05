@@ -10,8 +10,8 @@ export class SideBar extends React.Component {
         return (
             <div className="SideBar">
                 <Button link="/1"/>
-                <Button link="/2"/>
-                <Button link="/3"/>
+                <Button link="/notebook"/>
+                <Button link="/calendar"/>
             </div>
         );
     }
