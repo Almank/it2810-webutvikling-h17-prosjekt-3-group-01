@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export default class DayBox extends React.Component {
 
     createDays() {
-        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         let dayOfWeek = new Date().getDay();
         let dayDate = new Date().getDate();
         let dayName;
@@ -29,26 +29,26 @@ export default class DayBox extends React.Component {
                 dayName = days[6];
             }
             if (i === 0){
-                dayName = 'Today';
+                dayName = 'TODAY';
             }
             if (i === 1){
-                dayName = 'Tomorrow';
+                dayName = 'TOMORROW';
             }
 
             dayList.push([dayName,dayDate]);
 
             dayDate++;
             dayOfWeek++;
-            console.log(dayList);
             if (dayOfWeek === 8){
                 dayOfWeek = 1;
             }
         }
+
         let dayElements = dayList.map(function(dayName){
-            return <div key={dayName} className={'dayBox'}>
-                    <div className={'dayName'}>{dayName[0]}</div>
+            return <button key={dayName} className={'dayBox'}>
+                    <p className={'dayName'}>{dayName[0]}</p>
                     <h1 className={'dayDate'}>{dayName[1]}</h1>
-            </div>
+            </button>
         });
 
         return <div className={'weekBox'}>{dayElements}</div>

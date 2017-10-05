@@ -1,19 +1,65 @@
+.calendarContent {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+
+}
+
+h1 {
+    font-family: "Helvetica", serif;
+}
+
+.title {
+    text-align: center;
+    font-weight: 400;
+    border-bottom:1px solid rgba(155,155,155,0.5);
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+
+}
+
 .weekBox {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-self: center;
 }
 
 .dayBox {
     display: flex;
     flex-direction: column;
-    width:100px;
-    height: 100px;
     justify-content: center;
     align-items: center;
+    flex-basis:100px;
+    margin:15px;
+    border: 1px solid rgba(155,155,155,0.5);
+    font-family: "Helvetica", serif;
+    background-color: white;
+    height: 100px;
+}
+
+.dayBox p {
+    margin:0;
+    font-size:11px;
+}
+
+.dayBox h1 {
+    font-size:32px;
+    font-weight: 400;
+}
+
+.dayBox:hover {
+    border-color: rgba(236,164,0,1);
+    cursor: pointer;
 }
 
 .dayDate {
-    margin:0px;
-    padding: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
