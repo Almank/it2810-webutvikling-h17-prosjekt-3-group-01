@@ -10,9 +10,9 @@ export class Frontpage extends React.Component {
             <div>
                 <div className="hero">
                     <div className="background-image"></div>
-                </div>
-                <div>
-                </div>
+                        <div className="LogoWrapper"><h1 className="Logo">✎</h1></div>
+                        <h3 className="LoginText">My Personal assistent!</h3>
+                    </div>
             </div>
         );
     }

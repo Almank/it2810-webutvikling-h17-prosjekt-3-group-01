@@ -1,20 +1,21 @@
 .SideBar {
     display: flex;
     width: 100px;
-    background-color: #93c3cf;
     height: 100vh;
+    background-color: #35393a;
     flex-direction: column;
     align-items: center;
+
 }
 
 .SideBar .Button{
     width: 80px;
     height: 80px;
-    background-color: #3c7f90;
-    border-radius: 15px;
+    background-color: #17292d;
     margin-top: 5px;
     color: white;
     text-decoration: none;
+    padding: 5px;
 }
 
 .Glyphicon{
@@ -22,5 +23,9 @@
     font-size: 30px;
     text-align: center;
     padding-top: 20px;
-    padding-left: 24.5px;
+    padding-left: 20px;
+}
+
+.Glyphicon:hover{
+    color: #23212c;
 }
