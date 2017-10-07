@@ -24,6 +24,6 @@
     color: #ECA400;
 }
 
-.glyphicon:hover, .Button:hover {
-    text-decoration: none;
+.Button:hover, .Button  {
+    text-decoration: none !important;
 }

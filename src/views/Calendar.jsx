@@ -7,25 +7,17 @@ import '../assets/styles/calendar.css';
 
 export class Calendar extends React.Component {
 
-    render(
-
-    ){
-        return ( <div className={'calendarContent'}>
+    render(){
+        return (
+            <div className={'calendarContent'}>
                 <h1 className={'title'}>Your schedule for the coming week</h1>
 
-
-                <DayBox className={'weekBox'}>
-
-                </DayBox>
+                <DayBox />
 
                 <div className={'calendarBox'}>
 
                 </div>
             </div>
-
         );
-
-
     }
-
 }
