@@ -2,26 +2,14 @@
     display: flex;
     flex-direction: column;
     margin: 0 10%;
-
-}
-
-h1 {
-    font-family: "Helvetica", serif;
 }
 
 .title {
     text-align: center;
-    font-weight: 400;
+    font-weight: 700;
     border-bottom:1px solid rgba(155,155,155,0.5);
     padding-bottom: 15px;
     margin-bottom: 5px;
-}
-
-.subtitle {
-    font-weight: 400;
-    font-size: 20px;
-    text-align: center;
-
 }
 
 .weekBox {
@@ -39,7 +27,6 @@ h1 {
     flex-basis:100px;
     margin:15px;
     border: 1px solid rgba(155,155,155,0.5);
-    font-family: "Helvetica", serif;
     background-color: white;
     height: 100px;
 }
@@ -51,7 +38,6 @@ h1 {
 
 .dayBox h1 {
     font-size:32px;
-    font-weight: 400;
 }
 
 .dayBox:hover {

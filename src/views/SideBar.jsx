@@ -10,10 +10,9 @@ export class SideBar extends React.Component {
     render(){
         return (
             <div className="SideBar">
-                <Button link="/" icon="glyphicon glyphicon-home"/>
-                <Button link="/1" icon="glyphicon glyphicon-list-alt"/>
-                <Button link="/notebook" icon="glyphicon glyphicon-pencil"/>
-                <Button link="/calendar" icon="glyphicon glyphicon-calendar"/>
+                <Button link="/" icon="glyphicon-home"/>
+                <Button link="/1" icon="glyphicon-list-alt"/>
+                <Button link="/notebook" icon="glyphicon-pencil"/>
             </div>
         );
     }
