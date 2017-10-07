@@ -12,6 +12,7 @@ export class SideBar extends React.Component {
                 <Button link="/1"/>
                 <Button link="/notebook"/>
                 <Button link="/calendar"/>
+
             </div>
         );
     }

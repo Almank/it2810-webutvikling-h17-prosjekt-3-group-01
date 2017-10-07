@@ -1,70 +1,56 @@
 /**
- * Created by almank on 02.10.2017.
+ * Created by Lohne on 05.10.2017.
  */
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export default class DayBox extends React.Component {
 
-    createDays() {
-        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        let dayOfWeek = new Date().getDay();
-        let dayDate = new Date().getDate();
-        let dayName;
-        let dayList = [];
-        for (let i=0;i<7;i++) {
-            if (dayOfWeek === 1) {
-                dayName = days[0];
-            } else if (dayOfWeek === 2) {
-                dayName = days[1];
-            } else if (dayOfWeek === 3) {
-                dayName = days[2];
-            } else if (dayOfWeek === 4) {
-                dayName = days[3];
-            } else if (dayOfWeek === 5) {
-                dayName = days[4];
-            } else if (dayOfWeek === 6) {
-                dayName = days[5];
-            } else if (dayOfWeek === 7) {
-                dayName = days[6];
-            }
-            if (i === 0){
-                dayName = 'Today';
-            }
-            if (i === 1){
-                dayName = 'Tomorrow';
-            }
 
-            dayList.push([dayName,dayDate]);
+export default class AppointmentApp extends React.Component {
 
-            dayDate++;
-            dayOfWeek++;
-            console.log(dayList);
-            if (dayOfWeek === 8){
-                dayOfWeek = 1;
-            }
+    appointmentWindow() {
+        console.log('hey');
+    }
+    constructor(initial) {
+        super(initial);
+        this.state = {
+            value: ''
         }
-        let dayElements = dayList.map(function(dayName){
-            return <div key={dayName} className={'dayBox'}>
-                    <div className={'dayName'}>{dayName[0]}</div>
-                    <h1 className={'dayDate'}>{dayName[1]}</h1>
-            </div>
-        });
 
-        return <div className={'weekBox'}>{dayElements}</div>
-    }
-
-    render(){
-        return (
-            <div>{this.createDays()}</div>
-        );
-    }
+    this.handleChange = this.handleNameChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 }
 
-DayBox.PropTypes = {
-    dayName: PropTypes.string.isRequired,
-};
+handleNameChange(event) {
+    this.setState({value: event.target.value});
+}
 
-DayBox.defaultProps = {
-    dayName: 'Today',
-};
+handleSubmit(event) {
+    alert('Value: ' + this.state.value);
+    event.preventDefault();
+}
+
+
+
+render(){
+        return (
+           <div>
+
+
+
+               <form onSubmit={this.handleSubmit}>
+                   <label>
+                       Appointment name:
+                       <input type="text" value={this.state.value} onChange={this.handleNameChange} />
+                   </label>
+                   <input type="submit" value="Submit" />
+               </form>
+               <button id={"functionButton"} onClick = {() => {this.appointmentWindow()} } >FFS</button>
+
+           </div>
+
+        );
+    }
+
+}
+
+

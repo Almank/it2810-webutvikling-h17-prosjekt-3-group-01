@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import DayBox from './components/calendar/DayBox';
+import AppointmentApp from './components/calendar/AppointmentApp';
 import '../assets/styles/calendar.css';
 
 export class Calendar extends React.Component {
@@ -17,9 +18,12 @@ export class Calendar extends React.Component {
 
                 </DayBox>
 
+
+
                 <div className={'calendarBox'}>
 
                 </div>
+                <div><AppointmentApp className={'AppointmentBox'}/></div>
             </div>
 
         );
