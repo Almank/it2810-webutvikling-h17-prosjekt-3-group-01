@@ -1,0 +1,107 @@
+/*-------------
+ 	Imports the fonts
+-------------*/
+
+@font-face {
+    font-family: "Geosans";
+    src: url("../fonts/GeosansLight.ttf") format("truetype");
+}
+
+
+.background-image {
+    background-image: url("../images/background.jpg");
+    position: fixed !important;
+}
+
+
+/*----------------
+ 	Background Image Section
+----------------*/
+
+.hero{
+    position: relative;
+    justify-content: center;
+    min-height: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.hero .background-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    z-index: -1;
+}
+
+.hero .background-image:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #414a4f;
+    opacity: 0.40;
+}
+
+.hero h1{
+    font: bold 60px 'Open Sans', sans-serif;
+    margin-bottom: 15px;
+}
+
+.hero h3{
+    font-family: "Geosans" !important;
+    margin-bottom: 40px;
+}
+
+.hero a.btn{
+    padding: 20px 46px;
+}
+
+@media (max-width: 800px){
+
+    .hero{
+        min-height: 600px;
+    }
+
+    .hero h1{
+        font-size: 48px;
+    }
+
+    .hero h3{
+        font-size: 24px;
+    }
+
+    .hero a.btn{
+        padding: 15px 40px;
+    }
+
+}
+
+
+/*-------------
+Logo
+-------------*/
+
+.LogoWrapper {
+    width: 210px;
+    height: 205px;
+    border-radius: 50%;
+    background-color: #222b3f;
+    background-image: -webkit-linear-gradient(to bottom, #17353c, #17353c);
+    background-image: linear-gradient(to bottom, #23212c, #222b3f);
+    box-shadow: 0px 8px 10px 0px grey, inset 0px 4px 1px 1px #2a2331, inset 0px -3px 1px 1px #211b24;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+    margin-top: 180px !important;
+    margin: auto;
+    opacity: 0.95;
+}
+
+.Logo {
+    font-family: "Noteworthy" !important;
+    font-size: 110px !important;
+    color: white;
+    text-align: center;}

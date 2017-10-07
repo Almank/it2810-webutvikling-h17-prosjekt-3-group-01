@@ -10,6 +10,7 @@
     min-width: 250px;
     height: 100%;
     background-color: #D7BEA8;
+    overflow: auto;
 }
 
 .NoteEdit{
@@ -45,9 +46,13 @@
     font-family: "Helvetica", serif;
 }
 
+.NoteButton:hover{
+    text-decoration: none;
+    color: #40285b;
+}
+
 .RemoveButton{
     display: flex;
-    max-height: 20px;
     margin-right: 5px;
 }
 
