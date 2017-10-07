@@ -10,6 +10,7 @@ import { Notes } from "./Notes";
 import {Calendar} from "./Calendar";
 import {Frontpage} from "./Frontpage";
 
+
 export class Content extends React.Component {
     render(){
         return (
