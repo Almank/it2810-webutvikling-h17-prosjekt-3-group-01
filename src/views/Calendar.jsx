@@ -7,8 +7,16 @@ import '../assets/styles/calendar.css';
 
 export class Calendar extends React.Component {
     constructor(props) {
+        if(localStorage.getItem("emptyCalendar") === null){
+            let data = {empty: true};
+            localStorage.setItem("emptyCalendar", JSON.stringify(data));
+        }
         super(props);
-        this.state = {empty: true};
+
+        let data = localStorage.getItem("emptyCalendar");
+        data = JSON.parse(data);
+        this.state = data;
+        this.test = this.test.bind(this);
     }
 
     emptyScheduleCheck(){
@@ -36,12 +44,16 @@ export class Calendar extends React.Component {
                 );
         }
     }
+    test() {
+        this.setState({empty: false});
+        let data = this.state;
+        localStorage.setItem("emptyCalendar", JSON.stringify(data));
+    }
 
     render(){
         return (
             <div className={'calendarContent'}>
-                <h1 className={'title'}>Your schedule for the coming week</h1>
-
+                <h1 className={'title'} >Your schedule for the coming week</h1>
                 <DayBox />
 
                 <div className={'calendarBox'}>

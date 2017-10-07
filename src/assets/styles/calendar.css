@@ -27,7 +27,7 @@
     flex-basis:100px;
     margin:15px;
     border: 1px solid rgba(155,155,155,0.5);
-    background-color: white;
+    background-color: #FFF;
     height: 100px;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .dayBox:hover {
-    border-color: rgba(236,164,0,1);
+    border-color: #FF9505;
     cursor: pointer;
 }
 
@@ -52,7 +52,6 @@
 
 .calendarBox {
     background-color: white;
-
     width: 100%;
     height:auto;
 }

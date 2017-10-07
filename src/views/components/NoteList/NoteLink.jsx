@@ -22,7 +22,9 @@ export class NoteLink extends React.Component {
                 <button className="RemoveButton"
                         type="button"
                         onClick={this.props.onClick}
-                        value={this.props.title}>Remove</button>
+                        value={this.props.title}>
+                    <span className='glyphicon glyphicon-minus'></span>
+                </button>
             </div>
         );
     }
