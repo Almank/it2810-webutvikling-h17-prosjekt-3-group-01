@@ -3,17 +3,13 @@
 -------------*/
 
 @font-face {
-    font-family: "Noteworthy";
-    src: url("../fonts/Noteworthy-Light.ttf") format("truetype");
-}
-
-@font-face {
     font-family: "Geosans";
     src: url("../fonts/GeosansLight.ttf") format("truetype");
 }
 
 
-.background-image {background-image: url("../images/background.jpg");
+.background-image {
+    background-image: url("../images/background.jpg");
     position: fixed !important;
 }
 
@@ -25,7 +21,7 @@
 .hero{
     position: relative;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 100%;
     color: #fff;
     text-align: center;
 }
