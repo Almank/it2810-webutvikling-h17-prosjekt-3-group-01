@@ -1,30 +1,29 @@
-.SideBar {
+.sideBar {
     display: flex;
-    width: 100px;
     height: 100%;
     background-color: #35393a;
     flex-direction: column;
-    align-items: center;
 }
 
-.SideBar .Button{
+.sideBar .Button{
     width: 80px;
     height: 80px;
-    background-color: #17292d;
-    margin-top: 5px;
-    color: white;
-    text-decoration: none;
-    padding: 5px;
+    background-color: #17292f;
+    margin: 5px 5px 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.Glyphicon{
+.glyphicon{
     color: white;
-    font-size: 30px;
-    text-align: center;
-    padding-top: 20px;
-    padding-left: 20px;
+    font-size: 42px;
 }
 
-.Glyphicon:hover .Button{
+.Button:hover .glyphicon{
     color: #ECA400;
+}
+
+.glyphicon:hover, .Button:hover {
+    text-decoration: none;
 }
