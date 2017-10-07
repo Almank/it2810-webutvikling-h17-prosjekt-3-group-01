@@ -6,50 +6,84 @@ import React from 'react';
 
 
 export default class AppointmentApp extends React.Component {
-
-    appointmentWindow() {
-        console.log('hey');
-    }
-    constructor(initial) {
-        super(initial);
+    constructor(props) {
+        super(props);
+        //this.state = {isToggleOn: true};
         this.state = {
-            value: ''
+            itemArray: []
         }
+    }
 
-    this.handleChange = this.handleNameChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+        // This binding is necessary to make `this` work in the callback
+        //this.handleClick = this.handleClick.bind(this);
+
+
+    /*handleClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        }));
+    } */
+
+    newItem(){
+
+        const item = this.state.itemArray;
+
+        const title = 'testTitleContent';
+
+
+       const text = (<form>
+           <div className="inputForm">
+               <h2>Name</h2>
+               <input type='name' className="nameInput" placeholder='Enter your name' required/>
+               <div>
+                   <button type="submit" onClick={console.log("Success")} className="nameBtn">Enter</button>
+               </div>
+           </div>
+       </form>);
+
+
+        item.push({ title, text })
+        this.setState({itemArray: item})
+
+
+
 }
-
-handleNameChange(event) {
-    this.setState({value: event.target.value});
-}
-
-handleSubmit(event) {
-    alert('Value: ' + this.state.value);
-    event.preventDefault();
-}
-
-
 
 render(){
-        return (
-           <div>
+
+    return (
+        <div className={"allContent"}>
+            <div className={"container"}>
+                <h1>This is headline </h1>
 
 
+                <p> how you doin</p>
+                <h2> footer</h2>
+            </div>
 
-               <form onSubmit={this.handleSubmit}>
-                   <label>
-                       Appointment name:
-                       <input type="text" value={this.state.value} onChange={this.handleNameChange} />
-                   </label>
-                   <input type="submit" value="Submit" />
-               </form>
-               <button id={"functionButton"} onClick = {() => {this.appointmentWindow()} } >FFS</button>
+            <div className ={"popupBtn"}>
+                <button onClick={this.newItem.bind(this)}> Create new
 
-           </div>
+                </button>
+                <div>
+                    {this.state.itemArray.map((item, index) => {
+                        return (
+                            <div className="new" key={index}>
+                                <div>
+                                    <h1>{item.title}</h1>
+                                    <form>{item.text}</form>
+                                </div>
+                            </div>
+                        )
+                    })}
 
-        );
-    }
+                    </div>
+                    </div>
+        </div>
+
+
+            );
+        }
 
 }
 
