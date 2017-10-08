@@ -73,6 +73,5 @@ export default class DayBox extends React.Component {
 }
 
 DayBox.PropTypes = {
-    dayName: PropTypes.string.isRequired,
-    fullDate: PropTypes.string.isRequired,
+    change: PropTypes.string.isRequired,
 };

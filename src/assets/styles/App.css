@@ -2,3 +2,10 @@
   display: flex;
   flex-direction: row;
 }
+
+/* Mobile - portrait */
+@media only screen and (max-width : 420px) {
+  .App {
+    flex-direction: column;
+  }
+}

@@ -39,7 +39,9 @@ export class Notes extends React.Component {
     }
 
     onChange(title, content){
+        // eslint-disable-next-line
         this.state.notes[title].title = title;
+        // eslint-disable-next-line
         this.state.notes[title].content = content;
         this.updateLocalStorage();
     }

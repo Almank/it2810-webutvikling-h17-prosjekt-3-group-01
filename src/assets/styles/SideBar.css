@@ -26,3 +26,13 @@
 .Button:hover, .Button  {
     text-decoration: none !important;
 }
+
+/* Mobile - portrait */
+@media only screen and (max-width : 420px) {
+    .sideBar {
+        flex-direction: row;
+        min-height: 80px;
+        height: 80px;
+        width: auto;
+    }
+}

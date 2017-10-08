@@ -25,7 +25,6 @@
 .dayBox {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     flex-basis:100px;
     margin:15px;
@@ -39,6 +38,7 @@
 
 .dayBox p {
     margin:0;
+    margin-top: 21px;
     font-size:11px;
 }
 
@@ -196,4 +196,73 @@
 
 .rightCalendarBoxContent h2 {
     margin: 0 15px;
+}
+
+/* Mobile - portrait */
+@media only screen and (max-width : 420px) {
+    .dayBox {
+        flex-basis: 90px;
+        height: 90px;
+        margin:0;
+        padding: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+    .calendarContent {
+        margin: 0;
+    }
+
+    .calendarBox {
+        width: 95%;
+    }
+
+    .calendarBoxContent > h1 {
+        font-size: 20px;
+    }
+    .calendarBoxContent > .leftCalendarBoxContent h2, .calendarBoxContent > .middleCalendarBoxContent h2,.calendarBoxContent > .rightCalendarBoxContent h2 {
+        font-size: 24px;
+    }
+    .appointmentFlow h3 {
+        font-size: 18px;
+    }
+    .appointmentFlow p {
+        font-size: 16px;
+    }
+    .formContainer {
+        top:0px;
+        left:0px;
+        width: 100vw;
+        height: 100vh;
+        margin:0;
+        position: fixed;
+        -webkit-transform: none;
+        -moz-transform:none;
+        transform: none;
+    }
+    .absolute-icon-top-right {
+        font-size: 50px;
+        padding: 15px;
+    }
+    .form span {
+        font-size: 24px;
+    }
+    .form input {
+        height: 50px;
+        font-size: 18px;
+    }
+    .dateInput, .timeInput {
+        width:65vw;
+    }
+    .form {
+        margin-top: 50px;
+    }
+    .submitButton {
+        height: 50px;
+    }
+    .title {
+        font-size: 22px;
+    }
+
+
 }

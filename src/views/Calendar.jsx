@@ -4,7 +4,6 @@
 import React from 'react';
 import DayBox from './components/calendar/DayBox';
 import '../assets/styles/calendar.css';
-import PropTypes from 'prop-types';
 
 export class Calendar extends React.Component {
     constructor(props) {
@@ -155,7 +154,7 @@ export class Calendar extends React.Component {
                             <h2>What</h2>
                         </div>
                         <div className='rightCalendarBoxContent'>
-                            <h2>Why</h2>
+                            <h2>About</h2>
                         </div>
                         <button className='icon-topright' onClick={this.showForm}>
                             <span className='glyphicon glyphicon-plus'></span>
@@ -187,10 +186,3 @@ export class Calendar extends React.Component {
         );
     }
 }
-
-Calendar.PropTypes = {
-    dateValue: PropTypes.string.isRequired,
-    timeValue: PropTypes.string.isRequired,
-    titleValue: PropTypes.string.isRequired,
-    textValue: PropTypes.string.isRequired,
-};

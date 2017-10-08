@@ -165,9 +165,30 @@
     width: 96%;
     padding: 2%;
     height: 85%;
-    border: 0;
     margin: 0;
     outline: none;
     resize: none;
     border: 1px solid lightgrey;
+}
+
+/* Mobile - portrait */
+@media only screen and (max-width : 420px) {
+    .NoteBook {
+        flex-direction: column;
+
+    }
+    .NoteList {
+        width: 100vw;
+        min-width: 0;
+        height: auto;
+    }
+    .NoteEdit {
+        width: 100vw;
+        min-width: 0;
+        height: auto;
+    }
+    .NoteContentContainer textarea {
+        min-height: 30vh;
+    }
+
 }
