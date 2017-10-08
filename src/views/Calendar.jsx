@@ -49,12 +49,14 @@ export class Calendar extends React.Component {
             .map((item,i) =>
             <div className='calendarBoxContent' key={i}>
                 <div className='leftCalendarBoxContent'>
-                    <h2>{item.time}</h2>
+                    <h3>{item.time}</h3>
                 </div>
 
+                <div className='middleCalendarBoxContent'>
+                    <h3>{item.title}</h3>
+                </div>
                 <div className='rightCalendarBoxContent'>
-                    <h1>{item.title}</h1>
-                    <h2>{item.text}</h2>
+                    <p>{item.text}</p>
                 </div>
             </div>
             );
@@ -123,6 +125,11 @@ export class Calendar extends React.Component {
         this.forceUpdate();
     }
 
+    showForm(){
+        let element = document.querySelector('.formContainer');
+        element.style.display = element.style.display === 'none' ? 'flex' : 'none';
+    }
+
     render(){
         return (
             <div className={'calendarContent'}>
@@ -130,13 +137,34 @@ export class Calendar extends React.Component {
                 <DayBox change={this.changeContent} />
 
                 <div className={'calendarBox'}>
-                    <form>
-                        <input type='date' name='date' className="dateInput" required/>
-                        <input type='time' className="timeInput" required/>
-                        <input type='text' className="titleInput" required/>
-                        <input type='textfield' className="textInput"/>
-                        <input type='submit' onClick={this.createAppointment}/>
-                    </form>
+                    <div className='calendarBoxContent'>
+                        <div className='leftCalendarBoxContent'>
+                            <h2>When</h2>
+                        </div>
+
+                        <div className='middleCalendarBoxContent'>
+                            <h2>What</h2>
+                        </div>
+                        <div className='rightCalendarBoxContent'>
+                            <h2>Why</h2>
+                        </div>
+                        <button className='icon-topright' onClick={this.showForm}>
+                            <span className='glyphicon glyphicon-plus'></span>
+                        </button>
+                    </div>
+                    <div className='formContainer'>
+                        <button className='absolute-icon-top-right' onClick={this.showForm}>
+                            <span className='glyphicon glyphicon-remove'></span>
+                        </button>
+                        <form className={'form'}>
+                            <h3>Create new appointment</h3>
+                            <input type='date' name='date' className="dateInput" required/>
+                            <input type='time' className="timeInput" required/>
+                            <input type="text" name="title" className="titleInput" maxLength='25' required />
+                            <textarea type='text' className="textInput" maxLength='40' />
+                            <input type='submit' onClick={this.createAppointment}/>
+                        </form>
+                    </div>
                     {this.emptyScheduleCheck()}
                 </div>
             </div>
