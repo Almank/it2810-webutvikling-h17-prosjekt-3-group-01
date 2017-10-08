@@ -151,13 +151,13 @@ export class Calendar extends React.Component {
                         </div>
 
                         <div className='middleCalendarBoxContent'>
-                            <h2>What</h2>
+                            <h2>Title</h2>
                         </div>
                         <div className='rightCalendarBoxContent'>
                             <h2>About</h2>
                         </div>
                         <button className='icon-topright' onClick={this.showForm}>
-                            <span className='glyphicon glyphicon-plus'></span>
+                            <span className='glyphicon glyphicon-plus'/>
                         </button>
                     </div>
                     <div className='formContainer' style={{
@@ -165,7 +165,7 @@ export class Calendar extends React.Component {
                         display: 'none'
                     }}>
                         <button className='absolute-icon-top-right' onClick={this.showForm}>
-                            <span className='glyphicon glyphicon-remove'></span>
+                            <span className='glyphicon glyphicon-remove'/>
                         </button>
                         <form className={'form'}>
                             <h3>Create new appointment</h3>
