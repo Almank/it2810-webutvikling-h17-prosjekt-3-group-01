@@ -23,13 +23,15 @@ export class Calendar extends React.Component {
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
 
+        //Setting dateToday to current date.
+        data.dateToday = new Date().toISOString().slice(0, 10);
+
         //Setting state to stored state.
         this.state = data;
-        this.state.dateToday = (new Date().toISOString().slice(0, 10));
-        console.log(this.state);
 
-        //Binding function
+        //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
+        this.changeContent = this.changeContent.bind(this);
     }
 
     emptyScheduleCheck(){
@@ -56,7 +58,8 @@ export class Calendar extends React.Component {
                                     <h1>{item.title}</h1>
                                     <h2>{item.text}</h2>
                                 </div>
-                            </div>)}
+                            </div>
+                        )}
                     </div>
                 );
         }
@@ -80,7 +83,8 @@ export class Calendar extends React.Component {
 
         //Creating new updated state.
         let data = {empty: false,
-            children: newStateArray
+            children: newStateArray,
+            dateToday: new Date().toISOString().slice(0, 10),
         };
 
         //Setting state.
@@ -91,7 +95,20 @@ export class Calendar extends React.Component {
     }
 
     changeContent(e){
-        console.log(e);
+        let data = localStorage.getItem("emptyCalendar");
+        data = JSON.parse(data);
+
+        //Setting dateToday to current date.
+        data.dateToday = e.props.dateFull;
+
+        //Setting state to stored state.
+        this.state = data;
+
+        //Updating localstorage to store new data.
+        localStorage.setItem("emptyCalendar", JSON.stringify(data));
+
+        //Forcing update of the DOM to change content.
+        this.forceUpdate();
     }
 
     render(){

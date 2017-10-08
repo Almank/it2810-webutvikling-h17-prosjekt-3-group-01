@@ -3,69 +3,83 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import DayEle from '../calendar/DayEle';
 
 export default class DayBox extends React.Component {
 
-    createDays() {
+    getDateFull(i){
+        let temp = new Date();
+        temp.setDate(temp.getDate() + i);
+        return temp.toISOString().slice(0, 10);
+    }
+
+    getDayDate(i){
+        let temp = new Date().getDate();
+        return temp + i;
+    }
+
+    getDayName(i){
         const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         let dayOfWeek = new Date().getDay();
-        let dayDate = new Date().getDate();
-
-        let dayName;
-        let dayList = [];
-        for (let i=0;i<7;i++) {
-            if (dayOfWeek === 1) {
-                dayName = days[0];
-            } else if (dayOfWeek === 2) {
-                dayName = days[1];
-            } else if (dayOfWeek === 3) {
-                dayName = days[2];
-            } else if (dayOfWeek === 4) {
-                dayName = days[3];
-            } else if (dayOfWeek === 5) {
-                dayName = days[4];
-            } else if (dayOfWeek === 6) {
-                dayName = days[5];
-            } else if (dayOfWeek === 7) {
-                dayName = days[6];
-            }
-            if (i === 0){
-                dayName = 'TODAY';
-            }
-            if (i === 1){
-                dayName = 'TOMORROW';
-            }
-
-            dayList.push([dayName,dayDate]);
-
-            dayDate++;
-            dayOfWeek++;
-            if (dayOfWeek === 8){
-                dayOfWeek = 1;
-            }
+        if (i + dayOfWeek >= 7)
+            return days[i+dayOfWeek-7+1];
+        else {
+            return days[i+dayOfWeek+1];
         }
-
-        let dayElements = dayList.map(function(dayName){
-            return <button key={dayName} className={'dayBox'}>
-                        <p className={'dayName'}>{dayName[0]}</p>
-                        <h1 className={'dayDate'}>{dayName[1]}</h1>
-                    </button>
-        });
-
-        return <div className={'weekBox'}>{dayElements}</div>
     }
 
     render(){
         return (
-            <div onClick={this.props.change.bind(null, this)}>{this.createDays()}</div>
+            <div className={'weekBox'}>
+                <DayEle change={this.props.change}
+                        key={this.getDateFull(0)}
+                        dateFull={this.getDateFull(0)}
+                        dateName={'TODAY'}
+                        dayDate={this.getDayDate(0)} />
+                <DayEle change={this.props.change}
+                        key={this.getDateFull(1)}
+                        dateFull={this.getDateFull(1)}
+                        dateName={'TOMORROW'}
+                        dayDate={this.getDayDate(1)} />
+                <DayEle change={this.props.change}
+                        key={this.getDateFull(2)}
+                        dateFull={this.getDateFull(2)}
+                        dateName={this.getDayName(0)}
+                        dayDate={this.getDayDate(2)} />
+                <DayEle change={this.props.change}
+                        key={this.getDateFull(3)}
+                        dateFull={this.getDateFull(3)}
+                        dateName={this.getDayName(1)}
+                        dayDate={this.getDayDate(3)} />
+                <DayEle change={this.props.change}
+                        key={this.getDateFull(4)}
+                        dateFull={this.getDateFull(4)}
+                        dateName={this.getDayName(2)}
+                        dayDate={this.getDayDate(4)} />
+                <DayEle change={this.props.change}
+                        key={this.getDateFull(5)}
+                        dateFull={this.getDateFull(5)}
+                        dateName={this.getDayName(3)}
+                        dayDate={this.getDayDate(5)} />
+                <DayEle change={this.props.change}
+                        key={this.getDateFull(6)}
+                        dateFull={this.getDateFull(6)}
+                        dateName={this.getDayName(4)}
+                        dayDate={this.getDayDate(6)} />
+
+            </div>
         );
     }
 }
 
 DayBox.PropTypes = {
     dayName: PropTypes.string.isRequired,
+    fullDate: PropTypes.string.isRequired,
 };
 
 DayBox.defaultProps = {
     dayName: 'Today',
 };
+
+//change={this.props.change}
+//{this.createDays(this.props.change.bind(null, this))}
