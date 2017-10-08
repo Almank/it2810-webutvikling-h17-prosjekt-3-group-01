@@ -35,6 +35,30 @@ export class Calendar extends React.Component {
     }
 
     emptyScheduleCheck(){
+
+        //Making a constant with a copy of the state children array.
+        const myData =[].concat(this.state.children)
+
+            //Sorting elements based on time, earliest first.
+            .sort((a, b) => a.time > b.time)
+
+            //Filtering out appointments on current day.
+            .filter(child => child.date === this.state.dateToday)
+
+            //Mapping items from array giving the html the correct values.
+            .map((item,i) =>
+            <div className='calendarBoxContent' key={i}>
+                <div className='leftCalendarBoxContent'>
+                    <h2>{item.time}</h2>
+                </div>
+
+                <div className='rightCalendarBoxContent'>
+                    <h1>{item.title}</h1>
+                    <h2>{item.text}</h2>
+                </div>
+            </div>
+            );
+
         switch (this.state.empty){
             default:
                 break;
@@ -47,20 +71,8 @@ export class Calendar extends React.Component {
             case false:
                 return (
                         <div>
-                        {this.state.children.filter(child => child.date === this.state.dateToday).map((item,i) =>
-                            <div className='calendarBoxContent' key={i}>{item.date}
-
-                                <div className='leftCalendarBoxContent'>
-                                    <h2>{item.time}</h2>
-                                </div>
-
-                                <div className='rightCalendarBoxContent'>
-                                    <h1>{item.title}</h1>
-                                    <h2>{item.text}</h2>
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                            {myData}
+                        </div>
                 );
         }
     }
@@ -139,6 +151,14 @@ Calendar.PropTypes = {
     textValue: PropTypes.string.isRequired,
 };
 
-Calendar.defaultProps = {
-    dateValue: <h1>Hey</h1>,
-}
+//{this.state.children.filter(child => child.date === this.state.dateToday).map((item,i) =>
+  //  <div className='calendarBoxContent' key={i}>
+    //    <div className='leftCalendarBoxContent'>
+      //      <h2>{item.time}</h2>
+        //</div>
+
+        //<div className='rightCalendarBoxContent'>
+          //  <h1>{item.title}</h1>
+            //<h2>{item.text}</h2>
+       // </div>
+   // </div>

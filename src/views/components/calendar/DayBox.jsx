@@ -76,10 +76,3 @@ DayBox.PropTypes = {
     dayName: PropTypes.string.isRequired,
     fullDate: PropTypes.string.isRequired,
 };
-
-DayBox.defaultProps = {
-    dayName: 'Today',
-};
-
-//change={this.props.change}
-//{this.createDays(this.props.change.bind(null, this))}

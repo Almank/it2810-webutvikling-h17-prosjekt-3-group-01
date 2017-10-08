@@ -58,3 +58,16 @@
     margin:0px;
     padding: 20px;
 }
+
+.calendarBoxContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftCalendarBoxContent {
+    flex-basis: 10ch;
+}
+
+.rightCalendarBoxContent {
+    flex-basis: 100%;
+}
