@@ -11,8 +11,8 @@ export class Calendar extends React.Component {
 
         //Setting state if there is none stored.
         if(localStorage.getItem("emptyCalendar") === null){
-            let data = {empty: true,
-                        dateToday: new Date().toISOString().slice(0, 10),
+            let data = {
+                dateToday: new Date().toISOString().slice(0, 10),
                 children: [{date:'ok',time: "12:02", title: "Hey", text: "This is text"},{date:'ok',time: "12:02", title: "Hey", text: "This is text"}],
             };
             localStorage.setItem("emptyCalendar", JSON.stringify(data));
@@ -36,8 +36,8 @@ export class Calendar extends React.Component {
 
     emptyScheduleCheck(){
 
-        //Making a constant with a copy of the state children array.
-        const myData =[].concat(this.state.children)
+        //Making a let with a copy of the state children array.
+        let myData =[].concat(this.state.children)
 
             //Sorting elements based on time, earliest first.
             .sort((a, b) => a.time > b.time)
@@ -61,22 +61,18 @@ export class Calendar extends React.Component {
             </div>
             );
 
-        switch (this.state.empty){
-            default:
-                break;
-            case true:
-                return (
-                    <div className='calendarBoxContent'>
-                        <h1>You don't have any plans!</h1>
-                    </div>
-                );
-            case false:
-                return (
-                        <div>
-                            {myData}
-                        </div>
-                );
-        }
+        //If there are no plans that day write this.
+        if (myData.length === 0){
+            myData = [  <div key={0} className='calendarBoxContent'>
+                            <h1>You don't have any plans!</h1>
+                        </div>];
+            }
+
+        return (
+            <div className='appointmentFlow'>
+                {myData}
+            </div>
+        );
     }
 
     createAppointment(e) {
@@ -96,7 +92,7 @@ export class Calendar extends React.Component {
         newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
 
         //Creating new updated state.
-        let data = {empty: false,
+        let data = {
             children: newStateArray,
             dateToday: new Date().toISOString().slice(0, 10),
         };
@@ -106,9 +102,19 @@ export class Calendar extends React.Component {
 
         //Updating localstorage to store new data.
         localStorage.setItem("emptyCalendar", JSON.stringify(data));
+
+        //Resetting form values.
+        document.getElementsByClassName('dateInput')[0].value = null;
+        document.getElementsByClassName('timeInput')[0].value = null;
+        document.getElementsByClassName('titleInput')[0].value = null;
+        document.getElementsByClassName('textInput')[0].value = null;
+
+        //Hiding form.
+        this.showForm();
     }
 
     changeContent(e){
+        //Fetching data from localstorage
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
 
@@ -126,8 +132,11 @@ export class Calendar extends React.Component {
     }
 
     showForm(){
+        //Toggle form.
         let element = document.querySelector('.formContainer');
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
+        let today = new Date().toISOString().slice(0, 10);
+        document.querySelector(".dateInput").value = today;
     }
 
     render(){
@@ -152,17 +161,24 @@ export class Calendar extends React.Component {
                             <span className='glyphicon glyphicon-plus'></span>
                         </button>
                     </div>
-                    <div className='formContainer'>
+                    <div className='formContainer' style={{
+                        //Need to style inline to remove having to double click button first time.
+                        display: 'none'
+                    }}>
                         <button className='absolute-icon-top-right' onClick={this.showForm}>
                             <span className='glyphicon glyphicon-remove'></span>
                         </button>
                         <form className={'form'}>
                             <h3>Create new appointment</h3>
+                            <span>Date</span>
                             <input type='date' name='date' className="dateInput" required/>
+                            <span>Time</span>
                             <input type='time' className="timeInput" required/>
-                            <input type="text" name="title" className="titleInput" maxLength='25' required />
-                            <textarea type='text' className="textInput" maxLength='40' />
-                            <input type='submit' onClick={this.createAppointment}/>
+                            <span>Title</span>
+                            <input type="text" name="title" className="titleInput" maxLength='19' required />
+                            <span>What</span>
+                            <textarea type='text' className="textInput" maxLength='200'  />
+                            <input type='submit' className='submitButton' onClick={this.createAppointment}/>
                         </form>
                     </div>
                     {this.emptyScheduleCheck()}
@@ -178,15 +194,3 @@ Calendar.PropTypes = {
     titleValue: PropTypes.string.isRequired,
     textValue: PropTypes.string.isRequired,
 };
-
-//{this.state.children.filter(child => child.date === this.state.dateToday).map((item,i) =>
-  //  <div className='calendarBoxContent' key={i}>
-    //    <div className='leftCalendarBoxContent'>
-      //      <h2>{item.time}</h2>
-        //</div>
-
-        //<div className='rightCalendarBoxContent'>
-          //  <h1>{item.title}</h1>
-            //<h2>{item.text}</h2>
-       // </div>
-   // </div>
