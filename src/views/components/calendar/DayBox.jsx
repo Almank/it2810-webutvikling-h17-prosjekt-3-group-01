@@ -10,6 +10,7 @@ export default class DayBox extends React.Component {
         const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         let dayOfWeek = new Date().getDay();
         let dayDate = new Date().getDate();
+
         let dayName;
         let dayList = [];
         for (let i=0;i<7;i++) {
@@ -46,9 +47,9 @@ export default class DayBox extends React.Component {
 
         let dayElements = dayList.map(function(dayName){
             return <button key={dayName} className={'dayBox'}>
-                    <p className={'dayName'}>{dayName[0]}</p>
-                    <h1 className={'dayDate'}>{dayName[1]}</h1>
-            </button>
+                        <p className={'dayName'}>{dayName[0]}</p>
+                        <h1 className={'dayDate'}>{dayName[1]}</h1>
+                    </button>
         });
 
         return <div className={'weekBox'}>{dayElements}</div>
@@ -56,7 +57,7 @@ export default class DayBox extends React.Component {
 
     render(){
         return (
-            <div>{this.createDays()}</div>
+            <div onClick={this.props.change.bind(null, this)}>{this.createDays()}</div>
         );
     }
 }
