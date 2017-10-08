@@ -23,6 +23,7 @@ export class NoteList extends React.Component {
         };
         this.setState({notes: data});
         this.props.updateStorage();
+        this.createNewNote();
         event.preventDefault();
     }
 
