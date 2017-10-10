@@ -3,6 +3,7 @@ import '../assets/styles/App.css';
 import {SideBar} from "./SideBar";
 import {Content} from "./Content";
 
+
 export class App extends React.Component {
     render(){
         return (
@@ -12,4 +13,4 @@ export class App extends React.Component {
             </div>
         );
     }
-}
+};

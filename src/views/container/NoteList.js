@@ -23,6 +23,7 @@ export class NoteList extends React.Component {
         };
         this.setState({notes: data});
         this.props.updateStorage();
+        this.createNewNote();
         event.preventDefault();
     }
 
@@ -47,12 +48,23 @@ export class NoteList extends React.Component {
         return dataSet;
     }
 
+    createNewNote() {
+        let element = document.querySelector('.NoteForm');
+        element.style.display = element.style.display === 'flex' ? '' : 'flex';
+    }
+
     render(){
         return (
             <div className="NoteList">
+                <div className="NoteListTitleContainer">
+                    <h1>Notes</h1>
+                    <div className="addNewNoteButton" onClick={this.createNewNote}>
+                        <span className={'glyphicon glyphicon-plus'}></span>
+                    </div>
+                </div>
                 <form className="NoteForm" onSubmit={this.onSubmit}>
                     <input className="NoteField" name="title" type="text"/>
-                    <input className="NoteAdd" type="submit" value="Add"/>
+                    <input className="NoteAdd" type="submit" value="ADD"/>
                 </form>
                 <div className="CurrentNotes">
                     { this.renderListedNotes() }

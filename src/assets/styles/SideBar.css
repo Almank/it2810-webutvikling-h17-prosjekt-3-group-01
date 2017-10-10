@@ -1,31 +1,42 @@
-.SideBar {
+.sideBar {
     display: flex;
-    width: 100px;
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
     background-color: #35393a;
     flex-direction: column;
-    align-items: center;
-
 }
 
-.SideBar .Button{
+.sideBar .Button{
     width: 80px;
     height: 80px;
-    background-color: #17292d;
-    margin-top: 5px;
-    color: white;
-    text-decoration: none;
-    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.Glyphicon{
+.Button span{
     color: white;
-    font-size: 30px;
-    text-align: center;
-    padding-top: 20px;
-    padding-left: 20px;
+    font-size: 42px;
 }
 
-.Glyphicon:hover{
-    color: #40285b;
+.Button:hover .glyphicon{
+    color: #FF9505;
+}
+
+.Button:hover, .Button  {
+    text-decoration: none !important;
+}
+
+/* Mobile - portrait */
+@media only screen and (max-width : 680px) {
+    .sideBar {
+        flex-direction: row;
+        justify-content: space-between;
+        min-height: 80px;
+        height: 80px;
+        width: auto;
+    }
+    .sideBar .Button {
+        margin: 0 10%;
+    }
 }

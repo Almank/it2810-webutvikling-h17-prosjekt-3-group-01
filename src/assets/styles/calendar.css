@@ -1,19 +1,273 @@
-.weekBox {
+.calendarContent {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0 10%;
+    min-height: 100vh;
+    height: auto;
+}
+
+.title {
+    text-align: center;
+    font-weight: 700;
+    border-bottom:1px solid rgba(155,155,155,0.5);
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+.weekBox {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-self: center;
 }
 
 .dayBox {
     display: flex;
     flex-direction: column;
-    width:100px;
-    height: 100px;
-    justify-content: center;
     align-items: center;
+    flex-basis:100px;
+    margin:15px;
+    border: 1px solid rgba(155,155,155,0.5);
+    background-color: #FFF;
+    height: 100px;
+    -webkit-box-shadow: -2px 1px 20px -7px #35393a;
+    -moz-box-shadow: -2px 1px 20px -7px #35393a;
+    box-shadow: -2px 1px 20px -7px #35393a;
+}
+
+.dayBox p {
+    margin:0;
+    margin-top: 21px;
+    font-size:11px;
+}
+
+.dayBox h1 {
+    font-size:32px;
+}
+
+.dayBox:hover {
+    border-color: #FF9505;
+    cursor: pointer;
 }
 
 .dayDate {
-    margin:0px;
-    padding: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.calendarBox {
+    position: relative;
+    align-self: center;
+    background-color: white;
+    width: 80ch;
+    height:auto;
+    margin-top:35px;
+    margin-bottom: 25px;
+    padding: 0 25px;
+    -webkit-box-shadow: -2px 1px 23px -3px #35393a;
+    -moz-box-shadow: -2px 1px 23px -3px #35393a;
+    box-shadow: -2px 1px 23px -3px #35393a;
+}
+
+.appointmentFlow {
+    max-height: 50vh;
+    overflow: scroll;
+}
+
+.icon-topright {
+    padding: 15px;
+    background-color: transparent;
+    border: none;
+}
+
+.icon-topright span {
+    font-size: 26px;
+    color: green;
+}
+
+.icon-topright:hover span {
+    color: #35393a;
+}
+
+.form {
+    display:flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.form h3 {
+    margin-top:0;
+    border-bottom: 1px solid #35393a;
+    margin-bottom: 15px;
+}
+
+.form input, .form textarea {
+    margin-bottom: 10px;
+}
+
+.form textarea {
+    height: 110px;
+    resize: none;
+}
+
+.formContainer{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translatey(-50%);
+    -moz-transform: translateX(-50%) translatey(-50%);
+    transform: translateX(-50%) translatey(-50%);
+    height: auto;
+    width: 310px;
+    flex-direction: column;
+    background-color: #F6F6F6;
+    padding: 35px;
+    padding-bottom: 20px;
+    -webkit-box-shadow: -2px 1px 23px -3px #F6F6F6;
+    -moz-box-shadow: -2px 1px 23px -3px #F6F6F6;
+    box-shadow: -2px 1px 23000px 1000px rgba(0,0,0,0.5);
+}
+
+.submitButton {
+    background-color: #FF9505;
+    color: white;
+    border:none;
+}
+
+.submitButton:hover {
+    background-color: green;
+}
+
+.absolute-icon-top-right {
+    position: absolute;
+    right:0px;
+    top:0px;
+    padding: 7.5px;
+    font-size: 23px;
+    background-color: transparent;
+    border:none;
+    color:#d9534f;
+}
+
+.absolute-icon-top-right:hover span {
+    color: #35393a;
+}
+
+.calendarBoxContent {
+    display: flex;
+    justify-content: flex-start;
+    min-height: 80px;
+    border-bottom: 1px solid #35393a;
+}
+
+.calendarBoxContent > h1 {
+    font-size: 24px;
+    align-self: center;
+}
+
+.calendarBoxContent:last-child {
+    border-bottom: none;
+}
+
+.leftCalendarBoxContent {
+    flex-basis: 10ch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middleCalendarBoxContent {
+    margin: 0 25px;
+    flex-basis: 30ch;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.rightCalendarBoxContent {
+    flex-basis: 40ch;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+}
+
+.rightCalendarBoxContent p, .leftCalendarBoxContent h3, .middleCalendarBoxContent h3, .rightCalendarBoxContent h2, .leftCalendarBoxContent h2, .middleCalendarBoxContent h2 {
+    margin: 0;
+
+}
+
+.rightCalendarBoxContent h2 {
+    margin: 0 15px;
+}
+
+/* Mobile - portrait */
+@media only screen and (max-width : 680px) {
+    .dayBox {
+        flex-basis: 90px;
+        height: 90px;
+        margin:0;
+        padding: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+    .calendarContent {
+        margin: 0;
+    }
+
+    .calendarBox {
+        width: 95%;
+    }
+
+    .calendarBoxContent > h1 {
+        font-size: 20px;
+    }
+    .calendarBoxContent > .leftCalendarBoxContent h2, .calendarBoxContent > .middleCalendarBoxContent h2,.calendarBoxContent > .rightCalendarBoxContent h2 {
+        font-size: 24px;
+    }
+    .appointmentFlow h3 {
+        font-size: 18px;
+    }
+    .appointmentFlow p {
+        font-size: 16px;
+    }
+    .formContainer {
+        top:0px;
+        left:0px;
+        width: 100vw;
+        height: 100vh;
+        margin:0;
+        position: fixed;
+        -webkit-transform: none;
+        -moz-transform:none;
+        transform: none;
+    }
+    .absolute-icon-top-right {
+        font-size: 50px;
+        padding: 15px;
+    }
+    .form span {
+        font-size: 24px;
+    }
+    .form input {
+        height: 50px;
+        font-size: 18px;
+    }
+    .dateInput, .timeInput {
+        width:65vw;
+    }
+    .form {
+        margin-top: 50px;
+    }
+    .submitButton {
+        height: 50px;
+    }
+    .title {
+        font-size: 22px;
+    }
+
+
 }

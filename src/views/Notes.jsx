@@ -39,7 +39,9 @@ export class Notes extends React.Component {
     }
 
     onChange(title, content){
+        // eslint-disable-next-line
         this.state.notes[title].title = title;
+        // eslint-disable-next-line
         this.state.notes[title].content = content;
         this.updateLocalStorage();
     }
@@ -59,7 +61,7 @@ export class Notes extends React.Component {
                           updateStorage={() => this.updateLocalStorage()}
                 />
                 <div className="NoteEdit">
-                    <div className="content">
+                    <div className="NoteEditContent">
                         <Route exact path="/notebook/:name" render={ (id) =>
                             <NoteContent data={this.state.notes[id.match.params.name]}
                                          key={id}
