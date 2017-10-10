@@ -4,7 +4,7 @@
 import React from 'react';
 import '../assets/styles/Content.css';
 import {Route} from 'react-router-dom';
-import {TodoList} from "./TodoList";
+import {TodoLists} from "./TodoLists";
 
 import { Notes } from "./Notes";
 import {Calendar} from "./Calendar";
@@ -15,7 +15,7 @@ export class Content extends React.Component {
         return (
             <div className="content">
                 <Route exact path="/" render={ () => <Calendar/>}/>
-                <Route path="/1" render={ () => <TodoList/>}/>
+                <Route path="/todolists" render={ () => <TodoLists/>}/>
                 <Route path="/notebook" render={ () => <Notes/>}/>
             </div>
         );
