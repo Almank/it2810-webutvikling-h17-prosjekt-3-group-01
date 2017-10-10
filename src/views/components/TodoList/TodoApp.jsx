@@ -81,6 +81,7 @@ export class ToDoApp extends React.Component{
 		}
 
 		setSelectedCatalog(index){
+			console.log(index);
 			this.state.selectedItem = index;
 			this.setState({
 				selectedItem: index
