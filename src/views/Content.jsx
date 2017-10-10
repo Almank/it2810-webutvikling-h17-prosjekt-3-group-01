@@ -8,17 +8,15 @@ import {TodoList} from "./TodoList";
 
 import { Notes } from "./Notes";
 import {Calendar} from "./Calendar";
-import {Frontpage} from "./Frontpage";
 
 
 export class Content extends React.Component {
     render(){
         return (
             <div className="content">
-                <Route exact path="/" render={ () => <Frontpage/>}/>
+                <Route exact path="/" render={ () => <Calendar/>}/>
                 <Route path="/1" render={ () => <TodoList/>}/>
                 <Route path="/notebook" render={ () => <Notes/>}/>
-                <Route path="/calendar" render={ () => <Calendar/>}/>
             </div>
         );
     }

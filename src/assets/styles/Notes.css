@@ -9,7 +9,7 @@
     width: 20%;
     min-width: 250px;
     height: 100%;
-    background-color: #D7BEA8;
+    background-color: transparent;
     overflow: auto;
 }
 
@@ -17,70 +17,136 @@
     width: 80%;
     min-width: 430px;
     height: 100%;
-    background-color: #f0f0f0;
 }
 
-.NoteEdit .content{
+.NoteEdit .NoteEditContent{
     height: 100%;
 }
 
 /* NoteLink Component */
+.NoteListTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    height: 79px;
+}
+
+.NoteListTitleContainer h1 {
+    margin: 0;
+}
+
+.addNewNoteButton {
+    cursor: pointer;
+    font-size: 26px;
+    color: #35393a;
+    padding: 5px;
+}
+
+.addNewNoteButton:hover {
+    color: #FF9505;
+}
+
 .NoteLinkContainer{
     display: flex;
     justify-content: space-between;
+    min-height: 60px;
     align-items: center;
-    border-bottom: 1px solid gainsboro;
+    background-color: #F6F6F6;
+    border-bottom: 1px solid #35393a;
+    cursor: pointer;
 }
 
-.NoteLinkContainer:hover{
-    background-color: #c6ad9a;
+.NoteLinkContainer:first-child{
+    border-top: 1px solid #35393a;
+}
+
+.NoteLinkContainer:nth-child(odd){
+    background-color: white;
+}
+
+.NoteLinkContainer:hover:nth-child(odd){
+    background-color: #F6F6F6;
+}
+
+.NoteLinkContainer:hover:nth-child(even){
+    background-color: white;
+}
+
+.NoteLinkContainer a {
+    text-decoration: none;
 }
 
 .NoteButton{
     display: flex;
     padding-left: 10px;
     text-decoration: none;
-    color: #ececec;
+    color: #35393a;
     font-size: 10px;
     width: 70%;
-    font-family: "Helvetica", serif;
+    font-family: Geosans, serif;
+    align-content: center;
 }
 
-.NoteButton:hover{
+.NoteLinkContainer:hover .NoteButton{
     text-decoration: none;
-    color: #40285b;
+    color: #FF9505;
+}
+
+.NoteButton h1 {
+    margin: 0;
+    font-size: 24px;
 }
 
 .RemoveButton{
-    display: flex;
-    margin-right: 5px;
+    border:none;
+    background-color: transparent;
+    padding: 15px;
+    padding-right: 20px;
+    z-index: 2;
+}
+
+.RemoveButton span {
+    z-index: -1;
+    color:#35393a;
+    font-size: 20px;
+}
+
+.RemoveButton:hover span {
+    color: #d9534f;
 }
 
 /* NoteList - Form component */
+
 .NoteForm{
-    display: flex;
-    justify-content: space-between;
+    display: none;
+    justify-content: center;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
-    border-bottom: 1px solid darkgrey;
 }
 
 .NoteAdd{
     margin-right: 5px;
-    background-color: green;
+    background-color: #35393a;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0 4px 4px 0;
     padding-left: 17.5px;
     padding-right: 17.5px;
 }
 
+.NoteAdd:hover {
+    background-color: #FF9505;
+}
+
 .NoteField{
-    padding: 2.5px 0px 2.5px 0px;
+    flex:1;
+    padding: 2.5px 5px 2.5px 5px;
     width: 165px;
+    height: 30px;
     border: 1px solid lightgrey;
-    border-radius: 4px;
+    border-radius: 4px 0 0 4px;
 }
 
 /* NoteContent Component */
@@ -99,8 +165,30 @@
     width: 96%;
     padding: 2%;
     height: 85%;
-    border: 0;
     margin: 0;
     outline: none;
     resize: none;
+    border: 1px solid lightgrey;
+}
+
+/* Mobile - portrait */
+@media only screen and (max-width : 680px) {
+    .NoteBook {
+        flex-direction: column;
+
+    }
+    .NoteList {
+        width: 100vw;
+        min-width: 0;
+        height: auto;
+    }
+    .NoteEdit {
+        width: 100vw;
+        min-width: 0;
+        height: auto;
+    }
+    .NoteContentContainer textarea {
+        min-height: 30vh;
+    }
+
 }
