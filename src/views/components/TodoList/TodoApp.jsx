@@ -6,7 +6,7 @@ import ToDoFilter from './TodoFilter';
 import ToDoCatelog from './TodoCatelog';
 import ToDoCatelogForm from './TodoCatelogForm';
 
-/* [TODO APP] */ 
+/* [TODO APP] */
 export class ToDoApp extends React.Component{
 		constructor(props){
 			super(props);
@@ -89,7 +89,6 @@ export class ToDoApp extends React.Component{
 		}
 
 		render(){
-            console.log(this.state.selectedItem);
 			return (
 				<div className="row">
 					<div className="col-xs-3">
@@ -105,6 +104,7 @@ export class ToDoApp extends React.Component{
 				</div>
 			);
 		}
+
 	}
 
 export default ToDoApp;
