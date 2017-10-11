@@ -3,9 +3,13 @@
  */
 import React from 'react';
 import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
+//The class NoteLink renders a note-link-object for the parent NoteList.
 export class NoteLink extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render(){
         return(
@@ -20,7 +24,7 @@ export class NoteLink extends React.Component {
                         type="button"
                         onClick={this.props.onClick}
                         value={this.props.title}>
-                    <span className='glyphicon glyphicon-minus'></span>
+                    <span className='glyphicon glyphicon-minus' />
                 </button>
             </div>
         );

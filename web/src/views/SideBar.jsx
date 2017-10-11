@@ -11,7 +11,7 @@ export class SideBar extends React.Component {
         return (
             <div className="sideBar">
                 <Button link="/" icon="glyphicon-home"/>
-                <Button link="/todolists" icon="glyphicon-list-alt"/>
+                <Button link="/todolist" icon="glyphicon-list-alt"/>
                 <Button link="/notebook" icon="glyphicon-pencil"/>
             </div>
         );

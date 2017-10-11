@@ -1,10 +1,9 @@
 import React from 'react';
-import ToDoBanner from './TodoBanner';
-import ToDoForm from './TodoForm';
-import ToDoList from './TodoList';
-import ToDoFilter from './TodoFilter';
-import ToDoCatelog from './TodoCatelog';
-import ToDoCatelogForm from './TodoCatelogForm';
+import {TodoForm} from '../components/TodoList/TodoForm';
+import {TodoList} from '../components/TodoList/TodoList';
+import {TodoFilter} from '../components/TodoList/TodoFilter';
+import {TodoCatelog} from '../components/TodoList/TodoCatelog';
+import {TodoCatelogForm} from '../components/TodoList/TodoCatelogForm';
 
 /* [TODO APP] */
 export class ToDoApp extends React.Component{
@@ -29,7 +28,6 @@ export class ToDoApp extends React.Component{
             let todo = localStorage.getItem("todo");
             todo = JSON.parse(todo);
             this.state = todo;
-            console.log(todo);
 
             this.updateItems = this.updateItems.bind(this);
             this.deleteItem = this.deleteItem.bind(this);
@@ -76,12 +74,10 @@ export class ToDoApp extends React.Component{
 			let Catalog = {name:newCatalog,items:[{item:'Todo item #1',isDone:false}]};
 			let newtodo = this.state.Todo.concat([Catalog]);
             this.setState({Todo: newtodo});
-            console.log(newtodo);
             localStorage.setItem("todo", JSON.stringify(this.state));
 		}
 
 		setSelectedCatalog(index){
-			console.log(index);
 			this.state.selectedItem = index;
 			this.setState({
 				selectedItem: index
@@ -92,19 +88,17 @@ export class ToDoApp extends React.Component{
 			return (
 				<div className="row">
 					<div className="col-xs-3">
-                        <ToDoCatelogForm onFormSubmit = {this.AddCatalog} />
-                        <ToDoCatelog selectedID = {this.state.selectedItem} onSelected={this.setSelectedCatalog} Todos = {this.state.Todo} />
+                        <TodoCatelogForm onFormSubmit = {this.AddCatalog} />
+                        <TodoCatelog selectedID={this.state.selectedItem} onClick={this.setSelectedCatalog} Todos = {this.state.Todo} />
 					</div>
 					<div className="col-xs-6">
-						<ToDoBanner/>
-						<ToDoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
-						<ToDoForm onFormSubmit = {this.updateItems} />
-						<ToDoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
+						<h3>What do you want to-do?</h3>
+						<TodoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
+						<TodoForm onFormSubmit = {this.updateItems} />
+						<TodoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
 					</div>
 				</div>
 			);
 		}
 
 	}
-
-export default ToDoApp;

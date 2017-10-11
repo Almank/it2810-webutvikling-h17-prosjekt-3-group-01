@@ -1,51 +1,51 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import ToDoBanner from './TodoBanner';
-import ToDoForm from './TodoForm';
-import ToDoList from './TodoList';
-import ToDoListItem from './TodoListItem';
-import ToDoFilter from './TodoFilter';
-import ToDoCatelogForm from './TodoCatelogForm';
 
-var ToDoCatelog  = React.createClass({
-		changeTodo : function(e){
-			this.props.onSelected( e.currentTarget.dataset.id);
-		},
-		checkActive:function(i){
-	
-			if (i == this.props.selectedID)
-			{
-				return "list-group-item active";
-			}
-			else
-			{
-				return "list-group-item ";
-			}
-		},
-		render: function(){	
-		    var selectedID = this .props.selectedID;
-		
-			var allitems =this.props.Todos;
+export class TodoCatelog extends React.Component {
+	constructor(props){
+		super(props);
 
-			return <div className="list-group">
-			{
-				allitems.map(function(item,i){ 
-				var _class = "";
-				if (i == this.props.selectedID)
-                {
-                    _class =  "list-group-item active";
-                }
-                else
-                {
-                    _class =  "list-group-item ";
-                }
-				return(
-			
-					 <a href="#" key={i} data-id={i} className={_class} onClick={this.changeTodo} ><span className="badge" >{item.items.length}</span>{item.name}</a>
-				)
-			},this)}</div>;
+		this.changeTodo = this.changeTodo.bind(this);
+		this.checkActive = this.checkActive.bind(this);
+	}
+
+	changeTodo(e){
+		this.props.onClick(e.currentTarget.dataset.id);
+	}
+
+	checkActive(i){
+		if(i === this.props.selectedID){
+			return "list-group-item active"
+		} else {
+            return "list-group-item"
+        }
+	}
+
+	render(){
+		let selectedID = this.props.selectedID;
+		let allitems = this.props.Todos;
+		let items = [];
+
+		for(let i = 0; i < allitems.length; i++){
+            let _class = "";
+            if(i === selectedID){
+                _class = "list-group-item active";
+            } else {
+                _class =  "list-group-item ";
+            }
+			items.push(
+				<a href="#" key={i} data-id={i} className={_class} onClick={this.changeTodo}>
+					<span className="badge">
+						{allitems[i].items.length}
+					</span>
+					{allitems[i].name}
+				</a>
+			)
 		}
-	});
 
-export default ToDoCatelog;
+		return(
+			<div className="list-group">
+				{ items }
+			</div>
+		)
+	}
+}

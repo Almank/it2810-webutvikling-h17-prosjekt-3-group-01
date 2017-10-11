@@ -3,9 +3,12 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import DayEle from '../calendar/DayEle';
+import {DayEle} from '../calendar/DayEle';
 
-export default class DayBox extends React.Component {
+export class DayBox extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     getDateFull(i){
         let temp = new Date();
@@ -19,54 +22,35 @@ export default class DayBox extends React.Component {
     }
 
     getDayName(i){
-        const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+        const days = [ 'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
         let dayOfWeek = new Date().getDay();
         if (i + dayOfWeek >= 7)
-            return days[i+dayOfWeek-7+1];
+            return days[i+dayOfWeek-7];
         else {
-            return days[i+dayOfWeek+1];
+            return days[i+dayOfWeek];
         }
     }
 
     render(){
+        let preset = ['TODAY', 'TOMORROW', 2, 3, 4, 5, 6];
+        let weekdays = [];
+        for(let i = 0; i < 7; i ++){
+            let dayname = [];
+            if(i < 2){
+                dayname.push(preset[i]);
+            } else {
+                dayname.push(this.getDayName(preset[i]))
+            }
+            weekdays.push(<DayEle change={this.props.change}
+                                  key={this.getDateFull(i)}
+                                  dateFull={this.getDateFull(i)}
+                                  dateName={ dayname }
+                                  dayDate={this.getDayDate(i)} />)
+        }
+
         return (
             <div className={'weekBox'}>
-                <DayEle change={this.props.change}
-                        key={this.getDateFull(0)}
-                        dateFull={this.getDateFull(0)}
-                        dateName={'TODAY'}
-                        dayDate={this.getDayDate(0)} />
-                <DayEle change={this.props.change}
-                        key={this.getDateFull(1)}
-                        dateFull={this.getDateFull(1)}
-                        dateName={'TOMORROW'}
-                        dayDate={this.getDayDate(1)} />
-                <DayEle change={this.props.change}
-                        key={this.getDateFull(2)}
-                        dateFull={this.getDateFull(2)}
-                        dateName={this.getDayName(0)}
-                        dayDate={this.getDayDate(2)} />
-                <DayEle change={this.props.change}
-                        key={this.getDateFull(3)}
-                        dateFull={this.getDateFull(3)}
-                        dateName={this.getDayName(1)}
-                        dayDate={this.getDayDate(3)} />
-                <DayEle change={this.props.change}
-                        key={this.getDateFull(4)}
-                        dateFull={this.getDateFull(4)}
-                        dateName={this.getDayName(2)}
-                        dayDate={this.getDayDate(4)} />
-                <DayEle change={this.props.change}
-                        key={this.getDateFull(5)}
-                        dateFull={this.getDateFull(5)}
-                        dateName={this.getDayName(3)}
-                        dayDate={this.getDayDate(5)} />
-                <DayEle change={this.props.change}
-                        key={this.getDateFull(6)}
-                        dateFull={this.getDateFull(6)}
-                        dateName={this.getDayName(4)}
-                        dayDate={this.getDayDate(6)} />
-
+                { weekdays }
             </div>
         );
     }
