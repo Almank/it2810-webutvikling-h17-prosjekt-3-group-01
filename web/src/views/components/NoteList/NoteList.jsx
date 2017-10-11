@@ -2,8 +2,8 @@
  * Created by martinlunde on 27.09.2017.
  */
 import React from 'react';
-import '../../assets/styles/Notes.css';
-import {NoteLink} from "../components/NoteList/NoteLink";
+import '../../../assets/styles/Notes.css';
+import {NoteLink} from "./NoteLink";
 
 export class NoteList extends React.Component {
     constructor(props) {

@@ -2,8 +2,8 @@
  * Created by almank on 02.10.2017.
  */
 import React from 'react';
-import DayBox from './components/calendar/DayBox';
-import '../assets/styles/calendar.css';
+import DayBox from '../components/calendar/DayBox';
+import '../../assets/styles/calendar.css';
 
 export class Calendar extends React.Component {
     constructor(props) {

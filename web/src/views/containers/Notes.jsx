@@ -2,10 +2,10 @@
  * Created by martinlunde on 27.09.2017.
  */
 import React from 'react';
-import '../assets/styles/Notes.css';
-import {NoteList} from "./container/NoteList";
+import '../../assets/styles/Notes.css';
+import {NoteList} from "../components/NoteList/NoteList";
 import {Route} from 'react-router-dom';
-import {NoteContent} from "./container/NoteContent";
+import {NoteContent} from "../components/NoteList/NoteContent";
 
 
 export class Notes extends React.Component {
