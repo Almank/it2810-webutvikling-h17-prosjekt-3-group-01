@@ -4,10 +4,10 @@
 import React from 'react';
 import '../assets/styles/Content.css';
 import {Route} from 'react-router-dom';
-import {TodoLists} from "./TodoLists";
+import {TodoLists} from "./containers/TodoLists";
 
-import { Notes } from "./Notes";
-import {Calendar} from "./Calendar";
+import { Notes } from "./containers/Notes";
+import {Calendar} from "./containers/Calendar";
 
 
 export class Content extends React.Component {
