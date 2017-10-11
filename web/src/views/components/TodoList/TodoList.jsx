@@ -1,42 +1,53 @@
 import React from 'react';
-import ToDoListItem from './TodoListItem';
+import {ToDoListItem} from './TodoListItem';
 
-/* [TODO LIST] */ 
-var ToDoList = React.createClass({
-		Remove: function(e){
-		   this.props.onDelete(e);
-		},
-		render: function() {
-			
-			var createItem = function(itemText,i) {
-			
-				return (
-					<ToDoListItem key={i} value={i} onRemove = {this.Remove}>{itemText}</ToDoListItem>
-				);
-			};
-			var allitems = this.props.items;
-            // Here is the filter function 
-			var status = this.props.filter[0].Status;
-			switch (status){
-				case 'false':
-				 allitems = allitems.filter(t => !t.isDone)
-				 break;
-				 case 'true':
-				 allitems = allitems.filter(t => t.isDone)
-			};
-			// Here is the search function 
-			var queryText = this.props.filter[0].keyword;
-		 
-			if(queryText){
-				var queryResult=[];
-				allitems.forEach(function(item){
-					if(item.item.toLowerCase().indexOf(queryText)!=-1)
-					queryResult.push(item);
-				});
-				return <ul>{queryResult.map(createItem,this)}</ul>;
-			}
-	
-			return <ul>{allitems.map(createItem,this)}</ul>;
+export class TodoList extends React.Component{
+	constructor(props){
+		super(props);
+		this.renderItems = this.renderItems.bind(this);
+	}
+
+	renderItems(items, object){
+		let resultList = [];
+		items.map(function (item, i) {
+            resultList.push(
+                <ToDoListItem key={i} value={i} onClick={() => object.props.onDelete(i)}>{item}</ToDoListItem>
+            )
+        });
+		return resultList;
+	}
+
+	render(){
+		let allitems = this.props.items;
+		let status = this.props.filter[0].Status;
+
+		//Filter function for filtering out queries.
+		switch (status){
+			case 'false':
+				allitems = allitems.filter(t => !t.isDone);
+				break;
+			case 'true':
+				allitems = allitems.filter(t => t.isDone);
+				break;
 		}
-    });
-export default ToDoList;
+
+		//Search function, for filtering through search query
+        let query = this.props.filter[0].keyword;
+        if(query){
+            let queryResult = [];
+        	allitems.forEach(function (item) {
+                if(item.item.toLowerCase().indexOf(query) !== -1){
+                    queryResult.push(item);
+                }
+            });
+        	//If query exists, return searched elements instead of all.
+            return(
+				<ul>{ this.renderItems(queryResult, this) }</ul>
+            )
+		}
+
+		return(
+			<ul>{ this.renderItems(allitems, this) }</ul>
+		)
+	}
+}

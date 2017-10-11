@@ -1,7 +1,7 @@
 import React from 'react';
-import ToDoForm from '../components/TodoList/TodoForm';
-import ToDoList from '../components/TodoList/TodoList';
-import ToDoFilter from '../components/TodoList/TodoFilter';
+import {TodoForm} from '../components/TodoList/TodoForm';
+import {TodoList} from '../components/TodoList/TodoList';
+import {TodoFilter} from '../components/TodoList/TodoFilter';
 import {TodoCatelog} from '../components/TodoList/TodoCatelog';
 import {TodoCatelogForm} from '../components/TodoList/TodoCatelogForm';
 
@@ -93,9 +93,9 @@ export class ToDoApp extends React.Component{
 					</div>
 					<div className="col-xs-6">
 						<h3>What do you want to-do?</h3>
-						<ToDoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
-						<ToDoForm onFormSubmit = {this.updateItems} />
-						<ToDoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
+						<TodoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
+						<TodoForm onFormSubmit = {this.updateItems} />
+						<TodoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
 					</div>
 				</div>
 			);
