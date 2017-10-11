@@ -20,7 +20,7 @@ export class NoteLink extends React.Component {
                         type="button"
                         onClick={this.props.onClick}
                         value={this.props.title}>
-                    <span className='glyphicon glyphicon-minus'></span>
+                    <span className='glyphicon glyphicon-minus' />
                 </button>
             </div>
         );

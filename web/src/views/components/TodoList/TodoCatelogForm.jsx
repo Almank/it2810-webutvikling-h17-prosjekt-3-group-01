@@ -1,12 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import ToDoBanner from './TodoBanner';
-import ToDoForm from './TodoForm';
-import ToDoList from './TodoList';
-import ToDoListItem from './TodoListItem';
-import ToDoFilter from './TodoFilter';
-import ToDoCatelog from './TodoCatelog';
 
 var ToDoCatelogForm = React.createClass({
 		getInitialState: function() {

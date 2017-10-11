@@ -41,7 +41,6 @@ export class DayBox extends React.Component {
             } else {
                 dayname.push(this.getDayName(preset[i]))
             }
-            console.log(i);
             weekdays.push(<DayEle change={this.props.change}
                                   key={this.getDateFull(i)}
                                   dateFull={this.getDateFull(i)}

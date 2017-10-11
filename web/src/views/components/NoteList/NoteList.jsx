@@ -59,7 +59,7 @@ export class NoteList extends React.Component {
                 <div className="NoteListTitleContainer">
                     <h1>Notes</h1>
                     <div className="addNewNoteButton" onClick={this.createNewNote}>
-                        <span className={'glyphicon glyphicon-plus'}></span>
+                        <span className={'glyphicon glyphicon-plus'} />
                     </div>
                 </div>
                 <form className="NoteForm" onSubmit={this.onSubmit}>

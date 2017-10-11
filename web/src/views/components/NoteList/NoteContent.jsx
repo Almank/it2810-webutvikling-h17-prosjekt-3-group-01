@@ -17,7 +17,6 @@ export class NoteContent extends React.Component {
     handleChange(event){
         this.setState({content: event.target.value});
         this.props.onChange(this.state.title, event.target.value);
-        console.log(this.props.data);
     }
 
     componentWillReceiveProps(nextProps){

@@ -1,12 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import ToDoBanner from './TodoBanner';
-import ToDoForm from './TodoForm';
-import ToDoList from './TodoList';
-import ToDoFilter from './TodoFilter';
-import ToDoCatelog from './TodoCatelog';
-import ToDoCatelogForm from './TodoCatelogForm';
 
 /* [TODO LISTITEM] */
 var ToDoListItem = React.createClass({

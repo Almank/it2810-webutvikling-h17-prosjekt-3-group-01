@@ -1,12 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import ToDoBanner from './TodoBanner';
-import ToDoForm from './TodoForm';
-import ToDoList from './TodoList';
-import ToDoListItem from './TodoListItem';
-import ToDoFilter from './TodoFilter';
-import ToDoCatelogForm from './TodoCatelogForm';
 
 var ToDoCatelog  = React.createClass({
 		changeTodo : function(e){
