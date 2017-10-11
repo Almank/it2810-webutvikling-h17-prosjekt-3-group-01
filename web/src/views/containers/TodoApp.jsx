@@ -2,8 +2,8 @@ import React from 'react';
 import ToDoForm from '../components/TodoList/TodoForm';
 import ToDoList from '../components/TodoList/TodoList';
 import ToDoFilter from '../components/TodoList/TodoFilter';
-import ToDoCatelog from '../components/TodoList/TodoCatelog';
-import ToDoCatelogForm from '../components/TodoList/TodoCatelogForm';
+import {TodoCatelog} from '../components/TodoList/TodoCatelog';
+import {TodoCatelogForm} from '../components/TodoList/TodoCatelogForm';
 
 /* [TODO APP] */
 export class ToDoApp extends React.Component{
@@ -88,8 +88,8 @@ export class ToDoApp extends React.Component{
 			return (
 				<div className="row">
 					<div className="col-xs-3">
-                        <ToDoCatelogForm onFormSubmit = {this.AddCatalog} />
-                        <ToDoCatelog selectedID = {this.state.selectedItem} onSelected={this.setSelectedCatalog} Todos = {this.state.Todo} />
+                        <TodoCatelogForm onFormSubmit = {this.AddCatalog} />
+                        <TodoCatelog selectedID={this.state.selectedItem} onClick={this.setSelectedCatalog} Todos = {this.state.Todo} />
 					</div>
 					<div className="col-xs-6">
 						<h3>What do you want to-do?</h3>
