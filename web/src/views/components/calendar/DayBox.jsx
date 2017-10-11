@@ -3,9 +3,12 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import DayEle from '../calendar/DayEle';
+import {DayEle} from '../calendar/DayEle';
 
-export default class DayBox extends React.Component {
+export class DayBox extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     getDateFull(i){
         let temp = new Date();
