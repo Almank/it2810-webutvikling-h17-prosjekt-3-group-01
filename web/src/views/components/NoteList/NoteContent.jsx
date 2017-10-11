@@ -3,6 +3,7 @@
  */
 import React from 'react';
 
+//The NoteContent class renders the content on the right side of the note list.
 export class NoteContent extends React.Component {
     constructor(props){
         super(props);
@@ -14,11 +15,13 @@ export class NoteContent extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    //Function for handling typing in textarea, and updates the state.
     handleChange(event){
         this.setState({content: event.target.value});
         this.props.onChange(this.state.title, event.target.value);
     }
 
+    //Function which tells the component that new props may arrive, and component has to rerender.
     componentWillReceiveProps(nextProps){
         this.setState({
             title: nextProps.data.title,

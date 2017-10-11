@@ -5,6 +5,7 @@ import React from 'react';
 import '../../../assets/styles/Notes.css';
 import {NoteLink} from "./NoteLink";
 
+//The class NoteList is the parent of all notes in the list of nodes.
 export class NoteList extends React.Component {
     constructor(props) {
         super(props);
@@ -16,6 +17,7 @@ export class NoteList extends React.Component {
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
     }
 
+    //Function for adding new note and updating storage to contain this.
     onSubmit(event){
         const data = this.state.notes;
         data[event.target.title.value] = {
@@ -27,12 +29,14 @@ export class NoteList extends React.Component {
         event.preventDefault();
     }
 
+    //Function for handling the removeclick and has to force update due to the state of its parent.
     handleRemoveClick(event){
         let title = event.target.value;
         this.props.removeClick(title);
         this.forceUpdate();
     }
 
+    //Function for rendering all the listed notes. Uses forloop because of dictionaries.
     renderListedNotes(){
         let dataSet = [];
         const data = this.state.notes;
@@ -48,6 +52,7 @@ export class NoteList extends React.Component {
         return dataSet;
     }
 
+    //Function for modifying flex style state.
     createNewNote() {
         let element = document.querySelector('.NoteForm');
         element.style.display = element.style.display === 'flex' ? '' : 'flex';

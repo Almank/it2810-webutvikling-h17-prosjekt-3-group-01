@@ -5,7 +5,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
+//The class NoteLink renders a note-link-object for the parent NoteList.
 export class NoteLink extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render(){
         return(

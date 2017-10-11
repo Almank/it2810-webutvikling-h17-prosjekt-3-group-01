@@ -24,6 +24,7 @@ export class Notes extends React.Component {
             localStorage.setItem("notes", JSON.stringify(data));
         }
 
+        //Load locally stored data into state.
         let notes = localStorage.getItem("notes");
         notes = JSON.parse(notes);
         super(props);
@@ -33,11 +34,13 @@ export class Notes extends React.Component {
         this.removeClick = this.removeClick.bind(this);
     };
 
+    //Function for updating locally stored data.
     updateLocalStorage(){
         let data = this.state;
         localStorage.setItem("notes", JSON.stringify(data));
     }
 
+    //Function for updating a notes title and content.
     onChange(title, content){
         // eslint-disable-next-line
         this.state.notes[title].title = title;
@@ -46,6 +49,7 @@ export class Notes extends React.Component {
         this.updateLocalStorage();
     }
 
+    //Function for enabling remove button and updating storage.
     removeClick(title){
         delete this.state.notes[title];
         this.updateLocalStorage();
