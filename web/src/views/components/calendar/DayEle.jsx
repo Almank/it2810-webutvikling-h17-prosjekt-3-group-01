@@ -3,7 +3,11 @@
  */
 import React from 'react';
 
-export default class DayEle extends React.Component {
+export class DayEle extends React.Component {
+    constructor(props){
+        super(props);
+    }
+
     render(){
         return (
             <button key={this.props.dateFull} className={'dayBox'} onClick={this.props.change.bind(null, this)}>

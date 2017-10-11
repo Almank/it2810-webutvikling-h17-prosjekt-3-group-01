@@ -4,10 +4,10 @@
 import React from 'react';
 import '../assets/styles/Content.css';
 import {Route} from 'react-router-dom';
-import {TodoLists} from "./TodoLists";
 
-import { Notes } from "./Notes";
-import {Calendar} from "./Calendar";
+import { Notes } from "./containers/Notes";
+import {Calendar} from "./containers/Calendar";
+import {ToDoApp} from "./containers/TodoApp";
 
 
 export class Content extends React.Component {
@@ -15,7 +15,7 @@ export class Content extends React.Component {
         return (
             <div className="content">
                 <Route exact path="/" render={ () => <Calendar/>}/>
-                <Route path="/todolists" render={ () => <TodoLists/>}/>
+                <Route path="/todolist" render={ () => <ToDoApp/>}/>
                 <Route path="/notebook" render={ () => <Notes/>}/>
             </div>
         );
