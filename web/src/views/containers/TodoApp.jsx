@@ -1,10 +1,9 @@
 import React from 'react';
-import ToDoBanner from './TodoBanner';
-import ToDoForm from './TodoForm';
-import ToDoList from './TodoList';
-import ToDoFilter from './TodoFilter';
-import ToDoCatelog from './TodoCatelog';
-import ToDoCatelogForm from './TodoCatelogForm';
+import ToDoForm from '../components/TodoList/TodoForm';
+import ToDoList from '../components/TodoList/TodoList';
+import ToDoFilter from '../components/TodoList/TodoFilter';
+import ToDoCatelog from '../components/TodoList/TodoCatelog';
+import ToDoCatelogForm from '../components/TodoList/TodoCatelogForm';
 
 /* [TODO APP] */
 export class ToDoApp extends React.Component{
@@ -29,7 +28,6 @@ export class ToDoApp extends React.Component{
             let todo = localStorage.getItem("todo");
             todo = JSON.parse(todo);
             this.state = todo;
-            console.log(todo);
 
             this.updateItems = this.updateItems.bind(this);
             this.deleteItem = this.deleteItem.bind(this);
@@ -76,12 +74,10 @@ export class ToDoApp extends React.Component{
 			let Catalog = {name:newCatalog,items:[{item:'Todo item #1',isDone:false}]};
 			let newtodo = this.state.Todo.concat([Catalog]);
             this.setState({Todo: newtodo});
-            console.log(newtodo);
             localStorage.setItem("todo", JSON.stringify(this.state));
 		}
 
 		setSelectedCatalog(index){
-			console.log(index);
 			this.state.selectedItem = index;
 			this.setState({
 				selectedItem: index
@@ -96,7 +92,7 @@ export class ToDoApp extends React.Component{
                         <ToDoCatelog selectedID = {this.state.selectedItem} onSelected={this.setSelectedCatalog} Todos = {this.state.Todo} />
 					</div>
 					<div className="col-xs-6">
-						<ToDoBanner/>
+						<h3>What do you want to-do?</h3>
 						<ToDoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
 						<ToDoForm onFormSubmit = {this.updateItems} />
 						<ToDoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
@@ -106,5 +102,3 @@ export class ToDoApp extends React.Component{
 		}
 
 	}
-
-export default ToDoApp;
