@@ -2,18 +2,27 @@
  * Created by martinlunde on 27.09.2017.
  */
 import React from 'react';
-import { View, StyleSheet, Button} from 'react-native';
+import { View, StyleSheet, TouchableHighlight, Image} from 'react-native';
 
 export class LinkButton extends React.Component {
+    constructor(props){
+        super(props);
+        this.onPress = this.onPress.bind(this);
+    }
 
     onPress(){
-        console.log("test");
+        console.log(this.props.img);
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Button style={styles.button} title="button" onPress={this.onPress}/>
+                <TouchableHighlight onPress={this.onPress} style={styles.button}>
+                    <Image
+                        style={styles.image}
+                        source={this.props.img}
+                    />
+                </TouchableHighlight>
             </View>
         );
     }
@@ -22,14 +31,18 @@ export class LinkButton extends React.Component {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        backgroundColor: 'powderblue',
+        backgroundColor: '#35393a',
         justifyContent: 'center',
-        alignItems: 'center',
         flex: 1,
-        height: 100,
     },
     button: {
         display: 'flex',
-        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 100,
+    },
+    image: {
+        width: 50,
+        height: 50,
     }
 });
