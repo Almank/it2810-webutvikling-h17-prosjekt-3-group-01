@@ -150,6 +150,9 @@
 .list-group{
     margin: 20px;
 }
+.todo-filter{
+    margin-bottom: 10px;
+}
 .todo-filter li{
     display: inline;
 }
@@ -165,4 +168,10 @@ ul{
 }
 h3{
     text-align: center;
+}
+.todoform{
+    display: flex;
+}
+.form-group{
+    display: flex;
 }
