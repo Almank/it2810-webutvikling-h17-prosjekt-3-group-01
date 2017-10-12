@@ -1,14 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet} from 'react-native';
 import { Index } from './src/index';
-import { index_style } from './src/assets/index_style';
 
 export default class App extends React.Component {
     render() {
         return (
-            <View style={index_style.container}>
-                <Index/>
+            <View style={styles.container}>
+                <Index />
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+   container: {
+       backgroundColor: 'grey',
+       flex: 1
+   }
+});
