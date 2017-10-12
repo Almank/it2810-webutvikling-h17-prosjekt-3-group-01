@@ -89,7 +89,7 @@ export class ToDoApp extends React.Component{
 			return (
                 <div className="todo-wrapper">
                     <h1 className={'title'} >To-do list</h1>
-                    <div className="row">
+                    <div className="bigrow">
                         <div className="col1">
                             <h3>To-do lists:</h3>
                             <TodoCatelogForm onFormSubmit = {this.AddCatalog} />
