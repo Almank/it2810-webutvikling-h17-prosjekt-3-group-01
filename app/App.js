@@ -6,7 +6,7 @@ export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Index />
+                <Index/>
             </View>
         );
     }
@@ -14,7 +14,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
    container: {
-       backgroundColor: 'grey',
        flex: 1
    }
 });
