@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
     }
 });
 
+//Styles and configuration of react-navigation navbar.
+//Repetitive code is necessary to configure each page.
 export const Content = TabNavigator({
     Calendar: {screen: Calendar,
             navigationOptions: {
@@ -62,8 +64,8 @@ export const Content = TabNavigator({
 
         showIcon: true,
         showLabel: false,
-        inactiveBackgroundColor: '#8e8e8e',
-        activeBackgroundColor: '#6e6e6e',
+        inactiveBackgroundColor: '#464a4b',
+        activeBackgroundColor: '#35393a',
         style: {
             height: 100,
         },
