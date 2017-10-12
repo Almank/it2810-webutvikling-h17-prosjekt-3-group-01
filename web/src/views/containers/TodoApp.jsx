@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../assets/styles/Todolists.css';
 import {TodoForm} from '../components/TodoList/TodoForm';
 import {TodoList} from '../components/TodoList/TodoList';
 import {TodoFilter} from '../components/TodoList/TodoFilter';
@@ -86,18 +87,23 @@ export class ToDoApp extends React.Component{
 
 		render(){
 			return (
-				<div className="row">
-					<div className="col-xs-3">
-                        <TodoCatelogForm onFormSubmit = {this.AddCatalog} />
-                        <TodoCatelog selectedID={this.state.selectedItem} onClick={this.setSelectedCatalog} Todos = {this.state.Todo} />
-					</div>
-					<div className="col-xs-6">
-						<h3>What do you want to-do?</h3>
-						<TodoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
-						<TodoForm onFormSubmit = {this.updateItems} />
-						<TodoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
-					</div>
-				</div>
+                <div className="todo-wrapper">
+                    <h1 className={'title'} >To-do list</h1>
+                    <div className="row">
+                        <div className="col1">
+                            <h3>To-do lists:</h3>
+                            <TodoCatelogForm onFormSubmit = {this.AddCatalog} />
+                            <TodoCatelog selectedID={this.state.selectedItem} onClick={this.setSelectedCatalog} Todos = {this.state.Todo} />
+                        </div>
+                        <div className="col2">
+                            <h3>What do you want to-do?</h3>
+                            <TodoForm onFormSubmit = {this.updateItems} />
+                            <TodoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
+                            <hr/>
+                            <TodoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
+                        </div>
+                    </div>
+                </div>
 			);
 		}
 
