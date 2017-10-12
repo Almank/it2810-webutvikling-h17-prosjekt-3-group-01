@@ -1,13 +1,13 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import {SideBar} from "./SideBar";
 
 export class Index extends React.Component {
     render() {
         return (
             <View>
-                <Text>Open up App.js to start working on your app!</Text>
-                <Text>Changes you make will automatically reload.</Text>
-                <Text>Shake your phone to open the developer menu.</Text>
+                <SideBar/>
+                /* Load Content here */
             </View>
         );
     }
