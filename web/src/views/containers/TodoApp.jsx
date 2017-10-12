@@ -99,7 +99,6 @@ export class ToDoApp extends React.Component{
                             <h3>What do you want to-do?</h3>
                             <TodoForm onFormSubmit = {this.updateItems} />
                             <TodoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
-                            <hr/>
                             <TodoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
                         </div>
                     </div>
