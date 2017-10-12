@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export class NoteLink extends React.Component {
     constructor(props){
         super(props);
         this.onPress = this.onPress.bind(this);
+        this.navigateToContent = this.navigateToContent.bind(this);
     }
 
     //onPress functions has to be binded in react native, but doesnt in regular react.
@@ -13,20 +14,26 @@ export class NoteLink extends React.Component {
         this.props.onClick(this.props.title);
     }
 
+    navigateToContent(){
+        this.props.navigation.navigate('Content', {title: this.props.title, navigation: this.props.navigation});
+    }
+
     render(){
         return(
-            <View style={styles.NoteLink}>
-                <Text style={styles.Title}>
-                      {this.props.title}
-                </Text>
-                <Button buttonStyle={{width: 40, height: 40, backgroundColor: '#a41e1e'}}
-                        underlayColor='#ef1c1c'
-                        raised
-                        onPress={this.onPress}
-                        fontWeight="bold"
-                        fontSize={20}
-                        title="X"/>
-            </View>
+            <TouchableHighlight onPress={this.navigateToContent}>
+                <View style={styles.NoteLink}>
+                    <Text style={styles.Title}>
+                          {this.props.title}
+                    </Text>
+                    <Button buttonStyle={{width: 40, height: 40, backgroundColor: '#a41e1e'}}
+                            underlayColor='#ef1c1c'
+                            raised
+                            onPress={this.onPress}
+                            fontWeight="bold"
+                            fontSize={20}
+                            title="X"/>
+                </View>
+            </TouchableHighlight>
         )
     }
 

@@ -55,6 +55,7 @@ export class NoteList extends React.Component {
             dataSet.push(<NoteLink title={ data[key].title }
                                    key={index}
                                    index={index}
+                                   navigation={this.props.navigation}
                                    onClick={this.handleRemoveClick}
             />);
             index++;
