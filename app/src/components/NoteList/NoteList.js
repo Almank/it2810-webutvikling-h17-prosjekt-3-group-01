@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, FlatList, Text } from 'react-native';
 import { Button, FormLabel } from 'react-native-elements';
 import { NoteLink } from "./NoteLink";
 
@@ -9,9 +9,41 @@ export class NoteList extends React.Component {
         this.state = {
             notes: {
                 'default': {
-                    title: 'default',
+                    title: 'default0',
                     content: 'no content'
-                }
+                },
+                'default1': {
+                    title: 'default1',
+                    content: 'no content'
+                },
+                'default2': {
+                    title: 'default2',
+                    content: 'no content'
+                },
+                'default3': {
+                    title: 'default3',
+                    content: 'no content'
+                },
+                'default4': {
+                    title: 'default4',
+                    content: 'no content'
+                },
+                'default5': {
+                    title: 'default5',
+                    content: 'no content'
+                },
+                'default6': {
+                    title: 'default6',
+                    content: 'no content'
+                },
+                'default7': {
+                    title: 'default7',
+                    content: 'no content'
+                },
+                'default8': {
+                    title: 'default8',
+                    content: 'no content'
+                },
             },
         };
 
@@ -46,23 +78,25 @@ export class NoteList extends React.Component {
         this.setState(data);
     }
 
-    //Function for rendering all the listed notes. Uses forloop because of dictionaries.
-    renderListedNotes(){
-        let dataSet = [];
-        const data = this.state.notes;
-        let index = 0;
-        for(let key in data){
-            dataSet.push(<NoteLink title={ data[key].title }
-                                   key={index}
-                                   index={index}
-                                   navigation={this.props.navigation}
-                                   onClick={this.handleRemoveClick}
-            />);
-            index++;
-        }
-        return dataSet;
+    //Function for rendering all the listed notes.
+    renderNote(item, index){
+        return(<NoteLink title={item.title}
+                         index={index}
+                         key={index}
+                         navigation={this.props.navigation}
+                         onClick={this.handleRemoveClick}
+        />);
     }
 
+    //Processes data from state to be used in FlatList
+    renderData(){
+        let unprocessedData = this.state.notes;
+        let data = [];
+        for(let key in unprocessedData){
+            data.push(unprocessedData[key])
+        }
+        return data;
+    }
 
     render(){
         return(
@@ -83,9 +117,12 @@ export class NoteList extends React.Component {
                             fontWeight="bold"
                             onPress={this.onSubmit}/>
                 </View>
-                <View className="CurrentNotes">
-                    { this.renderListedNotes() }
-                </View>
+                <FlatList
+                    key={"flatList"}
+                    data={this.renderData()}
+                    renderItem={({item, index}) => this.renderNote(item, index)}
+                    keyExtractor={(key, index) => index}
+                />
             </View>
         )
     }
@@ -100,7 +137,9 @@ const styles = StyleSheet.create({
     InputFields: {
         display: 'flex',
         justifyContent: 'flex-end',
-        backgroundColor: 'lightgrey'
+        backgroundColor: 'lightgrey',
+        borderBottomWidth: 2,
+        borderColor: 'grey',
     },
     TitleInput: {
         backgroundColor: 'white',

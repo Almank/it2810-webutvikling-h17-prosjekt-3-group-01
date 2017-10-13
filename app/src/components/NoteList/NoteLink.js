@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
-import { Button } from 'react-native-elements';
 
 export class NoteLink extends React.Component {
     constructor(props){
