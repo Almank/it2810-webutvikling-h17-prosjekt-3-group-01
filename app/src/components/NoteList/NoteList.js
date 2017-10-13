@@ -46,7 +46,6 @@ export class NoteList extends React.Component {
                 },
             },
         };
-
         this.onSubmit = this.onSubmit.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -82,6 +81,7 @@ export class NoteList extends React.Component {
     //Function for rendering all the listed notes.
     renderNote(item, index){
         return(<NoteLink title={item.title}
+                         content={item.content}
                          index={index}
                          key={index}
                          navigation={this.props.navigation}

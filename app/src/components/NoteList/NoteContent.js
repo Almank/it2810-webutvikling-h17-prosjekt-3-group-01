@@ -11,6 +11,7 @@ export class NoteContent extends React.Component {
         this.state = {
             textfield: "",
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.returnToLastView = this.returnToLastView.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -32,6 +33,13 @@ export class NoteContent extends React.Component {
     }
 
     render(){
+        let textValue;
+        if(!this.state.textfield){
+            textValue = this.props.navigation.state.params.content;
+        } else {
+            textValue = this.state.textfield;
+        }
+
         return(
             <View>
                 <View style={styles.header}>
@@ -46,7 +54,7 @@ export class NoteContent extends React.Component {
                     <View style={styles.hr}/>
                     <TextInput style={styles.noteField}
                                onChangeText={(text) => this.handleChange(text)}
-                               value={this.state.text}
+                               value={textValue}
                                multiline={true}
                                numberOfLines={4}
                     />

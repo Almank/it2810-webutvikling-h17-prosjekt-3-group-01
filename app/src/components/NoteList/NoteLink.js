@@ -11,6 +11,7 @@ export class NoteLink extends React.Component {
     navigateToContent(){
         this.props.navigation.navigate('Content', {
             title: this.props.title,
+            content: this.props.content,
             navigation: this.props.navigation,
             onPress: this.onDelete
         });
