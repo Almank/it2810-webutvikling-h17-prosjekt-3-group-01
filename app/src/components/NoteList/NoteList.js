@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TextInput, FlatList, Text } from 'react-native';
+import { View, StyleSheet, TextInput, FlatList, Keyboard } from 'react-native';
 import { Button, FormLabel } from 'react-native-elements';
 import { NoteLink } from "./NoteLink";
 
@@ -62,6 +62,7 @@ export class NoteList extends React.Component {
             };
             data.textfield = "";
             this.setState(data);
+            Keyboard.dismiss();
         }
     }
 
