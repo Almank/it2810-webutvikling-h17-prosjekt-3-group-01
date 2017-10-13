@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TextInput, FlatList, Keyboard } from 'react-native';
+import { View, StyleSheet, TextInput, FlatList, Keyboard, AsyncStorage} from 'react-native';
 import { Button, FormLabel } from 'react-native-elements';
 import { NoteLink } from "./NoteLink";
 
@@ -7,49 +7,39 @@ export class NoteList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            notes: {
-                'default0': {
-                    title: 'default0',
-                    content: 'no content'
-                },
-                'default1': {
-                    title: 'default1',
-                    content: 'no content'
-                },
-                'default2': {
-                    title: 'default2',
-                    content: 'no content'
-                },
-                'default3': {
-                    title: 'default3',
-                    content: 'no content'
-                },
-                'default4': {
-                    title: 'default4',
-                    content: 'no content'
-                },
-                'default5': {
-                    title: 'default5',
-                    content: 'no content'
-                },
-                'default6': {
-                    title: 'default6',
-                    content: 'no content'
-                },
-                'default7': {
-                    title: 'default7',
-                    content: 'no content'
-                },
-                'default8': {
-                    title: 'default8',
-                    content: 'no content'
-                },
-            },
+            notes: {}
         };
+
         this.onSubmit = this.onSubmit.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleNoteContentChange = this.handleNoteContentChange.bind(this);
+        this.loadData();
+        console.log(this.state);
+    }
+
+    //Inital async load of data that has to be done outside the constructor
+    async loadData(){
+        let notes;
+        try {
+            notes = await AsyncStorage.getItem('notes');
+            if (notes !== null){
+                notes = JSON.parse(notes);
+                this.setState({notes: notes['notes']});
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    updateAsyncStorage(){
+        console.log("save");
+        let data = this.state;
+        try{
+            AsyncStorage.setItem("notes", JSON.stringify(data));
+        } catch (error){
+            console.log(error);
+        }
     }
 
     //Function for adding new note and updating storage to contain this.
@@ -63,6 +53,7 @@ export class NoteList extends React.Component {
             data.textfield = "";
             this.setState(data);
             Keyboard.dismiss();
+            this.updateAsyncStorage();
         }
     }
 
@@ -71,12 +62,14 @@ export class NoteList extends React.Component {
         let data = this.state;
         delete data.notes[title];
         this.setState(data);
+        this.updateAsyncStorage();
     }
 
     handleChange(text){
         let data = this.state;
         data.textfield = text;
         this.setState(data);
+        this.updateAsyncStorage();
     }
 
     //function for handling changes in content and save to state
@@ -84,6 +77,7 @@ export class NoteList extends React.Component {
         let data = this.state.notes;
         data[title].content = content;
         this.setState(data);
+        this.updateAsyncStorage();
     }
 
     //Function for rendering all the listed notes.
