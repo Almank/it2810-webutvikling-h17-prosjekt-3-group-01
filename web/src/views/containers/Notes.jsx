@@ -59,6 +59,7 @@ export class Notes extends React.Component {
 
     render(){
         return (
+            <div> <h1 className={'title'}>Notes</h1>
             <div className="NoteBook">
                 <NoteList notes={this.state.notes}
                           removeClick={(value) => this.removeClick(value)}
@@ -75,6 +76,7 @@ export class Notes extends React.Component {
                             />}/>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }
