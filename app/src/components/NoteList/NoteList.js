@@ -15,7 +15,6 @@ export class NoteList extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleNoteContentChange = this.handleNoteContentChange.bind(this);
         this.loadData();
-        console.log(this.state);
     }
 
     //Inital async load of data that has to be done outside the constructor
@@ -33,7 +32,6 @@ export class NoteList extends React.Component {
     }
 
     updateAsyncStorage(){
-        console.log("save");
         let data = this.state;
         try{
             AsyncStorage.setItem("notes", JSON.stringify(data));

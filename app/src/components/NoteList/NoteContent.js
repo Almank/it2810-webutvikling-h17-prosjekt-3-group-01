@@ -9,7 +9,7 @@ export class NoteContent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            textfield: "",
+            textfield: this.props.navigation.state.params.content,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -37,7 +37,7 @@ export class NoteContent extends React.Component {
     render(){
         let textValue;
         if(!this.state.textfield){
-            textValue = this.props.navigation.state.params.content;
+            textValue = '';
         } else {
             textValue = this.state.textfield;
         }
