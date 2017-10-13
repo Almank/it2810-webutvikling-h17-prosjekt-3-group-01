@@ -89,7 +89,7 @@ export class ToDoApp extends React.Component{
 			return (
                 <div className="todo-wrapper">
                     <h1 className={'title'} >To-do list</h1>
-                    <div className="row">
+                    <div className="bigrow">
                         <div className="col1">
                             <h3>To-do lists:</h3>
                             <TodoCatelogForm onFormSubmit = {this.AddCatalog} />
@@ -99,7 +99,6 @@ export class ToDoApp extends React.Component{
                             <h3>What do you want to-do?</h3>
                             <TodoForm onFormSubmit = {this.updateItems} />
                             <TodoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
-                            <hr/>
                             <TodoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
                         </div>
                     </div>
