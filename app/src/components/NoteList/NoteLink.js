@@ -6,6 +6,7 @@ export class NoteLink extends React.Component {
         super(props);
         this.navigateToContent = this.navigateToContent.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.onChildContentChange = this.onChildContentChange.bind(this);
     }
 
     navigateToContent(){
@@ -13,8 +14,13 @@ export class NoteLink extends React.Component {
             title: this.props.title,
             content: this.props.content,
             navigation: this.props.navigation,
-            onPress: this.onDelete
+            onPress: this.onDelete,
+            onContentChange: this.onChildContentChange,
         });
+    }
+
+    onChildContentChange(title, text){
+        this.props.onContentChange(title, text);
     }
 
     onDelete(){

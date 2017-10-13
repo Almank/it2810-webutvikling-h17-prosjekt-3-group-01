@@ -8,7 +8,7 @@ export class NoteList extends React.Component {
         super(props);
         this.state = {
             notes: {
-                'default': {
+                'default0': {
                     title: 'default0',
                     content: 'no content'
                 },
@@ -49,6 +49,7 @@ export class NoteList extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleNoteContentChange = this.handleNoteContentChange.bind(this);
     }
 
     //Function for adding new note and updating storage to contain this.
@@ -78,6 +79,13 @@ export class NoteList extends React.Component {
         this.setState(data);
     }
 
+    //function for handling changes in content and save to state
+    handleNoteContentChange(title, content){
+        let data = this.state.notes;
+        data[title].content = content;
+        this.setState(data);
+    }
+
     //Function for rendering all the listed notes.
     renderNote(item, index){
         return(<NoteLink title={item.title}
@@ -86,6 +94,7 @@ export class NoteList extends React.Component {
                          key={index}
                          navigation={this.props.navigation}
                          onClick={this.handleRemoveClick}
+                         onContentChange={this.handleNoteContentChange}
         />);
     }
 

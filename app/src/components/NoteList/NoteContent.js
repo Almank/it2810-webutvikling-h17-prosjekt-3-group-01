@@ -23,8 +23,10 @@ export class NoteContent extends React.Component {
 
     handleChange(text){
         let data = this.state;
+        let noteProp = this.props.navigation.state.params;
         data.textfield = text;
         this.setState(data);
+        noteProp.onContentChange(noteProp.title, this.state.textfield);
     }
 
     handleDelete(){
