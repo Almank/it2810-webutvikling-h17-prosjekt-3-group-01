@@ -86,35 +86,61 @@ export class Calendar extends React.Component {
         let titleValue = document.getElementsByClassName('titleInput')[0].value;
         let textValue = document.getElementsByClassName('textInput')[0].value;
 
-        //Creating new array with current state children.
-        let newStateArray = this.state.children.slice();
+        //Validate fields date, time and title. Last field is optional.
+        if (this.validateFormDate(dateValue) && this.validateFormTime(timeValue) && this.validateFormTitle(titleValue)){
 
-        //Pushing new child to array.
-        newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
+            //Creating new array with current state children.
+            let newStateArray = this.state.children.slice();
 
-        //Sorting array with earliest appointments first.
-        newStateArray.sort((a, b) => a.time > b.time);
+            //Pushing new child to array.
+            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
 
-        //Creating new updated state.
-        let data = {
-            children: newStateArray,
-            dateToday: new Date().toISOString().slice(0, 10),
-        };
+            //Sorting array with earliest appointments first.
+            newStateArray.sort((a, b) => a.time > b.time);
 
-        //Setting state.
-        this.setState(data);
+            //Creating new updated state.
+            let data = {
+                children: newStateArray,
+                dateToday: new Date().toISOString().slice(0, 10),
+            };
 
-        //Updating localstorage to store new data.
-        localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            //Setting state.
+            this.setState(data);
 
-        //Resetting form values.
-        document.getElementsByClassName('dateInput')[0].value = null;
-        document.getElementsByClassName('timeInput')[0].value = null;
-        document.getElementsByClassName('titleInput')[0].value = null;
-        document.getElementsByClassName('textInput')[0].value = null;
+            //Updating localstorage to store new data.
+            localStorage.setItem("emptyCalendar", JSON.stringify(data));
 
-        //Hiding form.
-        this.showForm();
+            //Resetting form values.
+            document.getElementsByClassName('dateInput')[0].value = null;
+            document.getElementsByClassName('timeInput')[0].value = null;
+            document.getElementsByClassName('titleInput')[0].value = null;
+            document.getElementsByClassName('textInput')[0].value = null;
+
+            //Hiding form.
+            this.showForm();
+        } else {
+            alert('Invalid values. Please fill the fields.')
+        }
+
+
+    }
+
+    validateFormDate(date){
+        if (date.length === 10){
+            return true
+        }
+    }
+
+    validateFormTime(time){
+        if (time.length === 5){
+            return true
+        }
+    }
+
+    validateFormTitle(title){
+        if (title.length > 0){
+            return true
+        }
     }
 
     changeContent(e){
