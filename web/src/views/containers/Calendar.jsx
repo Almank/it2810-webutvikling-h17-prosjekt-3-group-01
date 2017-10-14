@@ -121,26 +121,24 @@ export class Calendar extends React.Component {
         } else {
             alert('Invalid values. Please fill the fields.')
         }
-
-
     }
 
     validateFormDate(date){
-        if (date.length === 10){
+        if (date.length === 10)
             return true
-        }
+        return false
     }
 
     validateFormTime(time){
-        if (time.length === 5){
+        if (time.length === 5)
             return true
-        }
+        return false
     }
 
     validateFormTitle(title){
-        if (title.length > 0){
+        if (title.length > 0)
             return true
-        }
+        return false
     }
 
     changeContent(e){
