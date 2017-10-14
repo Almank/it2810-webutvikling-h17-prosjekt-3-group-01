@@ -2,7 +2,7 @@
  * Created by almank on 02.10.2017.
  */
 import React from 'react';
-import {DayBox} from '../components/calendar/DayBox';
+import {WeekCal} from '../components/calendar/WeekCal';
 import '../../assets/styles/calendar.css';
 
 export class Calendar extends React.Component {
@@ -142,7 +142,7 @@ export class Calendar extends React.Component {
         return (
             <div className={'calendarContent'}>
                 <h1 className={'title'} >Your schedule for the coming week</h1>
-                <DayBox change={this.changeContent} />
+                <WeekCal change={this.changeContent} />
 
                 <div className={'calendarBox'}>
                     <div className='calendarBoxContent'>

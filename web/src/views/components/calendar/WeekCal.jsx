@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {DayEle} from '../calendar/DayEle';
 
-export class DayBox extends React.Component {
+export class WeekCal extends React.Component {
     constructor(props){
         super(props);
     }
@@ -56,6 +56,6 @@ export class DayBox extends React.Component {
     }
 }
 
-DayBox.PropTypes = {
+WeekCal.PropTypes = {
     change: PropTypes.string.isRequired,
 };
