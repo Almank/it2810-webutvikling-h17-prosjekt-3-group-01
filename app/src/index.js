@@ -59,7 +59,7 @@ export const Content = TabNavigator({
             }
         }
 }, {
-    initialRouteName: 'Notes',
+    initialRouteName: 'Calendar',
     swipeEnabled: false,
     tabBarOptions: {
 
