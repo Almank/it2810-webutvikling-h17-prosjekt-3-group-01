@@ -2,7 +2,7 @@
  * Created by almank on 14.10.2017.
  */
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export class ContentHeader extends React.Component {
 
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     item: {
         flexBasis:'33%',
         textAlign:'center',
-        fontSize:16,
+        fontSize:18,
+        marginBottom: 20,
     }
 
 });

@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {ContentHeader} from "./ContentHeader";
-import { View, Text, TextInput, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 
 export class AppointmentForm extends React.Component {
     constructor(props){
@@ -19,11 +19,10 @@ export class AppointmentForm extends React.Component {
         this.submitInput = this.submitInput.bind(this);
     }
 
+    //Send data to calendar on submit
     submitInput() {
-        console.log('works');
         if (this.state.dateValue !== null && this.state.timeValue !== null && this.state.titleValue !== null){
             this.props.getValues([this.state.dateValue, this.state.timeValue, this.state.titleValue, this.state.textValue]);
-            console.log('APPF: ' + this.props.getValues);
         } else {
             this.setState({
                 dateValue: null,
@@ -34,6 +33,7 @@ export class AppointmentForm extends React.Component {
         }
     }
 
+    //Hide/show form.
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
     }
@@ -41,39 +41,59 @@ export class AppointmentForm extends React.Component {
     render(){
         return (
             <View>
-                <TouchableOpacity onPress={() => {
-                    this.setModalVisible(true)}} title='Press me'>
-                    <Text>Add appointment</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        this.setModalVisible(true)
+                        }}
+                        title='Press me'
+                        style={[styles.addAppButton, styles.shadow]}>
+                    <Text style={styles.textButton}>ADD APPOINTMENT</Text>
                 </TouchableOpacity>
                 <ContentHeader />
                 <Modal
                     animationType="slide"
                     transparent={false}
                     visible={this.state.modalVisible}
-                    onRequestClose={() => {alert("Modal has been closed.")}}>
-                    <View className={'form'}>
+                    onRequestClose={() => {alert("Form has been closed.")}}>
+                    <View style={styles.formContainer}>
                         <View>
-                            <Text>Create new appointment</Text>
-                            <TouchableOpacity onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible)
-                            }}>
-                                <Text>Close</Text>
-                            </TouchableOpacity>
+                            <Text style={styles.title}>Create new appointment</Text>
                         </View>
-                        <Text htmlFor="date">Date</Text>
-                        <TextInput onChangeText={(dateValue) => this.setState({dateValue})} value={this.state.dateValue}/>
-                        <Text htmlFor="time">Time</Text>
-                        <TextInput onChangeText={(timeValue) => this.setState({timeValue})} value={this.state.timeValue}/>
-                        <Text htmlFor="title">Title</Text>
-                        <TextInput onChangeText={(titleValue) => this.setState({titleValue})} value={this.state.titleValue}/>
-                        <Text htmlFor="what">What</Text>
-                        <TextInput onChangeText={(textValue) => this.setState({textValue})} value={this.state.textValue}/>
+                        <Text htmlFor="date" style={styles.text}>Date - YYYY-MM-DD</Text>
+                        <TextInput onChangeText={(dateValue) => this.setState({dateValue})}
+                                   value={this.state.dateValue}
+                                   placeholder={'YYYY-MM-DD'}
+                                   style={[styles.inputField, styles.shadow]}/>
+                        <Text htmlFor="time" style={styles.text}>Time - HH:MM</Text>
+                        <TextInput onChangeText={(timeValue) => this.setState({timeValue})}
+                                   value={this.state.timeValue}
+                                   placeholder={'HH:MM'}
+                                   style={[styles.inputField, styles.shadow]}/>
+                        <Text htmlFor="title" style={styles.text}>Title</Text>
+                        <TextInput onChangeText={(titleValue) => this.setState({titleValue})}
+                                   value={this.state.titleValue}
+                                   style={[styles.inputField, styles.shadow]}/>
+                        <Text htmlFor="what" style={styles.text}>What</Text>
+                        <TextInput onChangeText={(textValue) => this.setState({textValue})}
+                                   value={this.state.textValue}
+                                   style={[styles.inputField, styles.shadow]}/>
                         <TouchableOpacity onPress={() => {
-                            this.submitInput();
-                            this.setModalVisible(!this.state.modalVisible)
+                            this.setModalVisible(!this.state.modalVisible);
+                            //To avoid getting stuck by having alert behind modal.
+                            setTimeout(() => {
+                                this.submitInput();
+                            }, 100);
+
                             }}
-                            title='Submit'>
-                            <Text>Submit</Text>
+                            title='Submit'
+                            style={[styles.addAppButton, styles.shadow]}>
+                            <Text style={styles.textButton}>Submit</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
+                            this.setModalVisible(!this.state.modalVisible)
+                        }}
+                                          style={[styles.addAppButton, styles.shadow]}>
+                            <Text style={styles.textButton}>Cancel</Text>
                         </TouchableOpacity>
                     </View>
                 </Modal>
@@ -81,3 +101,54 @@ export class AppointmentForm extends React.Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    addAppButton: {
+        marginTop: 20,
+        marginLeft:'15%',
+        marginRight:'15%',
+        flexBasis: 40,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FF9505',
+        borderWidth: 1,
+        borderColor: 'rgba(155,155,155,0.5)',
+    },
+    textButton: {
+        fontSize:16,
+        color:'white',
+    },
+    formContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        height:'100%',
+    },
+    inputField: {
+        padding: 5,
+        marginLeft: '15%',
+        marginRight: '15%',
+        flexBasis: 40,
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: 'rgba(155,155,155,0.5)',
+    },
+    shadow: {
+        shadowColor: 'black',
+        shadowOffset: {width:0, height: 2},
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+    },
+    text: {
+        marginLeft: '15%',
+        marginRight: '15%',
+        marginBottom: 3,
+        marginTop: 10,
+    },
+    title: {
+        fontSize: 25,
+        textAlign: 'center',
+    }
+
+});

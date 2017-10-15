@@ -61,17 +61,16 @@ export const Content = TabNavigator({
     initialRouteName: 'Calendar',
     swipeEnabled: false,
     tabBarOptions: {
-
         showIcon: true,
         showLabel: false,
         inactiveBackgroundColor: '#464a4b',
         activeBackgroundColor: '#35393a',
         style: {
-            height: 100,
+            flexBasis: 90,
         },
         iconStyle: {
-            height: 50,
-            width: 50
+            height: 45,
+            width: 45,
         },
     }
 });

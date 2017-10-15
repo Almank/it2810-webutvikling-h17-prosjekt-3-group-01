@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, AsyncStorage, Text, Image } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Text, ScrollView } from 'react-native';
 import {Week} from '../components/Calendar/Week';
-import {ContentHeader} from "../components/Calendar/ContentHeader";
 import {AppointmentForm} from "../components/Calendar/AppointmentForm";
 
 export class Calendar extends React.Component {
@@ -39,31 +38,24 @@ export class Calendar extends React.Component {
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
-                <View className='calendarBoxContent' key={i}>
-                    <View className='leftCalendarBoxContent'>
-                        <Text>{item.time}</Text>
-                    </View>
-
-                    <View className='middleCalendarBoxContent'>
-                        <Text>{item.title}</Text>
-                    </View>
-                    <View className='rightCalendarBoxContent'>
-                        <Text>{item.text}</Text>
-                    </View>
+                <View style={styles.showAppointments} key={i}>
+                    <Text style={styles.appointmentItem}>{item.time}</Text>
+                    <Text style={styles.appointmentItem}>{item.title}</Text>
+                    <Text style={styles.appointmentItem}>{item.text}</Text>
                 </View>
             );
 
         //If there are no plans that day.
         if (myData.length === 0){
-            myData = [  <View key={0} className='calendarBoxContent'>
-                <Text>You don't have any plans!</Text>
+            myData = [  <View style={styles.showAppointments} key={0}>
+                <Text style={styles.appointmentNoItems}>You don't have any plans!</Text>
             </View>];
         }
 
         return (
-            <View className='appointmentFlow'>
+            <ScrollView style={styles.scrollView}>
                 {myData}
-            </View>
+            </ScrollView>
         );
     }
 
@@ -92,7 +84,7 @@ export class Calendar extends React.Component {
                 this.setState({
                     dateToday: new Date().toISOString().slice(0, 10),
                     children: [],
-                    dateValue: 'eee',
+                    dateValue: '',
                     timeValue: '',
                     titleValue: '',
                     textValue: '',
@@ -131,19 +123,16 @@ export class Calendar extends React.Component {
             //Setting state.
             this.setState(data);
 
-            //Updating localstorage to store new data.
-            //localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            //Setting updated values to storage.
+            try{
+                AsyncStorage.setItem("calendar", JSON.stringify(data));
+            } catch (error){
+                console.log(error);
+            }
 
-            //Resetting form values.
-            //document.getElementsByClassName('dateInput')[0].value = null;
-            //document.getElementsByClassName('timeInput')[0].value = null;
-            //document.getElementsByClassName('titleInput')[0].value = null;
-            //document.getElementsByClassName('textInput')[0].value = null;
-            console.log(this.state);
-            //Hiding form.
-            //this.showForm();
         } else {
-            alert('Invalid values. Please fill the fields.')
+            //If there are invalid values.
+            alert('Error! Do not submit invalid values.')
         }
     }
 
@@ -174,16 +163,37 @@ export class Calendar extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20,
+        marginTop: 40,
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-
+        marginBottom: 20,
     },
     bottomContainer: {
         display: 'flex',
         flexDirection: 'column',
+        flex: 1,
     },
+    showAppointments: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    appointmentItem: {
+        flexBasis:'33%',
+        textAlign:'center',
+        fontSize:16,
+        flexWrap: 'wrap',
+    },
+    appointmentNoItems: {
+        marginTop: '10%',
+        flexBasis:'90%',
+        textAlign:'center',
+        fontSize:20,
+    },
+    scrollView: {
+        height: '100%',
+    }
 
 
 });
