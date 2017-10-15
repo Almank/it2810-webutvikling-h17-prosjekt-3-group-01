@@ -21,7 +21,7 @@ export class Week extends React.Component {
 
     getFullDate(i){
         let date = new Date();
-        date.setDate(date.getDate() + i)
+        date.setDate(date.getDate() + i);
         return date.toISOString().slice(0,10);
     }
 
@@ -29,7 +29,8 @@ export class Week extends React.Component {
 
         let weekdays = [];
         for (let i=0; i<7; i++){
-            weekdays.push(<Day  key={this.getFullDate(i)}
+            weekdays.push(<Day  change={this.props.change}
+                                key={this.getFullDate(i)}
                                 dateFull={this.getFullDate(i)}
                                 dayName={this.getDayName(i)}
                                 dayDate={this.getDate(i)} />);
@@ -48,7 +49,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        backgroundColor: 'red',
-        flex: 1,
+
     }
 });

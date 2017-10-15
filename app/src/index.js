@@ -18,7 +18,6 @@ export class Index extends React.Component {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        marginTop: 20,
         flexDirection: 'column',
         justifyContent: 'flex-end',
         flex: 1,

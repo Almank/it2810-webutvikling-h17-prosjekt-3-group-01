@@ -36,7 +36,7 @@ export class Calendar extends React.Component {
     }
 
     emptyScheduleCheck(){
-
+        console.log(this.state.dateToday);
         //Copy of the state children array.
         let myData =[].concat(this.state.children)
 
