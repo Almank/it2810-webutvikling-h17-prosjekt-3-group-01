@@ -12,9 +12,6 @@ export class ContentHeader extends React.Component {
                 <Text style={styles.item}>When</Text>
                 <Text style={styles.item}>Title</Text>
                 <Text style={styles.item}>About</Text>
-                <TouchableOpacity onPress={this.props.closeForm} title="press here">
-                    <Text>Hey</Text>
-                </TouchableOpacity>
             </View>
         )
     }

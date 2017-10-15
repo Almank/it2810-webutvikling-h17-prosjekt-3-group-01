@@ -159,22 +159,12 @@ export class Calendar extends React.Component {
         return (title.length > 0)
     }
 
-    showForm(){
-        //Toggle form.
-        //let element = document.querySelector('.formContainer');
-        //element.style.display = element.style.display === 'none' ? 'flex' : 'none';
-        //let today = new Date().toISOString().slice(0, 10);
-        //document.querySelector(".dateInput").value = today;
-    }
-
     render(){
             return(
-
                     <View style={styles.container}>
                             <Week change={this.changeContent} />
                             <View style={styles.bottomContainer}>
-                                <ContentHeader closeForm={this.showForm()}/>
-                                <AppointmentForm closeForm={this.showForm()} getValues={ arr => this.createAppointment(arr) } />
+                                <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
                                 {this.emptyScheduleCheck()}
                             </View>
                     </View>
