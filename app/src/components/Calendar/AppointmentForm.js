@@ -12,34 +12,65 @@ export class AppointmentForm extends React.Component {
             timeValue: '',
             titleValue: '',
             textValue: '',
-        }
+        };
+
+        this.submitInput = this.submitInput.bind(this);
     }
 
-    handleDateInput = () => {
-        let value = this.dateInput.value;
-        this.props.getDateValueFromForm(value);
+    handleDateInput = (e) => {
+        this.setState({dateValue: e.value});
+    };
+
+    handleTimeInput = (e) => {
+        this.setState({timeValue: e.value});
+    };
+
+    handleTitleInput = (e) => {
+        this.setState({titleValue: e.value});
+    };
+
+    handleTextInput = (e) => {
+        this.setState({textValue: e.value});
+    };
+
+    submitInput() {
+        console.log('heey');
+        console.log(this.state.timeValue);
+        console.log(this.state.dateValue);
+        console.log(this.state.titleValue);
+        console.log(this.state.textValue);
+        if (this.state.dateValue !== null && this.state.timeValue !== null && this.state.titleValue !== null){
+            this.props.getValues([this.state.dateValue, this.state.timeValue, this.state.titleValue, this.state.textValue]);
+            console.log('APPF: ' + this.props.getValues);
+        } else {
+            this.setState({
+                dateValue: null,
+                timeValue: null,
+                titleValue: null,
+                textValue: null,
+            })
+        }
     }
 
     render(){
         return (
-            <View className='formContainer' style={{
-                //Need to style inline to remove having to double click button first time.
-                display: 'none'
-            }}>
-                <TouchableOpacity className='absolute-icon-top-right' onClick={this.props.closeForm} title='Press me'>
+            <View>
+                <TouchableOpacity className='absolute-icon-top-right' onPress={this.props.closeForm} title='Press me'>
                     <Text className='glyphicon glyphicon-remove'/>
                 </TouchableOpacity>
                 <View className={'form'}>
                     <Text>Create new appointment</Text>
                     <Text htmlFor="date">Date</Text>
-                    <TextInput type='date' name='date' id='date' className="dateInput" onChange={this.handleDateInput} />
+                    <TextInput onChangeText={(dateValue) => this.setState({dateValue})} value={this.state.dateValue}/>
                     <Text htmlFor="time">Time</Text>
-                    <TextInput type='time' id='time' className="timeInput" required />
+                    <TextInput onChangeText={(timeValue) => this.setState({timeValue})} value={this.state.timeValue}/>
                     <Text htmlFor="title">Title</Text>
-                    <TextInput type="text" id='title' name="title" className="titleInput" />
+                    <TextInput onChangeText={(titleValue) => this.setState({titleValue})} value={this.state.titleValue}/>
                     <Text htmlFor="what">What</Text>
-                    <TextInput type='text' id='what' className="textInput"  />
-                    <TouchableOpacity type='submit' className='submitButton' onClick={this.props.submitForm} title='Submit'/>
+                    <TextInput onChangeText={(textValue) => this.setState({textValue})} value={this.state.textValue}/>
+                    <TouchableOpacity onPress={this.submitInput} title='Submit'>
+                        <Text>Submit</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

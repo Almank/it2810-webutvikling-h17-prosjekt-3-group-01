@@ -10,19 +10,18 @@ export class Calendar extends React.Component {
 
         this.state = {
             dateToday: new Date().toISOString().slice(0, 10),
+            dateVal: '',
+            timeVal: '',
+            titleVal: '',
+            textVal: '',
             children: [
                 {date: '2017-10-15', time: '14:15', title: 'Hello World', text: 'This is text'},
             ],
-            dateValue: '',
-            timeValue: '',
-            titleValue: '',
-            textValue: '',
         };
 
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
-        this.getDateValueFromForm = this.getDateValueFromForm.bind(this);
 
         this.loadData();
     }
@@ -93,6 +92,10 @@ export class Calendar extends React.Component {
                 this.setState({
                     dateToday: new Date().toISOString().slice(0, 10),
                     children: [],
+                    dateValue: 'eee',
+                    timeValue: '',
+                    titleValue: '',
+                    textValue: '',
                 });
             }
         } catch (error) {
@@ -101,14 +104,11 @@ export class Calendar extends React.Component {
     }
 
     createAppointment(e) {
-        //Preventing reload of window.
-        e.preventDefault();
-
         //Fetching values from form.
-        let dateValue = this.state.dateValue;
-        let timeValue = this.state.timeValue;
-        let titleValue = this.state.titleValue;
-        let textValue = this.state.textValue;
+        let dateValue = e[0];
+        let timeValue = e[1];
+        let titleValue = e[2];
+        let textValue = e[3];
 
         //Validate fields date, time and title. Last field is optional.
         if (this.validateFormDate(dateValue) && this.validateFormTime(timeValue) && this.validateFormTitle(titleValue)){
@@ -132,7 +132,7 @@ export class Calendar extends React.Component {
             this.setState(data);
 
             //Updating localstorage to store new data.
-            localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            //localStorage.setItem("emptyCalendar", JSON.stringify(data));
 
             //Resetting form values.
             //document.getElementsByClassName('dateInput')[0].value = null;
@@ -141,7 +141,7 @@ export class Calendar extends React.Component {
             //document.getElementsByClassName('textInput')[0].value = null;
             console.log(this.state);
             //Hiding form.
-            this.showForm();
+            //this.showForm();
         } else {
             alert('Invalid values. Please fill the fields.')
         }
@@ -159,33 +159,22 @@ export class Calendar extends React.Component {
         return (title.length > 0)
     }
 
-    getDateValueFromForm(e){
-        this.setState({
-            dateValue: e.dateValue,
-            timeValue: e.timeValue,
-            titleValue: e.titleValue,
-            textValue: e.textValue,
-        });
-    }
-
     showForm(){
         //Toggle form.
         //let element = document.querySelector('.formContainer');
         //element.style.display = element.style.display === 'none' ? 'flex' : 'none';
         //let today = new Date().toISOString().slice(0, 10);
         //document.querySelector(".dateInput").value = today;
-        let element = 2;
     }
 
     render(){
             return(
 
                     <View style={styles.container}>
-
                             <Week change={this.changeContent} />
                             <View style={styles.bottomContainer}>
                                 <ContentHeader closeForm={this.showForm()}/>
-                                <AppointmentForm closeForm={this.showForm()} getValues={this.getDateValueFromForm} />
+                                <AppointmentForm closeForm={this.showForm()} getValues={ arr => this.createAppointment(arr) } />
                                 {this.emptyScheduleCheck()}
                             </View>
                     </View>
