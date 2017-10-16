@@ -32,6 +32,17 @@
     height: 79px;
 }
 
+.NoteList{
+    display: inline-block;
+    margin: 20px;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid rgba(155,155,155,0.5);
+    -webkit-box-shadow: -2px 1px 20px -7px #35393a;
+    -moz-box-shadow: -2px 1px 20px -7px #35393a;
+    box-shadow: -2px 1px 20px -7px #35393a;
+}
+
 .NoteListTitleContainer h1 {
     margin: 0;
 }

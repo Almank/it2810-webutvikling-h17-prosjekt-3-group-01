@@ -19,10 +19,10 @@ export class ToDoListItem extends React.Component{
 			_style = "none";
 		}
 		return(
-			<li data-id={this.props.value}
+			<li id="todoitem" data-id={this.props.value}
 				key={this.props.value}>
-				<button type="button" className="close pull-right" aria-hidden="true" onClick={this.props.onClick}>&times;</button>
-				<input type="checkbox" onChange={this.changeHandler} defaultChecked={this.props.children.isDone} />
+				<button type="button" className="close pull-right" aria-hidden="true" onClick={this.props.onClick}>x</button>
+				<input id="check" type="checkbox" onChange={this.changeHandler} defaultChecked={this.props.children.isDone} />
 				<span style={{"textDecoration": _style}}>{this.props.children.item}</span>
 			</li>
 		)
