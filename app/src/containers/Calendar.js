@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, AsyncStorage, Text, ScrollView } from 'react-native';
-import {Week} from '../components/calendar/Week';
-import {AppointmentForm} from "../components/calendar/AppointmentForm";
+import {Week} from '../components/Calendar/Week';
+import {AppointmentForm} from "../components/Calendar/AppointmentForm";
 
 export class Calendar extends React.Component {
     constructor(props) {
