@@ -39,11 +39,12 @@ export class Calendar extends React.Component {
         //Copy of the state children array.
         let myData =[].concat(this.state.children)
 
-            //Sorting elements based on time, earliest first.
-            .sort((a, b) => a.time > b.time)
-
             //Filtering out appointments on current day.
             .filter(child => child.date === this.state.dateToday)
+
+            //Sorting elements based on time, earliest first.
+            .sort((a, b) => parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
+                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)))
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
@@ -60,7 +61,6 @@ export class Calendar extends React.Component {
                 </div>
             </div>
             );
-
         //If there are no plans that day.
         if (myData.length === 0){
             myData = [  <div key={0} className='calendarBoxContent'>
@@ -95,7 +95,7 @@ export class Calendar extends React.Component {
             newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
 
             //Sorting array with earliest appointments first.
-            newStateArray.sort((a, b) => a.time > b.time);
+            newStateArray.sort((a, b) => parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) - parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)));
 
             //Creating new updated state.
             let data = {
@@ -124,17 +124,14 @@ export class Calendar extends React.Component {
 
     validateFormDate(date){
         return date.length === 10 && date >= new Date().toISOString().slice(0, 10);
-
     }
 
     validateFormTime(time){
         return time.length === 5;
-
     }
 
     validateFormTitle(title){
         return title.length > 0;
-
     }
 
     changeContent(e){

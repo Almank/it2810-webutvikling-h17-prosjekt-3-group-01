@@ -38,6 +38,10 @@ export class AppointmentForm extends React.Component {
         }
     }
 
+    removeBorders(){
+        document.getElementsByClassName('inputField').style.border = '1px solid lightgray';
+    }
+
     render(){
         return (
             <div className='formContainer' style={{
@@ -50,14 +54,14 @@ export class AppointmentForm extends React.Component {
                 <form className={'form'}>
                     <h3>Create new appointment</h3>
                     <label htmlFor="date">Date - Must be present or future date</label>
-                    <input type='date' name='date' id='date' className="dateInput" required onChange={this.validDateField}/>
+                    <input type='date' name='date' id='date' className="dateInput inputField" required onChange={this.validDateField}/>
                     <label htmlFor="time">Time</label>
-                    <input type='time' id='time' className="timeInput" required onChange={this.validTimeField}/>
+                    <input type='time' id='time' className="timeInput inputField" required onChange={this.validTimeField}/>
                     <label htmlFor="title">Title</label>
-                    <input type="text" id='title' name="title" className="titleInput" maxLength='19' onChange={this.validTitleField} />
+                    <input type="text" id='title' name="title" className="titleInput inputField" maxLength='19' onChange={this.validTitleField} />
                     <label htmlFor="what">What</label>
-                    <textarea type='text' id='what' className="textInput" maxLength='200' onChange={this.validTextField}/>
-                    <input type='submit' className='submitButton' onClick={this.props.submitForm}/>
+                    <textarea type='text' id='what' className="textInput inputField" maxLength='200' onChange={this.validTextField}/>
+                    <input type='submit' className='submitButton' onClick={this.props.submitForm} />
                 </form>
             </div>
         );
