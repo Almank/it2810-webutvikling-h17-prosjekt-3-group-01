@@ -118,26 +118,23 @@ export class Calendar extends React.Component {
             //Hiding form.
             this.showForm();
         } else {
-            alert('Invalid values. Please fill the fields.')
+            alert('Invalid values. Please try again.')
         }
     }
 
     validateFormDate(date){
-        if (date.length === 10)
-            return true
-        return false
+        return date.length === 10 && date >= new Date().toISOString().slice(0, 10);
+
     }
 
     validateFormTime(time){
-        if (time.length === 5)
-            return true
-        return false
+        return time.length === 5;
+
     }
 
     validateFormTitle(title){
-        if (title.length > 0)
-            return true
-        return false
+        return title.length > 0;
+
     }
 
     changeContent(e){
