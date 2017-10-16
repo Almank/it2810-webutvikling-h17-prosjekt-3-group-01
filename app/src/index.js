@@ -18,7 +18,6 @@ export class Index extends React.Component {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        marginTop: 20,
         flexDirection: 'column',
         justifyContent: 'flex-end',
         flex: 1,
@@ -59,20 +58,19 @@ export const Content = TabNavigator({
             }
         }
 }, {
-    initialRouteName: 'Notes',
+    initialRouteName: 'Calendar',
     swipeEnabled: false,
     tabBarOptions: {
-
         showIcon: true,
         showLabel: false,
         inactiveBackgroundColor: '#464a4b',
         activeBackgroundColor: '#35393a',
         style: {
-            height: 100,
+            flexBasis: 90,
         },
         iconStyle: {
-            height: 50,
-            width: 50
+            height: 45,
+            width: 45,
         },
     }
 });
