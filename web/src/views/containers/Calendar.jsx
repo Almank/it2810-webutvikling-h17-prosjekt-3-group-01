@@ -95,7 +95,8 @@ export class Calendar extends React.Component {
             newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
 
             //Sorting array with earliest appointments first.
-            newStateArray.sort((a, b) => parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) - parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)));
+            newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
+                                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)));
 
             //Creating new updated state.
             let data = {
@@ -158,6 +159,10 @@ export class Calendar extends React.Component {
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
         let today = new Date().toISOString().slice(0, 10);
         document.querySelector(".dateInput").value = today;
+        let fields = document.querySelectorAll(".inputField");
+        for (let i = 0; i < fields.length; i++)
+            fields[i].style.border = '1px solid lightgray';
+
     }
 
     render(){

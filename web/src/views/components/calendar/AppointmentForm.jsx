@@ -38,10 +38,6 @@ export class AppointmentForm extends React.Component {
         }
     }
 
-    removeBorders(){
-        document.getElementsByClassName('inputField').style.border = '1px solid lightgray';
-    }
-
     render(){
         return (
             <div className='formContainer' style={{
