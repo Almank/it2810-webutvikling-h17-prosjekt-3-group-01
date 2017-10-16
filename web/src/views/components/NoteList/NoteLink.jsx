@@ -6,31 +6,25 @@ import propTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 //The class NoteLink renders a note-link-object for the parent NoteList.
-export class NoteLink extends React.Component {
-    constructor(props){
-        super(props);
-    }
+export const NoteLink = ({index, title, onClick}) => {
+    return(
+        <div className="NoteLinkContainer">
+            <Link className="NoteButton"
+                  key={index}
+                  to={`/notebook/${title}`}>
 
-    render(){
-        return(
-            <div className="NoteLinkContainer">
-                <Link className="NoteButton"
-                      key={this.props.index}
-                      to={`/notebook/${this.props.title}`}>
+                <h1>{title}</h1>
+            </Link>
+            <button className="RemoveButton"
+                    type="button"
+                    onClick={onClick}
+                    value={title}>
+                <span className='glyphicon glyphicon-minus' />
+            </button>
+        </div>
+    );
+};
 
-                    <h1>{this.props.title}</h1>
-                </Link>
-                <button className="RemoveButton"
-                        type="button"
-                        onClick={this.props.onClick}
-                        value={this.props.title}>
-                    <span className='glyphicon glyphicon-minus' />
-                </button>
-            </div>
-        );
-    }
-
-}
 
 NoteLink.propTypes = {
     title: propTypes.string,
