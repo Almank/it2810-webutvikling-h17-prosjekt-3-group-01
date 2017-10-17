@@ -30,7 +30,7 @@ export class TodoCatelogForm extends React.Component {
 					<div className="form-group ">
 						<input type='text' className="todoField"  ref='item' onChange={this.onChange} value={this.state.item}
                             placeholder="Add list"/>
-						<input type='submit' className="addbutton" value='Add'/>
+						<input type='submit' className="addbutton" value='ADD'/>
 					</div>
 				</form>
 			</div>
