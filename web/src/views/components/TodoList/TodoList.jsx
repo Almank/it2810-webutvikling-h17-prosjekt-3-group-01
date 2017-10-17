@@ -12,9 +12,10 @@ export class TodoList extends React.Component{
 		items.map(function (item, i) {
             resultList.push(
                 <ToDoListItem key={i} value={i} onClick={() => object.props.onDelete(i)}>{item}</ToDoListItem>
-            )
+            );
+            return null;
         });
-		return resultList;
+        return resultList;
 	}
 
 	render(){
@@ -29,6 +30,8 @@ export class TodoList extends React.Component{
 			case 'true':
 				allitems = allitems.filter(t => t.isDone);
 				break;
+            default:
+                break;
 		}
 
 		//Search function, for filtering through search query
