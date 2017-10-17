@@ -41,6 +41,7 @@
     margin: 20px;
     background-color: white;
     min-width: 200px;
+    max-height: 80vh;
     border: 1px solid rgba(155,155,155,0.5);
     -webkit-box-shadow: -2px 1px 20px -7px #35393a;
     -moz-box-shadow: -2px 1px 20px -7px #35393a;
@@ -177,8 +178,14 @@
 
 /* Mobile - portrait */
 @media only screen and (max-width : 680px) {
+
+    .NoteBookWrapper .Title {
+        color: red;
+    }
+
     .NoteBook {
         flex-direction: column;
+        padding-top: 40px;
 
     }
     .NoteList {
@@ -195,5 +202,7 @@
     .NoteContentContainer textarea {
         min-height: 30vh;
     }
-
+    .NoteForm {
+        padding-bottom: 25px;
+    }
 }
