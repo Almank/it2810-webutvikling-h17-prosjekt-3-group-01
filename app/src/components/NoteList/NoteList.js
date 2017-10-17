@@ -104,19 +104,19 @@ export class NoteList extends React.Component {
         return(
             <View style={styles.NoteList}>
                 <View style={styles.InputFields}>
-                    <FormLabel labelStyle={{fontSize: 20}}>Title</FormLabel>
                     <TextInput style={styles.TitleInput}
                                onChangeText={(text) => this.handleChange(text)}
                                value={this.state.text}
+                               placeholder="Enter title here..."
                     />
                     <Button raised
-                            backgroundColor="green"
-                            underlayColor="lightgreen"
+                            backgroundColor="#FF9505"
+                            underlayColor="#FF9505"
                             color="white"
-                            title="Create New Note"
+                            title="ADD NOTE"
+                            borderColor="rgba(155,155,155,0.5)"
                             style={styles.AddInput}
-                            fontSize={20}
-                            fontWeight="bold"
+                            fontSize={16}
                             onPress={this.onSubmit}/>
                 </View>
                 <FlatList
@@ -133,23 +133,37 @@ export class NoteList extends React.Component {
 const styles = StyleSheet.create({
     NoteList: {
         display: 'flex',
-        backgroundColor: '#696969',
+        backgroundColor: 'white',
         flex: 1,
     },
     InputFields: {
         display: 'flex',
         justifyContent: 'flex-end',
-        backgroundColor: 'lightgrey',
+        backgroundColor: '#f2f2f2',
         borderBottomWidth: 2,
-        borderColor: 'grey',
+        borderColor: '#f2f2f2',
+        height: '30%',
+        paddingTop: 20,
     },
     TitleInput: {
-        backgroundColor: 'white',
         marginLeft: 15,
         marginRight: 15,
+        height: '28%',
+        borderBottomWidth: 0.99,
+        borderColor: 'grey',
+        borderRadius: 2,
+        borderWidth: 0.95,
+        backgroundColor: 'white',
     },
     AddInput: {
+        display: 'flex',
         marginTop: 10,
         marginBottom: 10,
+        width: '50%',
+        marginLeft:'25%',
+        marginRight:'25%',
+        flexBasis: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

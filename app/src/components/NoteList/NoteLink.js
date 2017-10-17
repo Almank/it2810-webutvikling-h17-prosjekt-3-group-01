@@ -47,18 +47,20 @@ export class NoteLink extends React.Component {
 const styles = StyleSheet.create({
     NoteLink: {
         display: 'flex',
-        marginTop: 2,
         paddingTop: 10,
         paddingLeft: 15,
         paddingRight: 15,
         paddingBottom: 10,
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'white',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderBottomColor: 'grey',
+        borderTopColor: 'grey',
+        borderRadius: 1,
+        borderWidth: 0.25,
     },
     Title: {
-        fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 16,
     },
 });
