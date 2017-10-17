@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     noteField: {
         backgroundColor: 'white',
-        height: 420,
+        height: 260,
     },
     DeleteButton: {
         marginTop: 10,

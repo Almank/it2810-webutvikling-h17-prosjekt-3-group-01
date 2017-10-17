@@ -61,7 +61,7 @@ componentDidMount() {
 render(){
     return (
         <View style={[styles.container, { paddingBottom: this.state.viewMargin }]}>
-            <Text style={styles.title}>    To-do List    </Text>
+            <Text style={styles.title}>    TO-DO    </Text>
             <FlatList
                 style={styles.list}
                 data={this.state.tasks}
@@ -71,7 +71,7 @@ render(){
                     <Text style={styles.listItem}>
                         {item.text}
                     </Text>
-                    <Button title="X" onPress={() => this.deleteTask(index)} />
+                    <Button color="#FE642E" title="X" onPress={() => this.deleteTask(index)} />
                 </View>
                 <View style={styles.hr} />
                 </View>}
@@ -111,11 +111,11 @@ render(){
 
     const styles = StyleSheet.create({
         title: {
-            fontSize: 25,
-            color: 'grey',
+            fontSize: 26,
+            color: '#FF9505',
             textDecorationLine: 'underline',
-            textDecorationColor: 'grey',
-            paddingBottom: 10
+            textDecorationColor: '#f2f2f2',
+            paddingBottom: 10,
         },
         container: {
             flex: 1,
@@ -146,10 +146,10 @@ render(){
             height: 40,
             paddingRight: 10,
             paddingLeft: 10,
-            borderColor: "gray",
+            borderColor: "#FF9505",
             borderWidth: isAndroid ? 0 : 1,
-            width: "100%"
-        }
+            width: "100%",
+        },
     }
 );
 
