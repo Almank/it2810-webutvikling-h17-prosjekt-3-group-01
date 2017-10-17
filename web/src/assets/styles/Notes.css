@@ -177,8 +177,14 @@
 
 /* Mobile - portrait */
 @media only screen and (max-width : 680px) {
+
+    .NoteBookWrapper .Title {
+        color: red;
+    }
+
     .NoteBook {
         flex-direction: column;
+        padding-top: 40px;
 
     }
     .NoteList {
@@ -195,5 +201,7 @@
     .NoteContentContainer textarea {
         min-height: 30vh;
     }
-
+    .NoteForm {
+        padding-bottom: 25px;
+    }
 }
