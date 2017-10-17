@@ -1,14 +1,18 @@
+.NoteBookWrapper{
+    height: 90%;
+}
+
 .NoteBook{
+    height: 100%;
     display: flex;
     flex-direction: row;
-    height: 100%;
 }
 
 /* Main flexboxes */
 .NoteList{
+    height: fit-content;
     width: 20%;
     min-width: 250px;
-    height: 100%;
     background-color: transparent;
     overflow: auto;
 }
@@ -37,6 +41,7 @@
     margin: 20px;
     background-color: white;
     min-width: 200px;
+    max-height: 80vh;
     border: 1px solid rgba(155,155,155,0.5);
     -webkit-box-shadow: -2px 1px 20px -7px #35393a;
     -moz-box-shadow: -2px 1px 20px -7px #35393a;
@@ -45,17 +50,6 @@
 
 .NoteListTitleContainer h1 {
     margin: 0;
-}
-
-.addNewNoteButton {
-    cursor: pointer;
-    font-size: 26px;
-    color: #35393a;
-    padding: 5px;
-}
-
-.addNewNoteButton:hover {
-    color: #FF9505;
 }
 
 .NoteLinkContainer{
@@ -130,7 +124,7 @@
 /* NoteList - Form component */
 
 .NoteForm{
-    display: none;
+    display: flex;
     justify-content: center;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -139,7 +133,7 @@
 
 .NoteAdd{
     margin-right: 5px;
-    background-color: #35393a;
+    background-color: green;
     color: white;
     border: none;
     border-radius: 0 4px 4px 0;
@@ -173,7 +167,7 @@
 
 .NoteContentContainer textarea{
     max-width: 100%;
-    width: 96%;
+    width: 100%;
     padding: 2%;
     height: 85%;
     margin: 0;
@@ -184,11 +178,18 @@
 
 /* Mobile - portrait */
 @media only screen and (max-width : 680px) {
+
+    .NoteBookWrapper .Title {
+        color: red;
+    }
+
     .NoteBook {
         flex-direction: column;
+        padding-top: 40px;
 
     }
     .NoteList {
+        margin: 0;
         width: 100vw;
         min-width: 0;
         height: auto;
@@ -201,5 +202,7 @@
     .NoteContentContainer textarea {
         min-height: 30vh;
     }
-
+    .NoteForm {
+        padding-bottom: 25px;
+    }
 }

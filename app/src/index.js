@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
 export const Content = TabNavigator({
     Calendar: {screen: Calendar,
             navigationOptions: {
-                tabBarIcon: () => (
+                tabBarIcon: ({focused}) => (
                     <Image
-                        source={require('./assets/calendar.png')}
+                        source={focused ? require('./assets/calendar_focused.png') : require('./assets/calendar.png')}
                         style={{width: 60, height: 60}}
                     />
                 ),
@@ -39,9 +39,9 @@ export const Content = TabNavigator({
         },
     Notes: {screen: Notes,
             navigationOptions: {
-                tabBarIcon: () => (
+                tabBarIcon: ({focused}) => (
                     <Image
-                        source={require('./assets/list-symbol.png')}
+                        source={focused ? require('./assets/list-symbol_focused.png') : require('./assets/list-symbol.png')}
                         style={{width: 60, height: 60}}
                     />
                 ),
@@ -49,9 +49,9 @@ export const Content = TabNavigator({
         },
     Todo: {screen: Todo,
             navigationOptions: {
-                tabBarIcon: () => (
+                tabBarIcon: ({focused}) => (
                     <Image
-                        source={require('./assets/pencil.png')}
+                        source={focused ? require('./assets/pencil_focused.png') : require('./assets/pencil.png')}
                         style={{width: 60, height: 60}}
                     />
                 ),

@@ -25,6 +25,7 @@ export class Calendar extends React.Component {
         this.loadData();
     }
 
+
     emptyScheduleCheck(){
 
         //Copy of the state children array.
@@ -48,7 +49,7 @@ export class Calendar extends React.Component {
         //If there are no plans that day.
         if (myData.length === 0){
             myData = [  <View style={styles.showAppointments} key={0}>
-                <Text style={styles.appointmentNoItems}>You don't have any plans!</Text>
+                <Text style={styles.appointmentNoItems}>You don&#39;t have any plans!</Text>
             </View>];
         }
 

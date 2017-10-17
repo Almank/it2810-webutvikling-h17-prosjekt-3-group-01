@@ -33,12 +33,12 @@ export class TodoCatelog extends React.Component {
                 _class =  "list-group-item ";
             }
 			items.push(
-				<a href="#" key={i} data-id={i} className={_class} onClick={this.changeTodo}>
+				<button key={i} data-id={i} className={_class} onClick={this.changeTodo}>
 					<span className="badge">
 						{allitems[i].items.length}
 					</span>
 					{allitems[i].name}
-				</a>
+                </button>
 			)
 		}
 

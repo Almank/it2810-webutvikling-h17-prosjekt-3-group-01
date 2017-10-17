@@ -1,7 +1,7 @@
 .calendarContent {
     display: flex;
     flex-direction: column;
-    margin: 0 10%;
+    margin: 0;
     min-height: 100vh;
     height: auto;
 }
@@ -31,9 +31,6 @@
     border: 1px solid rgba(155,155,155,0.5);
     background-color: #FFF;
     height: 100px;
-    -webkit-box-shadow: -2px 1px 20px -7px #35393a;
-    -moz-box-shadow: -2px 1px 20px -7px #35393a;
-    box-shadow: -2px 1px 20px -7px #35393a;
 }
 
 .dayBox p {
@@ -65,9 +62,13 @@
     margin-top:35px;
     margin-bottom: 25px;
     padding: 0 25px;
-    -webkit-box-shadow: -2px 1px 23px -3px #35393a;
-    -moz-box-shadow: -2px 1px 23px -3px #35393a;
-    box-shadow: -2px 1px 23px -3px #35393a;
+}
+
+.calendarBox, .dayBox {
+    border: 1px solid rgba(155,155,155,0.5);
+    -webkit-box-shadow: -2px 1px 20px -7px #35393a;
+    -moz-box-shadow: -2px 1px 20px -7px #35393a;
+    box-shadow: -2px 1px 20px -7px #35393a;
 }
 
 .appointmentFlow {
@@ -87,7 +88,7 @@
 }
 
 .icon-topright:hover span {
-    color: #35393a;
+    color: #FF9505;
 }
 
 .form {
@@ -104,6 +105,7 @@
 
 .form input, .form textarea {
     margin-bottom: 10px;
+    border-radius: 4px;
 }
 
 .form textarea {
@@ -190,17 +192,25 @@
     flex-basis: 40ch;
     display: flex;
     align-items: center;
+    align-content: center;
     justify-content: left;
-
 }
 
-.rightCalendarBoxContent p, .leftCalendarBoxContent h3, .middleCalendarBoxContent h3, .rightCalendarBoxContent h2, .leftCalendarBoxContent h2, .middleCalendarBoxContent h2 {
-    margin: 0;
+.rightCalendarBoxContent textarea {
+    margin-top: 20px;
+}
 
+.rightCalendarBoxContent h2, .leftCalendarBoxContent h2, .middleCalendarBoxContent h2 {
+    margin: 0;
 }
 
 .rightCalendarBoxContent h2 {
     margin: 0 15px;
+}
+
+.changeField {
+    border: none;
+    resize: none;
 }
 
 /* Mobile - portrait */
@@ -214,26 +224,51 @@
         -moz-box-shadow: none;
         box-shadow: none;
     }
+
     .calendarContent {
         margin: 0;
     }
 
+    .calendarContent .title {
+        font-size: 22px;
+        padding: 0px 10px;
+        margin-bottom: 0;
+    }
+
     .calendarBox {
         width: 95%;
+        margin-top: 15px;
     }
 
     .calendarBoxContent > h1 {
         font-size: 20px;
     }
+
     .calendarBoxContent > .leftCalendarBoxContent h2, .calendarBoxContent > .middleCalendarBoxContent h2,.calendarBoxContent > .rightCalendarBoxContent h2 {
         font-size: 24px;
     }
-    .appointmentFlow h3 {
-        font-size: 18px;
+
+    .calendarBoxContent .rightCalendarBoxContent textarea {
+        width: 100px;
+        margin-left:0;
     }
-    .appointmentFlow p {
-        font-size: 16px;
+
+    .appointmentFlow input, .appointmentFlow textarea {
+        font-size: 12px;
     }
+
+    .middleCalendarBoxContent {
+        margin-right: 0;
+    }
+
+    .middleCalendarBoxContent input {
+        width: 10ch;
+    }
+
+    .RemoveButton {
+        z-index: 0;
+    }
+
     .formContainer {
         top:0px;
         left:0px;
@@ -244,30 +279,36 @@
         -webkit-transform: none;
         -moz-transform:none;
         transform: none;
+        z-index: 1;
     }
+
     .absolute-icon-top-right {
         font-size: 50px;
         padding: 15px;
     }
+
     .form span {
         font-size: 24px;
     }
+
     .form input {
         height: 50px;
         font-size: 18px;
     }
+
     .dateInput, .timeInput {
         width:65vw;
     }
+
     .form {
         margin-top: 50px;
     }
+
     .submitButton {
         height: 50px;
     }
-    .title {
-        font-size: 22px;
+
+    .weekBox {
+        padding-top: 10px;
     }
-
-
 }
