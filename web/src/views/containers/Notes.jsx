@@ -3,9 +3,8 @@
  */
 import React from 'react';
 import '../../assets/styles/Notes.css';
-import {NoteList} from "../components/NoteList/NoteList";
+import {NoteList, NoteContent} from "../Components";
 import {Route} from 'react-router-dom';
-import {NoteContent} from "../components/NoteList/NoteContent";
 
 
 export class Notes extends React.Component {

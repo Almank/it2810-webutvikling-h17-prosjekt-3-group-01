@@ -1,10 +1,6 @@
 import React from 'react';
 import '../../assets/styles/Todolists.css';
-import {TodoForm} from '../components/TodoList/TodoForm';
-import {TodoList} from '../components/TodoList/TodoList';
-import {TodoFilter} from '../components/TodoList/TodoFilter';
-import {TodoCatelog} from '../components/TodoList/TodoCatelog';
-import {TodoCatelogForm} from '../components/TodoList/TodoCatelogForm';
+import {TodoForm, TodoList, TodoFilter, TodoCatelog, TodoCatelogForm} from '../Components';
 
 /* [TODO APP] */
 export class ToDoApp extends React.Component{
