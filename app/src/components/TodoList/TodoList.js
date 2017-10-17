@@ -86,7 +86,12 @@ render(){
                         returnKeyType="done"
                         returnKeyLabel="done"
                     />
-                    <Button title="Add" onPress={() => this.addTask} />
+                    <Button
+                        title="Add"
+                        onPress={() => this.addTask}
+                        color="#FF9505"
+                        backgroundColor="red"
+                    />
                 </View>
         </View>
         );
@@ -157,7 +162,7 @@ render(){
             paddingLeft: 10,
             borderColor: "#FF9505",
             borderWidth: isAndroid ? 0 : 1,
-            width: "100%",
+            width: "90%",
         },
     }
 );
