@@ -164,9 +164,6 @@ render(){
             borderWidth: isAndroid ? 0 : 1,
             width: "90%",
         },
-        addButton: {
-          color: 'red',
-        },
     }
 );
 
