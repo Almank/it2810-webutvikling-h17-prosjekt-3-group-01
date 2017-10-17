@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {WeekCal, AppointmentForm, ContentHeader} from '../Components';
-import '../../assets/styles/calendar.css';
+import '../../assets/styles/Calendar.css';
 
 export class Calendar extends React.Component {
     constructor(props) {
