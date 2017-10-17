@@ -47,17 +47,6 @@
     margin: 0;
 }
 
-.addNewNoteButton {
-    cursor: pointer;
-    font-size: 26px;
-    color: #35393a;
-    padding: 5px;
-}
-
-.addNewNoteButton:hover {
-    color: #FF9505;
-}
-
 .NoteLinkContainer{
     display: flex;
     justify-content: space-between;
@@ -130,7 +119,7 @@
 /* NoteList - Form component */
 
 .NoteForm{
-    display: none;
+    display: flex;
     justify-content: center;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -139,7 +128,7 @@
 
 .NoteAdd{
     margin-right: 5px;
-    background-color: #35393a;
+    background-color: green;
     color: white;
     border: none;
     border-radius: 0 4px 4px 0;

@@ -33,6 +33,35 @@ export class Calendar extends React.Component {
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
+        this.updateLocalStorage = this.handleRemoveClick.bind(this);
+    }
+
+    updateLocalStorage(){
+        console.log(this.state);
+        let data = this.state;
+        localStorage.setItem("notes", JSON.stringify(data));
+    }
+
+    handleRemoveClick(event){
+        for (let i=0; i<this.state.children.length; i++) {
+            if (String(this.state.children[i].uniqueDate) === String(event.target.value)){
+                //Deleting values in child
+                delete this.state.children[i];
+
+                //Removing empty objects
+                let newArr = this.state.children.filter(val => Object.keys(val).length !== 0);
+
+                //Updating state and localstorage on with callback function.
+                this.setState({children: newArr}, function() {
+                    localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+                });
+
+                this.forceUpdate();
+            }
+        }
+
+
     }
 
     emptyScheduleCheck(){
@@ -59,6 +88,9 @@ export class Calendar extends React.Component {
                 <div className='rightCalendarBoxContent'>
                     <p>{item.text}</p>
                 </div>
+                <button onClick={this.handleRemoveClick} className='RemoveButton' type='button' value={item.uniqueDate}>
+                    <span className='glyphicon glyphicon-minus' />
+                </button>
             </div>
             );
         //If there are no plans that day.
@@ -92,7 +124,7 @@ export class Calendar extends React.Component {
             let newStateArray = this.state.children.slice();
 
             //Pushing new child to array.
-            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
+            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue, uniqueDate: new Date()});
 
             //Sorting array with earliest appointments first.
             newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
