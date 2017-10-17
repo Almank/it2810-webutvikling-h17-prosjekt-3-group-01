@@ -7,23 +7,23 @@ import '../../assets/styles/Calendar.css';
 
 export class Calendar extends React.Component {
     constructor(props) {
-
+        super(props);
         //Setting state if there is none stored.
         if(localStorage.getItem("emptyCalendar") === null){
             let data = {
-                dateToday: new Date().toISOString().slice(0, 10),
+                dateToday: this.getTime(),
                 children: [],
             };
             localStorage.setItem("emptyCalendar", JSON.stringify(data));
         }
-        super(props);
+
 
         //Fetching state from storage.
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
 
-        //Setting dateToday to current date.
-        data.dateToday = new Date().toISOString().slice(0, 10);
+        //Setting time, with Norwegian timezone.
+        data.dateToday = this.getTime();
 
         //Setting state to stored state.
         this.state = data;
@@ -33,6 +33,8 @@ export class Calendar extends React.Component {
         this.changeContent = this.changeContent.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleChangeClick = this.handleChangeClick.bind(this);
+        this.showForm = this.showForm.bind(this);
+        this.getTime = this.getTime.bind(this);
     }
 
     handleRemoveClick(event){
@@ -129,6 +131,10 @@ export class Calendar extends React.Component {
         );
     }
 
+    getTime(){
+        return new Date(Date.now() - new Date().getTimezoneOffset() *60000).toISOString().slice(0, 10)
+    }
+
     createAppointment(e) {
         //Preventing reload of window.
         e.preventDefault();
@@ -155,7 +161,7 @@ export class Calendar extends React.Component {
             //Creating new updated state.
             let data = {
                 children: newStateArray,
-                dateToday: new Date().toISOString().slice(0, 10),
+                dateToday: this.getTime(),
             };
 
             //Setting state.
@@ -195,7 +201,6 @@ export class Calendar extends React.Component {
         //Fetching data from localstorage
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
-
         //Setting state to stored state.
         this.setState({dateToday: e.props.dateFull}, function(){
             //Updating localstorage to store new data.
@@ -207,11 +212,11 @@ export class Calendar extends React.Component {
         //Toggle form.
         let element = document.querySelector('.formContainer');
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
-        let today = new Date().toISOString().slice(0, 10);
-        document.querySelector(".dateInput").value = today;
+        document.querySelector(".dateInput").value = this.state.dateToday;
         let fields = document.querySelectorAll(".inputField");
         for (let i = 0; i < fields.length; i++)
             fields[i].style.border = '1px solid lightgray';
+        document.querySelector(".dateInput").style.border = '2px solid green';
     }
 
     render(){
