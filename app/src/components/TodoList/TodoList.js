@@ -88,7 +88,7 @@ render(){
                     />
                     <Button
                         title="Add"
-                        onPress={() => this.addTask}
+                        onPress={this.addTask}
                         color="#FF9505"
                         backgroundColor="red"
                     />
