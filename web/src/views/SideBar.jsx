@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import '../assets/styles/SideBar.css';
-import {Button} from "./components/SideBar/Button";
+import {Button} from "./Components";
 
 
 export class SideBar extends React.Component {
