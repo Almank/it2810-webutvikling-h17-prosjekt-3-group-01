@@ -46,7 +46,7 @@ export class NoteList extends React.Component {
         if(this.state.textfield) {
             data.notes[this.state.textfield] = {
                 title: this.state.textfield,
-                content: 'Write your content here'
+                content: 'Empty note'
             };
             data.textfield = "";
             this.setState(data);
