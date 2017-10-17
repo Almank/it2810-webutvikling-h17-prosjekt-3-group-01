@@ -68,7 +68,7 @@ Dependencies:
     "react-router-dom": "^4.2.2"
 
 
-#### How to install/run 
+#### How to install & run the application
 
 * Website
     * Make sure you have node.js installed.
@@ -79,8 +79,10 @@ Dependencies:
     * Navigate to localhost:8083 in your browser.
 
 * App
-    * Download all necessary dependencies.
     * Install the Expo app on your phone.
+    * Clone this Git-repository: https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-3-group-01
     * Navigate to the project web folder: "cd it2810-webutvikling-h17-prosjekt-3-group-01/app
+    * Run `npm install -g npm@4` as expo requires npm version <5 to run.    
     * Run `npm start`.
+    * (If required: run: sudo sysctl -w kern.maxfiles=5242880 and run: sudo sysctl -w kern.maxfilesperproc=524288
     * Use Expo on your phone to view the app.
