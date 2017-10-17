@@ -87,7 +87,8 @@ export class Calendar extends React.Component {
                     <input onBlur={this.handleChangeClick.bind(this, 'time')}
                            type='time'
                            defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].time}
-                           name={item.uniqueDate}/>
+                           name={item.uniqueDate}
+                           className='changeField'/>
                 </div>
 
                 <div className='middleCalendarBoxContent'>
@@ -95,14 +96,16 @@ export class Calendar extends React.Component {
                            type='text'
                            defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].title}
                            name={item.uniqueDate}
-                           maxLength={10} />
+                           maxLength={10}
+                           className='changeField'/>
                 </div>
                 <div className='rightCalendarBoxContent'>
-                    <input onBlur={this.handleChangeClick.bind(this, 'text')}
+                    <textarea onBlur={this.handleChangeClick.bind(this, 'text')}
                            type='text'
                            defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].text}
                            name={item.uniqueDate}
-                           maxLength={200} />
+                           maxLength={200}
+                           className='changeField'/>
                 </div>
                 <button onClick={this.handleRemoveClick}
                         className='RemoveButton'
