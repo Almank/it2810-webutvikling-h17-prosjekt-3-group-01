@@ -33,12 +33,7 @@ export class Calendar extends React.Component {
         this.changeContent = this.changeContent.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.updateLocalStorage = this.handleRemoveClick.bind(this);
-    }
-
-    updateLocalStorage(){
-        console.log(this.state);
-        let data = this.state;
-        localStorage.setItem("notes", JSON.stringify(data));
+        this.handleChangeClick = this.handleChangeClick.bind(this);
     }
 
     handleRemoveClick(event){
@@ -54,12 +49,24 @@ export class Calendar extends React.Component {
                 this.setState({children: newArr}, function() {
                     localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
                 });
-
-                this.forceUpdate();
             }
         }
+    }
 
-
+    handleChangeClick(type, event){
+        for (let i=0; i<this.state.children.length; i++) {
+            if (String(this.state.children[i].uniqueDate) === String(event.target.name)) {
+                let data = this.state.children;
+                if (type === 'title')
+                    data[i].title = event.target.value;
+                else if (type === 'time')
+                    data[i].time = event.target.value;
+                else if (type === 'text')
+                    data[i].text = event.target.value;
+                this.setState({children: data});
+                localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+            }
+        }
     }
 
     emptyScheduleCheck(){
@@ -70,23 +77,37 @@ export class Calendar extends React.Component {
             .filter(child => child.date === this.state.dateToday)
 
             //Sorting elements based on time, earliest first.
-            .sort((a, b) => parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
-                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)))
+            .sort((a, b) => parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6),10) -
+                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6),10))
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
             <div className='calendarBoxContent' key={i}>
                 <div className='leftCalendarBoxContent'>
-                    <h3>{item.time}</h3>
+                    <input onBlur={this.handleChangeClick.bind(this, 'time')}
+                           type='time'
+                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].time}
+                           name={item.uniqueDate}/>
                 </div>
 
                 <div className='middleCalendarBoxContent'>
-                    <h3>{item.title}</h3>
+                    <input onBlur={this.handleChangeClick.bind(this, 'title')}
+                           type='text'
+                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].title}
+                           name={item.uniqueDate}
+                           maxLength={10} />
                 </div>
                 <div className='rightCalendarBoxContent'>
-                    <p>{item.text}</p>
+                    <input onBlur={this.handleChangeClick.bind(this, 'text')}
+                           type='text'
+                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].text}
+                           name={item.uniqueDate}
+                           maxLength={200} />
                 </div>
-                <button onClick={this.handleRemoveClick} className='RemoveButton' type='button' value={item.uniqueDate}>
+                <button onClick={this.handleRemoveClick}
+                        className='RemoveButton'
+                        type='button'
+                        value={item.uniqueDate}>
                     <span className='glyphicon glyphicon-minus' />
                 </button>
             </div>
@@ -125,8 +146,8 @@ export class Calendar extends React.Component {
             newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue, uniqueDate: new Date()});
 
             //Sorting array with earliest appointments first.
-            newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
-                                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)));
+            newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6),10) -
+                                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6),10));
 
             //Creating new updated state.
             let data = {
