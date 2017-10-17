@@ -31,17 +31,47 @@ export class Calendar extends React.Component {
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
+        this.updateLocalStorage = this.handleRemoveClick.bind(this);
+    }
+
+    updateLocalStorage(){
+        console.log(this.state);
+        let data = this.state;
+        localStorage.setItem("notes", JSON.stringify(data));
+    }
+
+    handleRemoveClick(event){
+        for (let i=0; i<this.state.children.length; i++) {
+            if (String(this.state.children[i].uniqueDate) === String(event.target.value)){
+                //Deleting values in child
+                delete this.state.children[i];
+
+                //Removing empty objects
+                let newArr = this.state.children.filter(val => Object.keys(val).length !== 0);
+
+                //Updating state and localstorage on with callback function.
+                this.setState({children: newArr}, function() {
+                    localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+                });
+
+                this.forceUpdate();
+            }
+        }
+
+
     }
 
     emptyScheduleCheck(){
         //Copy of the state children array.
         let myData =[].concat(this.state.children)
 
-            //Sorting elements based on time, earliest first.
-            .sort((a, b) => a.time > b.time)
-
             //Filtering out appointments on current day.
             .filter(child => child.date === this.state.dateToday)
+
+            //Sorting elements based on time, earliest first.
+            .sort((a, b) => parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
+                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)))
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
@@ -56,9 +86,11 @@ export class Calendar extends React.Component {
                 <div className='rightCalendarBoxContent'>
                     <p>{item.text}</p>
                 </div>
+                <button onClick={this.handleRemoveClick} className='RemoveButton' type='button' value={item.uniqueDate}>
+                    <span className='glyphicon glyphicon-minus' />
+                </button>
             </div>
             );
-
         //If there are no plans that day.
         if (myData.length === 0){
             myData = [  <div key={0} className='calendarBoxContent'>
@@ -90,10 +122,11 @@ export class Calendar extends React.Component {
             let newStateArray = this.state.children.slice();
 
             //Pushing new child to array.
-            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
+            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue, uniqueDate: new Date()});
 
             //Sorting array with earliest appointments first.
-            newStateArray.sort((a, b) => a.time > b.time);
+            newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
+                                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)));
 
             //Creating new updated state.
             let data = {
@@ -116,26 +149,20 @@ export class Calendar extends React.Component {
             //Hiding form.
             this.showForm();
         } else {
-            alert('Invalid values. Please fill the fields.')
+            alert('Invalid values. Please try again.')
         }
     }
 
     validateFormDate(date){
-        if (date.length === 10)
-            return true
-        return false
+        return date.length === 10 && date >= new Date().toISOString().slice(0, 10);
     }
 
     validateFormTime(time){
-        if (time.length === 5)
-            return true
-        return false
+        return time.length === 5;
     }
 
     validateFormTitle(title){
-        if (title.length > 0)
-            return true
-        return false
+        return title.length > 0;
     }
 
     changeContent(e){
@@ -162,6 +189,10 @@ export class Calendar extends React.Component {
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
         let today = new Date().toISOString().slice(0, 10);
         document.querySelector(".dateInput").value = today;
+        let fields = document.querySelectorAll(".inputField");
+        for (let i = 0; i < fields.length; i++)
+            fields[i].style.border = '1px solid lightgray';
+
     }
 
     render(){

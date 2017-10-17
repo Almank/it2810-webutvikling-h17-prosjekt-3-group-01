@@ -6,6 +6,12 @@ import PropTypes from 'prop-types';
 import {DayEle} from '../calendar/DayEle';
 
 export class WeekCal extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            dateVal: new Date(),
+        };
+    }
 
     getDateFull(i){
         let temp = new Date();
