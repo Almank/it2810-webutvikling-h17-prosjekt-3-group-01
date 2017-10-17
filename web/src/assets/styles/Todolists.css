@@ -11,6 +11,7 @@
     padding: 10px;
     margin: 10px;
     display: flex;
+    justify-content: center;
     flex-direction: row;
     align-items: baseline;
 }
@@ -70,11 +71,11 @@
 }
 
 .col1{
-    min-width: 220px;
+    flex-basis: 220px;
 }
 
 .col2{
-    min-width: 300px;
+    flex-basis: 300px;
 }
 
 .button, .addbutton {
@@ -195,5 +196,9 @@ h3{
     .bigrow{
         flex-direction: column-reverse;
         align-items: center;
+    }
+
+    .col1 {
+        margin-bottom: 75px;
     }
 }
