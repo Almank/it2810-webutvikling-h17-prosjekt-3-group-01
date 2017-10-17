@@ -194,13 +194,18 @@
 
 }
 
-.rightCalendarBoxContent p, .leftCalendarBoxContent h3, .middleCalendarBoxContent h3, .rightCalendarBoxContent h2, .leftCalendarBoxContent h2, .middleCalendarBoxContent h2 {
+.rightCalendarBoxContent h2, .leftCalendarBoxContent h2, .middleCalendarBoxContent h2 {
     margin: 0;
 
 }
 
 .rightCalendarBoxContent h2 {
     margin: 0 15px;
+}
+
+.changeField {
+    border: none;
+    resize: none;
 }
 
 /* Mobile - portrait */
