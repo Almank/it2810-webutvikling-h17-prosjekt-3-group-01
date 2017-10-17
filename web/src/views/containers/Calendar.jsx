@@ -70,8 +70,8 @@ export class Calendar extends React.Component {
             .filter(child => child.date === this.state.dateToday)
 
             //Sorting elements based on time, earliest first.
-            .sort((a, b) => parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
-                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)))
+            .sort((a, b) => parseInt((("" + a.time.slice(0,2)) + a.time.slice(3,6)), 0) -
+                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0))
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
@@ -125,8 +125,8 @@ export class Calendar extends React.Component {
             newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue, uniqueDate: new Date()});
 
             //Sorting array with earliest appointments first.
-            newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6)) -
-                                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6)));
+            newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6), 0) -
+                                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0));
 
             //Creating new updated state.
             let data = {
