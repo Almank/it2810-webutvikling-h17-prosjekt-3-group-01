@@ -76,15 +76,18 @@ render(){
                 <View style={styles.hr} />
                 </View>}
                 />
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={this.changeTextHandler}
-                    onSubmitEditing={this.addTask}
-                    value={this.state.text}
-                    placeholder="Add new task"
-                    returnKeyType="done"
-                    returnKeyLabel="done"
-                />
+                <View style={styles.inputview}>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={this.changeTextHandler}
+                        onSubmitEditing={this.addTask}
+                        value={this.state.text}
+                        placeholder="Add new task"
+                        returnKeyType="done"
+                        returnKeyLabel="done"
+                    />
+                    <Button title="Add" onPress={() => this.addTask} />
+                </View>
         </View>
         );
     }
@@ -133,6 +136,12 @@ render(){
             paddingBottom: 2,
             fontSize: 18
         },
+        inputview:{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'flex-end'
+        },
+
         hr: {
             height: 1,
             backgroundColor: "grey"
@@ -148,7 +157,7 @@ render(){
             paddingLeft: 10,
             borderColor: "gray",
             borderWidth: isAndroid ? 0 : 1,
-            width: "100%"
+            width: "90%"
         }
     }
 );
