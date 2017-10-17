@@ -138,7 +138,9 @@ export class Calendar extends React.Component {
     }
 
     validateFormDate(date){
-        return (date.length === 10)
+        let lastDate = new Date();
+        lastDate.setDate(lastDate.getDate() + 7);
+        return date.length === 10 && date >= new Date().toISOString().slice(0, 10) && date < lastDate.toISOString().slice(0, 10);
     }
 
     validateFormTime(time){
@@ -150,14 +152,14 @@ export class Calendar extends React.Component {
     }
 
     render(){
-            return(
-                    <View style={styles.container}>
-                            <Week change={this.changeContent} />
-                            <View style={styles.bottomContainer}>
-                                <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
-                                {this.emptyScheduleCheck()}
-                            </View>
-                    </View>
+        return(
+            <View style={styles.container}>
+                <Week change={this.changeContent} />
+                <View style={styles.bottomContainer}>
+                    <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
+                    {this.emptyScheduleCheck()}
+                </View>
+            </View>
         );
     }
 }

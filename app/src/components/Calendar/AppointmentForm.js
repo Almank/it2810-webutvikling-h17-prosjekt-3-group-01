@@ -9,7 +9,7 @@ export class AppointmentForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            dateValue: '',
+            dateValue: new Date().toISOString().slice(0, 10),
             timeValue: '',
             titleValue: '',
             textValue: '',
@@ -25,7 +25,7 @@ export class AppointmentForm extends React.Component {
             this.props.getValues([this.state.dateValue, this.state.timeValue, this.state.titleValue, this.state.textValue]);
         } else {
             this.setState({
-                dateValue: null,
+                dateValue: new Date().toISOString().slice(0, 10),
                 timeValue: null,
                 titleValue: null,
                 textValue: null,
