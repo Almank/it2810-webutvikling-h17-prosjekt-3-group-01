@@ -149,14 +149,14 @@ export class Calendar extends React.Component {
     }
 
     render(){
-            return(
-                    <View style={styles.container}>
-                            <Week change={this.changeContent} />
-                            <View style={styles.bottomContainer}>
-                                <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
-                                {this.emptyScheduleCheck()}
-                            </View>
-                    </View>
+        return(
+            <View style={styles.container}>
+                <Week change={this.changeContent} />
+                <View style={styles.bottomContainer}>
+                    <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
+                    {this.emptyScheduleCheck()}
+                </View>
+            </View>
         );
     }
 }
