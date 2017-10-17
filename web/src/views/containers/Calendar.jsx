@@ -86,11 +86,9 @@ export class Calendar extends React.Component {
             .map((item,i) =>
             <div className='calendarBoxContent' key={i}>
                 <div className='leftCalendarBoxContent'>
-                    <input onChange={this.handleChangeClick.bind(this, 'time')}
-                           type='time'
-                           value={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].time}
-                           name={item.uniqueDate}
-                           className='changeField'/>
+                    <h2 type='time'
+                        name={item.uniqueDate}
+                        className='changeField'>{item.time}</h2>
                 </div>
 
                 <div className='middleCalendarBoxContent'>
