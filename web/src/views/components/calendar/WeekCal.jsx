@@ -5,9 +5,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {DayEle} from '../calendar/DayEle';
 
-export class DayBox extends React.Component {
+export class WeekCal extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            dateVal: new Date(),
+        };
     }
 
     getDateFull(i){
@@ -17,37 +20,29 @@ export class DayBox extends React.Component {
     }
 
     getDayDate(i){
-        let temp = new Date().getDate();
-        return temp + i;
+        return new Date().getDate() + i;
     }
 
     getDayName(i){
-        const days = [ 'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-        let dayOfWeek = new Date().getDay();
-        if (i + dayOfWeek >= 7)
-            return days[i+dayOfWeek-7];
-        else {
-            return days[i+dayOfWeek];
-        }
+        const dayNames = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+        const firstTwoDays = ['TODAY', 'TOMORROW'];
+        let weekDay = new Date().getDay();
+        if (i < 2)
+            return firstTwoDays[i];
+        if (i+weekDay > 7)
+            return dayNames[i+weekDay-7-1]; //Minus 7 days, and minus 1 since it starts at 0.
+        return dayNames[i+weekDay-1];
     }
 
     render(){
-        let preset = ['TODAY', 'TOMORROW', 2, 3, 4, 5, 6];
         let weekdays = [];
-        for(let i = 0; i < 7; i ++){
-            let dayname = [];
-            if(i < 2){
-                dayname.push(preset[i]);
-            } else {
-                dayname.push(this.getDayName(preset[i]))
-            }
+        for (let i=0; i<7; i++){
             weekdays.push(<DayEle change={this.props.change}
                                   key={this.getDateFull(i)}
                                   dateFull={this.getDateFull(i)}
-                                  dateName={ dayname }
+                                  dateName={ this.getDayName(i) }
                                   dayDate={this.getDayDate(i)} />)
         }
-
         return (
             <div className={'weekBox'}>
                 { weekdays }
@@ -56,6 +51,6 @@ export class DayBox extends React.Component {
     }
 }
 
-DayBox.PropTypes = {
+WeekCal.PropTypes = {
     change: PropTypes.string.isRequired,
 };

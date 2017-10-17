@@ -1,10 +1,6 @@
 import React from 'react';
 import '../../assets/styles/Todolists.css';
-import {TodoForm} from '../components/TodoList/TodoForm';
-import {TodoList} from '../components/TodoList/TodoList';
-import {TodoFilter} from '../components/TodoList/TodoFilter';
-import {TodoCatelog} from '../components/TodoList/TodoCatelog';
-import {TodoCatelogForm} from '../components/TodoList/TodoCatelogForm';
+import {TodoForm, TodoList, TodoFilter, TodoCatelog, TodoCatelogForm} from '../Components';
 
 /* [TODO APP] */
 export class ToDoApp extends React.Component{
@@ -58,17 +54,19 @@ export class ToDoApp extends React.Component{
 		}
 
 		filterItem(e){
-			this.state.filter[0].Status = e.target.id;
+		    let filter = this.state.filter;
+		    filter[0].Status = e.target.id;
 			this.setState({
-				filter: this.state.filter
+				filter: filter,
 			});
 		}
 
 		searchItem(e){
-			this.state.filter[0].keyword = e.target.value;
-			this.setState({
-				filter: this.state.filter
-			});
+            let filter = this.state.filter;
+            filter[0].keyword = e.target.value;
+            this.setState({
+                filter: filter,
+            });
 		}
 
 		AddCatalog(newCatalog){
@@ -79,10 +77,9 @@ export class ToDoApp extends React.Component{
 		}
 
 		setSelectedCatalog(index){
-			this.state.selectedItem = index;
-			this.setState({
-				selectedItem: index
-			});
+            this.setState({
+                selectedItem: index,
+            });
 		}
 
 		render(){

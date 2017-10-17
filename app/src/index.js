@@ -18,7 +18,6 @@ export class Index extends React.Component {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        marginTop: 20,
         flexDirection: 'column',
         justifyContent: 'flex-end',
         flex: 1,
@@ -30,9 +29,9 @@ const styles = StyleSheet.create({
 export const Content = TabNavigator({
     Calendar: {screen: Calendar,
             navigationOptions: {
-                tabBarIcon: () => (
+                tabBarIcon: ({focused}) => (
                     <Image
-                        source={require('./assets/calendar.png')}
+                        source={focused ? require('./assets/calendar_focused.png') : require('./assets/calendar.png')}
                         style={{width: 60, height: 60}}
                     />
                 ),
@@ -40,9 +39,9 @@ export const Content = TabNavigator({
         },
     Notes: {screen: Notes,
             navigationOptions: {
-                tabBarIcon: () => (
+                tabBarIcon: ({focused}) => (
                     <Image
-                        source={require('./assets/list-symbol.png')}
+                        source={focused ? require('./assets/list-symbol_focused.png') : require('./assets/list-symbol.png')}
                         style={{width: 60, height: 60}}
                     />
                 ),
@@ -50,29 +49,28 @@ export const Content = TabNavigator({
         },
     Todo: {screen: Todo,
             navigationOptions: {
-                tabBarIcon: () => (
+                tabBarIcon: ({focused}) => (
                     <Image
-                        source={require('./assets/pencil.png')}
+                        source={focused ? require('./assets/pencil_focused.png') : require('./assets/pencil.png')}
                         style={{width: 60, height: 60}}
                     />
                 ),
             }
         }
 }, {
-    initialRouteName: 'Notes',
+    initialRouteName: 'Calendar',
     swipeEnabled: false,
     tabBarOptions: {
-
         showIcon: true,
         showLabel: false,
         inactiveBackgroundColor: '#464a4b',
         activeBackgroundColor: '#35393a',
         style: {
-            height: 100,
+            flexBasis: 90,
         },
         iconStyle: {
-            height: 50,
-            width: 50
+            height: 45,
+            width: 45,
         },
     }
 });

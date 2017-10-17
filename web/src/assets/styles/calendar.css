@@ -1,7 +1,7 @@
 .calendarContent {
     display: flex;
     flex-direction: column;
-    margin: 0 10%;
+    margin: 0;
     min-height: 100vh;
     height: auto;
 }
@@ -218,6 +218,11 @@
         margin: 0;
     }
 
+    .calendarContent .title {
+        font-size: 35px;
+        padding: 10px;
+    }
+
     .calendarBox {
         width: 95%;
     }
@@ -265,8 +270,8 @@
     .submitButton {
         height: 50px;
     }
-    .title {
-        font-size: 22px;
+    .weekBox {
+        padding-top: 40px;
     }
 
 

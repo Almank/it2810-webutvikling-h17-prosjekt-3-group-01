@@ -2,7 +2,7 @@
  * Created by almank on 02.10.2017.
  */
 import React from 'react';
-import {DayBox} from '../components/calendar/DayBox';
+import {WeekCal, AppointmentForm, ContentHeader} from '../Components';
 import '../../assets/styles/calendar.css';
 
 export class Calendar extends React.Component {
@@ -12,7 +12,7 @@ export class Calendar extends React.Component {
         if(localStorage.getItem("emptyCalendar") === null){
             let data = {
                 dateToday: new Date().toISOString().slice(0, 10),
-                children: [{date:'ok',time: "12:02", title: "Hey", text: "This is text"},{date:'ok',time: "12:02", title: "Hey", text: "This is text"}],
+                children: [],
             };
             localStorage.setItem("emptyCalendar", JSON.stringify(data));
         }
@@ -31,18 +31,47 @@ export class Calendar extends React.Component {
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
+        this.updateLocalStorage = this.handleRemoveClick.bind(this);
+    }
+
+    updateLocalStorage(){
+        console.log(this.state);
+        let data = this.state;
+        localStorage.setItem("notes", JSON.stringify(data));
+    }
+
+    handleRemoveClick(event){
+        for (let i=0; i<this.state.children.length; i++) {
+            if (String(this.state.children[i].uniqueDate) === String(event.target.value)){
+                //Deleting values in child
+                delete this.state.children[i];
+
+                //Removing empty objects
+                let newArr = this.state.children.filter(val => Object.keys(val).length !== 0);
+
+                //Updating state and localstorage on with callback function.
+                this.setState({children: newArr}, function() {
+                    localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+                });
+
+                this.forceUpdate();
+            }
+        }
+
+
     }
 
     emptyScheduleCheck(){
-
-        //Making a let with a copy of the state children array.
+        //Copy of the state children array.
         let myData =[].concat(this.state.children)
-
-            //Sorting elements based on time, earliest first.
-            .sort((a, b) => a.time > b.time)
 
             //Filtering out appointments on current day.
             .filter(child => child.date === this.state.dateToday)
+
+            //Sorting elements based on time, earliest first.
+            .sort((a, b) => parseInt((("" + a.time.slice(0,2)) + a.time.slice(3,6)), 0) -
+                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0))
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
@@ -57,10 +86,12 @@ export class Calendar extends React.Component {
                 <div className='rightCalendarBoxContent'>
                     <p>{item.text}</p>
                 </div>
+                <button onClick={this.handleRemoveClick} className='RemoveButton' type='button' value={item.uniqueDate}>
+                    <span className='glyphicon glyphicon-minus' />
+                </button>
             </div>
             );
-
-        //If there are no plans that day write this.
+        //If there are no plans that day.
         if (myData.length === 0){
             myData = [  <div key={0} className='calendarBoxContent'>
                             <h1>You don't have any plans!</h1>
@@ -84,32 +115,54 @@ export class Calendar extends React.Component {
         let titleValue = document.getElementsByClassName('titleInput')[0].value;
         let textValue = document.getElementsByClassName('textInput')[0].value;
 
-        //Creating new array with current state children.
-        let newStateArray = this.state.children.slice();
+        //Validate fields date, time and title. Last field is optional.
+        if (this.validateFormDate(dateValue) && this.validateFormTime(timeValue) && this.validateFormTitle(titleValue)){
 
-        //Pushing new child to array.
-        newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
+            //Creating new array with current state children.
+            let newStateArray = this.state.children.slice();
 
-        //Creating new updated state.
-        let data = {
-            children: newStateArray,
-            dateToday: new Date().toISOString().slice(0, 10),
-        };
+            //Pushing new child to array.
+            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue, uniqueDate: new Date()});
 
-        //Setting state.
-        this.setState(data);
+            //Sorting array with earliest appointments first.
+            newStateArray.sort((a, b) =>    parseInt(("" + a.time.slice(0,2)) + a.time.slice(3,6), 0) -
+                                            parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0));
 
-        //Updating localstorage to store new data.
-        localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            //Creating new updated state.
+            let data = {
+                children: newStateArray,
+                dateToday: new Date().toISOString().slice(0, 10),
+            };
 
-        //Resetting form values.
-        document.getElementsByClassName('dateInput')[0].value = null;
-        document.getElementsByClassName('timeInput')[0].value = null;
-        document.getElementsByClassName('titleInput')[0].value = null;
-        document.getElementsByClassName('textInput')[0].value = null;
+            //Setting state.
+            this.setState(data);
 
-        //Hiding form.
-        this.showForm();
+            //Updating localstorage to store new data.
+            localStorage.setItem("emptyCalendar", JSON.stringify(data));
+
+            //Resetting form values.
+            document.getElementsByClassName('dateInput')[0].value = null;
+            document.getElementsByClassName('timeInput')[0].value = null;
+            document.getElementsByClassName('titleInput')[0].value = null;
+            document.getElementsByClassName('textInput')[0].value = null;
+
+            //Hiding form.
+            this.showForm();
+        } else {
+            alert('Invalid values. Please try again.')
+        }
+    }
+
+    validateFormDate(date){
+        return date.length === 10 && date >= new Date().toISOString().slice(0, 10);
+    }
+
+    validateFormTime(time){
+        return time.length === 5;
+    }
+
+    validateFormTitle(title){
+        return title.length > 0;
     }
 
     changeContent(e){
@@ -136,50 +189,21 @@ export class Calendar extends React.Component {
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
         let today = new Date().toISOString().slice(0, 10);
         document.querySelector(".dateInput").value = today;
+        let fields = document.querySelectorAll(".inputField");
+        for (let i = 0; i < fields.length; i++)
+            fields[i].style.border = '1px solid lightgray';
+
     }
 
     render(){
         return (
             <div className={'calendarContent'}>
                 <h1 className={'title'} >Your schedule for the coming week</h1>
-                <DayBox change={this.changeContent} />
+                <WeekCal change={this.changeContent} />
 
                 <div className={'calendarBox'}>
-                    <div className='calendarBoxContent'>
-                        <div className='leftCalendarBoxContent'>
-                            <h2>When</h2>
-                        </div>
-
-                        <div className='middleCalendarBoxContent'>
-                            <h2>Title</h2>
-                        </div>
-                        <div className='rightCalendarBoxContent'>
-                            <h2>About</h2>
-                        </div>
-                        <button className='icon-topright' onClick={this.showForm}>
-                            <span className='glyphicon glyphicon-plus'/>
-                        </button>
-                    </div>
-                    <div className='formContainer' style={{
-                        //Need to style inline to remove having to double click button first time.
-                        display: 'none'
-                    }}>
-                        <button className='absolute-icon-top-right' onClick={this.showForm}>
-                            <span className='glyphicon glyphicon-remove'/>
-                        </button>
-                        <form className={'form'}>
-                            <h3>Create new appointment</h3>
-                            <span>Date</span>
-                            <input type='date' name='date' className="dateInput" required/>
-                            <span>Time</span>
-                            <input type='time' className="timeInput" required/>
-                            <span>Title</span>
-                            <input type="text" name="title" className="titleInput" maxLength='19' required />
-                            <span>What</span>
-                            <textarea type='text' className="textInput" maxLength='200'  />
-                            <input type='submit' className='submitButton' onClick={this.createAppointment}/>
-                        </form>
-                    </div>
+                    <ContentHeader closeForm={this.showForm}/>
+                    <AppointmentForm closeForm={this.showForm} submitForm={this.createAppointment}/>
                     {this.emptyScheduleCheck()}
                 </div>
             </div>

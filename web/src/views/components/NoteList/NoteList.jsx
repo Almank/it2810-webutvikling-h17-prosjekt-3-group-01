@@ -19,13 +19,14 @@ export class NoteList extends React.Component {
 
     //Function for adding new note and updating storage to contain this.
     onSubmit(event){
-        const data = this.state.notes;
-        data[event.target.title.value] = {
-            title: event.target.title.value,
-        };
-        this.setState({notes: data});
-        this.props.updateStorage();
-        this.createNewNote();
+        if(event.target.title.value !== "") {
+            const data = this.state.notes;
+            data[event.target.title.value] = {
+                title: event.target.title.value,
+            };
+            this.setState({notes: data});
+            this.props.updateStorage();
+        }
         event.preventDefault();
     }
 
@@ -52,20 +53,11 @@ export class NoteList extends React.Component {
         return dataSet;
     }
 
-    //Function for modifying flex style state.
-    createNewNote() {
-        let element = document.querySelector('.NoteForm');
-        element.style.display = element.style.display === 'flex' ? '' : 'flex';
-    }
-
     render(){
         return (
             <div className="NoteList">
                 <div className="NoteListTitleContainer">
                     <h1>Add new</h1>
-                    <div className="addNewNoteButton" onClick={this.createNewNote}>
-                        <span className={'glyphicon glyphicon-plus'} />
-                    </div>
                 </div>
                 <form className="NoteForm" onSubmit={this.onSubmit}>
                     <input className="NoteField" name="title" type="text"/>

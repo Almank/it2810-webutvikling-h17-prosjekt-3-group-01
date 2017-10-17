@@ -3,9 +3,8 @@
  */
 import React from 'react';
 import '../../assets/styles/Notes.css';
-import {NoteList} from "../components/NoteList/NoteList";
+import {NoteList, NoteContent} from "../Components";
 import {Route} from 'react-router-dom';
-import {NoteContent} from "../components/NoteList/NoteContent";
 
 
 export class Notes extends React.Component {
@@ -59,24 +58,25 @@ export class Notes extends React.Component {
 
     render(){
         return (
-            <div> <h1 className={'title'}>Notes</h1>
-            <div className="NoteBook">
-                <NoteList notes={this.state.notes}
-                          removeClick={(value) => this.removeClick(value)}
-                          updateStorage={() => this.updateLocalStorage()}
-                />
-                <div className="NoteEdit">
-                    <div className="NoteEditContent">
-                        <Route exact path="/notebook/:name" render={ (id) =>
-                            <NoteContent data={this.state.notes[id.match.params.name]}
-                                         key={id}
-                                         id={id}
-                                         onChange={this.onChange.bind(this)}
-                                         update={this.state.update}
-                            />}/>
+            <div className="NoteBookWrapper">
+                <h1 className={'title'}> Notes</h1>
+                <div className="NoteBook">
+                    <NoteList notes={this.state.notes}
+                              removeClick={(value) => this.removeClick(value)}
+                              updateStorage={() => this.updateLocalStorage()}
+                    />
+                    <div className="NoteEdit">
+                        <div className="NoteEditContent">
+                            <Route exact path="/notebook/:name" render={ (id) =>
+                                <NoteContent data={this.state.notes[id.match.params.name]}
+                                             key={id}
+                                             id={id}
+                                             onChange={this.onChange.bind(this)}
+                                             update={this.state.update}
+                                />}/>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         );
     }
