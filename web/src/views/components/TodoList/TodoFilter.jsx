@@ -16,7 +16,7 @@ export class TodoFilter extends React.Component {
 			<div className="row">
                 <div className="col-filter">
 					<ul className="todo-filter">
-                        <li><a onClick={this.props.onFilter} className={this.isActive('SHOW_ALL')} id="SHOW_ALL" href="#">All</a></li>
+                        <li><a onClick={this.props.onFilter} className={this.isActive('SHOW_ALL')} id="SHOW_ALL">All</a></li>
 						<li><a onClick={this.props.onFilter} className={this.isActive('false')} id="false">Incomplete</a></li>
 						<li><a onClick={this.props.onFilter} className={this.isActive('true')} id="true">Complete</a></li>
 					</ul>
