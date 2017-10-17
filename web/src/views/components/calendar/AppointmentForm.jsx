@@ -7,7 +7,10 @@ export class AppointmentForm extends React.Component {
 
     //Visual validation
     validDateField(e){
-        if (e.target.value >= new Date().toISOString().slice(0, 10)){
+        let lastDate = new Date();
+        lastDate.setDate(lastDate.getDate() + 7);
+        if (e.target.value >= new Date().toISOString().slice(0, 10) &&
+            e.target.value < lastDate.toISOString().slice(0, 10)){
             e.target.style.border = '2px solid green';
         } else {
             e.target.style.border = '2px solid red';
