@@ -8,20 +8,15 @@ export class ToDoApp extends React.Component{
 			super(props);
 
 			if(localStorage.getItem("todo") === null){
-                let data = {Todo: [{name:"Primary",
-									items:[{item:'Todo item #1',isDone:false},
-											{item:'Todo item #2',isDone:true},
-											{item:'aaaa',isDone:true},
-											{item:'dddd',isDone:true}]},
-									{name:"Secondary",
-									items:[{item:'Todo item #1',isDone:false},
-											{item:'Todo item #2',isDone:true},
-											{item:'Todo item #3',isDone:true}
-									]}],
-									filter: [{keyword:'',Status:"SHOW_ALL"}],
+                let data = {Todo: [],
 									selectedItem: "0"};
                 localStorage.setItem("todo", JSON.stringify(data));
             }
+            let data = {Todo: [{name:"Primary",
+                items:[]},],
+                filter: [{keyword:'',Status:"SHOW_ALL"}],
+                selectedItem: "0"};
+            localStorage.setItem("todo", JSON.stringify(data));
             let todo = localStorage.getItem("todo");
             todo = JSON.parse(todo);
             this.state = todo;
