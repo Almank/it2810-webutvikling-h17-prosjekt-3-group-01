@@ -62,8 +62,9 @@ export class Calendar extends React.Component {
                     data[i].time = event.target.value;
                 else if (type === 'text')
                     data[i].text = event.target.value;
-                this.setState({children: data});
-                localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+                this.setState({children: data}, function(){
+                    localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+                });
             }
         }
     }
@@ -83,25 +84,25 @@ export class Calendar extends React.Component {
             .map((item,i) =>
             <div className='calendarBoxContent' key={i}>
                 <div className='leftCalendarBoxContent'>
-                    <input onBlur={this.handleChangeClick.bind(this, 'time')}
+                    <input onChange={this.handleChangeClick.bind(this, 'time')}
                            type='time'
-                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].time}
+                           value={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].time}
                            name={item.uniqueDate}
                            className='changeField'/>
                 </div>
 
                 <div className='middleCalendarBoxContent'>
-                    <input onBlur={this.handleChangeClick.bind(this, 'title')}
+                    <input onChange={this.handleChangeClick.bind(this, 'title')}
                            type='text'
-                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].title}
+                           value={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].title}
                            name={item.uniqueDate}
                            maxLength={10}
                            className='changeField'/>
                 </div>
                 <div className='rightCalendarBoxContent'>
-                    <textarea onBlur={this.handleChangeClick.bind(this, 'text')}
+                    <textarea onChange={this.handleChangeClick.bind(this, 'text')}
                            type='text'
-                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].text}
+                           value={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].text}
                            name={item.uniqueDate}
                            maxLength={200}
                            className='changeField'/>
@@ -158,10 +159,10 @@ export class Calendar extends React.Component {
             };
 
             //Setting state.
-            this.setState(data);
-
-            //Updating localstorage to store new data.
-            localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            this.setState(data, function(){
+                //Updating localstorage to store new data.
+                localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            });
 
             //Resetting form values.
             document.getElementsByClassName('dateInput')[0].value = null;
@@ -195,17 +196,11 @@ export class Calendar extends React.Component {
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
 
-        //Setting dateToday to current date.
-        data.dateToday = e.props.dateFull;
-
         //Setting state to stored state.
-        this.state = data;
-
-        //Updating localstorage to store new data.
-        localStorage.setItem("emptyCalendar", JSON.stringify(data));
-
-        //Forcing update of the DOM to change content.
-        this.forceUpdate();
+        this.setState({dateToday: e.props.dateFull}, function(){
+            //Updating localstorage to store new data.
+            localStorage.setItem("emptyCalendar", JSON.stringify(data));
+        });
     }
 
     showForm(){
@@ -217,7 +212,6 @@ export class Calendar extends React.Component {
         let fields = document.querySelectorAll(".inputField");
         for (let i = 0; i < fields.length; i++)
             fields[i].style.border = '1px solid lightgray';
-
     }
 
     render(){
