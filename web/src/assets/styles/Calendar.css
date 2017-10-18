@@ -84,11 +84,11 @@
 
 .icon-topright span {
     font-size: 26px;
-    color: green;
+    color: #FF9505;
 }
 
 .icon-topright:hover span {
-    color: #FF9505;
+    color: #de6f2c;
 }
 
 .form {
