@@ -10,6 +10,7 @@ export class AppointmentForm extends React.Component {
         super(props);
         this.state = {
             modalVisible: false,
+            dateValue: new Date().toISOString().slice(0, 10),
         };
         this.submitInput = this.submitInput.bind(this);
     }

@@ -94,9 +94,8 @@ export class Calendar extends React.Component {
         let data = this.state;
         data.dateToday = e.props.dateFull;
         this.setState({ dateToday: e.props.dateFull }, () => {
-            this.forceUpdate();
+            this.setStorage(data);
         });
-        this.setStorage(data);
     }
 
     async loadData(){
