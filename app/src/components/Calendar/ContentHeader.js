@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         flexWrap: 'wrap',
+        borderBottomWidth:1.5,
+        borderBottomColor: 'black',
     },
     item: {
         flexBasis:'33%',

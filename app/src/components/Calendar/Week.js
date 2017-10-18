@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import {Day} from './Day';
 
 export class Week extends React.Component {
@@ -44,7 +45,7 @@ export class Week extends React.Component {
 }
 
 Week.PropTypes = {
-    change: React.PropTypes.func.isRequired,
+    change: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

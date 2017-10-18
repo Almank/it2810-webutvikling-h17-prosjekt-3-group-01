@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TextInput, FlatList, Keyboard, AsyncStorage} from 'react-native';
+import PropTypes from 'prop-types';
 import { Button, FormLabel } from 'react-native-elements';
 import { NoteLink } from "./NoteLink";
 
@@ -129,6 +130,10 @@ export class NoteList extends React.Component {
         )
     }
 }
+
+NoteLink.PropTypes = {
+  navigation: PropTypes.navigation,
+};
 
 const styles = StyleSheet.create({
     NoteList: {
