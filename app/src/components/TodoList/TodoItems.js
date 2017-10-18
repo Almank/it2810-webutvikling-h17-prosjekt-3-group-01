@@ -78,7 +78,10 @@ export class TodoItems extends React.Component {
         let todo = this.state.text;
         let todos = this.state.todos;
         todos[todo] = todo;
-        this.setState({todos: todos});
+        this.setState({
+            todos: todos,
+            text: "",
+        });
 
         let title = this.props.navigation.state.params.title;
         let content = this.state.todos;
