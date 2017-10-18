@@ -21,15 +21,20 @@ export class TodoItems extends React.Component {
     }
 
     componentDidMount() {
-        Keyboard.addListener(
+        this.keyboardListener1 = Keyboard.addListener(
             isAndroid ? "keyboardDidShow" : "keyboardWillShow",
             e => this.setState({ viewMargin: e.endCoordinates.height + viewPadding })
         );
 
-        Keyboard.addListener(
+        this.keyboardListener2 = Keyboard.addListener(
             isAndroid ? "keyboardDidHide" : "keyboardWillHide",
             () => this.setState({ viewMargin: viewPadding })
         );
+    }
+
+    componentWillUnmount () {
+        this.keyboardListener1.remove();
+        this.keyboardListener2.remove();
     }
 
     //Processes data from state to be used in FlatList
