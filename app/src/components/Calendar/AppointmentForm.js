@@ -9,13 +9,8 @@ export class AppointmentForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            dateValue: new Date().toISOString().slice(0, 10),
-            timeValue: '',
-            titleValue: '',
-            textValue: '',
             modalVisible: false,
         };
-
         this.submitInput = this.submitInput.bind(this);
     }
 
