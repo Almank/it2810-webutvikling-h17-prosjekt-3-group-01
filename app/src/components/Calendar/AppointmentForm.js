@@ -9,13 +9,9 @@ export class AppointmentForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            dateValue: new Date().toISOString().slice(0, 10),
-            timeValue: '',
-            titleValue: '',
-            textValue: '',
             modalVisible: false,
+            dateValue: new Date().toISOString().slice(0, 10),
         };
-
         this.submitInput = this.submitInput.bind(this);
     }
 
@@ -102,6 +98,10 @@ export class AppointmentForm extends React.Component {
     }
 }
 
+AppointmentForm.PropTypes = {
+    getValues: React.PropTypes.array.isRequired,
+};
+
 const styles = StyleSheet.create({
     addAppButton: {
         marginTop: 20,
@@ -150,5 +150,4 @@ const styles = StyleSheet.create({
         fontSize: 25,
         textAlign: 'center',
     }
-
 });

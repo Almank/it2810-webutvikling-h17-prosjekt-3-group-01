@@ -31,5 +31,4 @@ const styles = StyleSheet.create({
         fontSize:18,
         marginBottom: 20,
     }
-
 });

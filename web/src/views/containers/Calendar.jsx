@@ -199,8 +199,9 @@ export class Calendar extends React.Component {
         //Fetching data from localstorage
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
+        data.dateToday = e.props.dateFull;
         //Setting state to stored state.
-        this.setState({dateToday: e.props.dateFull}, function(){
+        this.setState({dateToday: e.props.dateFull}, () => {
             //Updating localstorage to store new data.
             localStorage.setItem("emptyCalendar", JSON.stringify(data));
         });

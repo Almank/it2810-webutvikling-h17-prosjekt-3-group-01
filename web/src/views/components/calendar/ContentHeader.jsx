@@ -2,6 +2,7 @@
  * Created by almank on 14.10.2017.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class ContentHeader extends React.Component {
 
@@ -25,3 +26,7 @@ export class ContentHeader extends React.Component {
         )
     }
 }
+
+ContentHeader.PropTypes = {
+    closeForm: PropTypes.func,
+};

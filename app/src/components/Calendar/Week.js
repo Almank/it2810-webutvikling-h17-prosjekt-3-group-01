@@ -43,12 +43,15 @@ export class Week extends React.Component {
     }
 }
 
+Week.PropTypes = {
+    change: React.PropTypes.func.isRequired,
+};
+
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         flexWrap: 'wrap',
-
     }
 });
