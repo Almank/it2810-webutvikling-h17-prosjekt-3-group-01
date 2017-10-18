@@ -17,6 +17,7 @@ export class TodoList extends Component {
         this.addTask = this.addTask.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
         this.addCategory = this.addCategory.bind(this);
+        this.deleteCategory = this.deleteCategory.bind(this);
         this.loadData();
     }
 
@@ -79,6 +80,8 @@ export class TodoList extends Component {
         this.updateAsyncStorage();
     };
 
+
+
     //Processes data from state to be used in FlatList
     renderData(){
         let unprocessedData = this.state.categories;
@@ -99,6 +102,13 @@ export class TodoList extends Component {
         this.updateAsyncStorage();
     }
 
+    deleteCategory(title){
+        let data = this.state.categories;
+        delete data[title];
+        this.setState({categories: data});
+        this.updateAsyncStorage();
+    }
+
     renderCategoryItem(item, index){
         return(<TodoItemLink
                 title={item.title}
@@ -108,6 +118,7 @@ export class TodoList extends Component {
                 navigation={this.props.navigation}
                 onClick={this.deleteTask}
                 handleTaskChange={this.addTask}
+                handleCategoryDelete={this.deleteCategory}
             />
         )
     }

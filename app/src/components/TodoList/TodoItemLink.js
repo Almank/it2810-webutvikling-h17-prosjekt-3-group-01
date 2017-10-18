@@ -7,6 +7,7 @@ export class TodoItemLink extends React.Component {
         this.navigateToContent = this.navigateToContent.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onChildContentChange = this.onChildContentChange.bind(this);
+        this.onCategoryDelete = this.onCategoryDelete.bind(this);
     }
 
     navigateToContent(){
@@ -16,7 +17,12 @@ export class TodoItemLink extends React.Component {
             navigation: this.props.navigation,
             onPress: this.onDelete,
             handleTaskChange: this.onChildContentChange,
+            deleteCategory: this.onCategoryDelete,
         });
+    }
+
+    onCategoryDelete(title){
+        this.props.handleCategoryDelete(title);
     }
 
     onChildContentChange(title, content){

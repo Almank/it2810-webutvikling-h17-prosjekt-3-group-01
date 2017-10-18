@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View, FlatList, TextInput, Button, StyleSheet, Platform, Keyboard} from 'react-native';
+import {Text, View, FlatList, TextInput, StyleSheet, Platform, Keyboard} from 'react-native';
+import {Button} from 'react-native-elements';
 
 const isAndroid = Platform.OS === "android";
 const viewPadding = 10;
@@ -16,6 +17,7 @@ export class TodoItems extends React.Component {
         this.addTask = this.addTask.bind(this);
         this.changeTextHandler = this.changeTextHandler.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
+        this.deleteCategory = this.deleteCategory.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +49,12 @@ export class TodoItems extends React.Component {
         this.setState(data);
     }
 
+    deleteCategory(){
+        let properties = this.props.navigation.state.params;
+        properties.deleteCategory(properties.title);
+        this.props.navigation.goBack();
+    }
+
     renderCategoryItem(item){
         return(
             <View>
@@ -54,7 +62,7 @@ export class TodoItems extends React.Component {
                     <Text style={styles.listItem}>
                         {item}
                     </Text>
-                    <Button color="#FE642E" title="X" onPress={() => this.deleteTask(item)} />
+                    <Button title="X" onPress={() => this.deleteTask(item)} />
                 </View>
                 <View style={styles.hr} />
             </View>
@@ -77,9 +85,10 @@ export class TodoItems extends React.Component {
     };
 
     render(){
+        let properties = this.props.navigation.state.params;
         return (
             <View style={[styles.container, { paddingBottom: this.state.viewMargin }]}>
-                <Text style={styles.title}>    TO-DO    </Text>
+                <Text style={styles.title}>{properties.title}</Text>
                 <FlatList
                     style={styles.list}
                     data={this.renderData()}
@@ -104,6 +113,9 @@ export class TodoItems extends React.Component {
                         backgroundColor="red"
                     />
                 </View>
+                <Button title="Delete Category"
+                        onPress={this.deleteCategory}
+                />
             </View>
         );
     }
