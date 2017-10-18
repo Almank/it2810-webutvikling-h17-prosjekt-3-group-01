@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import {Week} from '../components/Calendar/Week';
 import {AppointmentForm} from "../components/Calendar/AppointmentForm";
+import {CalendarButton} from "../components/Calendar/CalendarButton";
 
 export class Calendar extends React.Component {
     constructor(props) {
@@ -20,7 +21,6 @@ export class Calendar extends React.Component {
         this.changeContent = this.changeContent.bind(this);
         this.setStorage = this.setStorage.bind(this);
         this.loadData();
-
     }
 
     setModalVisible(visible) {
@@ -55,22 +55,20 @@ export class Calendar extends React.Component {
                         visible={this.state.modalVisible}
                         onRequestClose={() => {alert("Form has been closed.")}}>
                         <View style={styles.formContainer}>
-                            <TouchableOpacity onPress={() => {
+                            <CalendarButton onpress={() => {
                                 this.setModalVisible(!this.state.modalVisible);
                                 let data = this.state.children;
                                 data = data.filter(a => String(a.uniqueDate) !== String(item.uniqueDate));
-                                this.setState({children: data});
-                                this.setStorage(data);
-                            }}
-                            style={[styles.addAppButton, styles.shadow, styles.removeButton]}>
-                                <Text style={styles.textButton}>Delete</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => {
+                                this.setState({children: data}, function() {
+                                    this.setStorage(data);
+                                });
+                            }} text={'Delete'}
+                                backgroundC={'red'}/>
+                            <CalendarButton onpress={() => {
                                 this.setModalVisible(!this.state.modalVisible)
                             }}
-                                              style={[styles.addAppButton, styles.shadow]}>
-                                <Text style={styles.textButton}>Cancel</Text>
-                            </TouchableOpacity>
+                                text={'Cancel'}>
+                            </CalendarButton>
                         </View>
                     </Modal>
                 </View>
@@ -185,7 +183,7 @@ export class Calendar extends React.Component {
             <View style={styles.container}>
                 <Week change={this.changeContent} />
                 <View style={styles.bottomContainer}>
-                    <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
+                    <AppointmentForm getValues={ arr => this.createAppointment(arr)} styles={this.styles} />
                     {this.emptyScheduleCheck()}
                 </View>
             </View>
@@ -230,29 +228,10 @@ const styles = StyleSheet.create({
     scrollView: {
         height: '100%',
     },
-    addAppButton: {
-        marginTop: 20,
-        marginLeft:'15%',
-        marginRight:'15%',
-        flexBasis: 40,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FF9505',
-        borderWidth: 1,
-        borderColor: 'rgba(155,155,155,0.5)',
-    },
     formContainer: {
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
         height: '100%',
     },
-    textButton: {
-        fontSize:16,
-        color:'white',
-    },
-    removeButton: {
-        backgroundColor:'red',
-    }
 });
