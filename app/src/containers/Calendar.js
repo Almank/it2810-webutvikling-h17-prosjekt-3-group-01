@@ -172,7 +172,9 @@ export class Calendar extends React.Component {
     }
 
     validateFormTime(time){
-        return (time.length === 5)
+        return (time.length === 5 && (parseInt(time.slice(3,6), 0) < 60)
+                && (parseInt(time.slice(3,6), 0) >= 0) && (parseInt(time.slice(0,2), 0) < 25)
+                && (parseInt(time.slice(0,2), 0) >= 0));
     }
 
     validateFormTitle(title){
