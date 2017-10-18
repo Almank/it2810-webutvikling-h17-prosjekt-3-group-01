@@ -8,7 +8,8 @@ import {DayEle} from '../calendar/DayEle';
 export class WeekCal extends React.Component {
 
     getDateFull(i){
-        let temp = new Date();
+        //Setting time, with Norwegian timezone.
+        let temp = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
         temp.setDate(temp.getDate() + i);
         return temp.toISOString().slice(0, 10);
     }

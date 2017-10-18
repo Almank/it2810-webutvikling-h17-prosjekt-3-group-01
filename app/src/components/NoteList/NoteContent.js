@@ -2,6 +2,7 @@
  * Created by martinlunde on 27.09.2017.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -47,7 +48,7 @@ export class NoteContent extends React.Component {
                 <View style={styles.header}>
                     <Button buttonStyle={styles.headerButton}
                             title="< Back"
-                            fontWeight={"bold"}
+                            fontSize={14}
                             onPress={this.returnToLastView}/>
                 </View>
                 <View style={styles.noteContainer}>
@@ -61,10 +62,9 @@ export class NoteContent extends React.Component {
                                numberOfLines={4}
                     />
                     <Button title="Delete Note"
-                            fontWeight={'bold'}
-                            fontSize={15}
+                            fontSize={14}
                             onPress={this.handleDelete}
-                            buttonStyle={styles.DeleteButton}
+                            buttonStyle={styles.deleteButton}
                     />
                 </View>
             </View>
@@ -72,25 +72,28 @@ export class NoteContent extends React.Component {
     }
 }
 
+NoteContent.PropTypes = {
+    navigation: PropTypes.navigation
+};
+
 const styles = StyleSheet.create({
     header: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#f2f2f2',
     },
     headerButton: {
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 25,
+        marginBottom: 10,
         marginLeft: -10,
         backgroundColor: '#35393a',
     },
     headerTitle: {
         textAlign: 'center',
-        marginTop: 5,
-        marginBottom: 5,
-        fontSize: 15,
-        fontWeight: 'bold',
+        marginTop: 10,
+        marginBottom: 10,
+        fontSize: 16,
     },
     hr: {
         borderBottomColor: 'grey',
@@ -101,10 +104,11 @@ const styles = StyleSheet.create({
     },
     noteField: {
         backgroundColor: 'white',
-        height: 300,
+        height: 260,
+        textAlignVertical: 'top',
     },
-    DeleteButton: {
+    deleteButton: {
         marginTop: 10,
-        backgroundColor: '#8f0500',
+        backgroundColor: '#FF9505',
     }
 });

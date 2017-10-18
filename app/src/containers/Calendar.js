@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, AsyncStorage, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import {Week} from '../components/Calendar/Week';
 import {AppointmentForm} from "../components/Calendar/AppointmentForm";
+import {CalendarButton} from "../components/Calendar/CalendarButton";
 
 export class Calendar extends React.Component {
     constructor(props) {
@@ -9,40 +10,50 @@ export class Calendar extends React.Component {
 
         this.state = {
             dateToday: new Date().toISOString().slice(0, 10),
-            dateVal: '',
-            timeVal: '',
-            titleVal: '',
-            textVal: '',
-            children: [
-                {date: '2017-10-15', time: '14:15', title: 'Hello World', text: 'This is text'},
-            ],
+            modalVisible: false,
+            children: [],
         };
 
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
-
+        this.setStorage = this.setStorage.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.loadData();
     }
 
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
+
+    handleRemoveClick(uniqueDate){
+        this.setState({tempUnique: uniqueDate});
+    }
 
     emptyScheduleCheck(){
-
         //Copy of the state children array.
         let myData =[].concat(this.state.children)
 
-        //Sorting elements based on time, earliest first.
-            .sort((a, b) => a.time > b.time)
-
-            //Filtering out appointments on current day.
+        //Filtering out appointments on current day.
             .filter(child => child.date === this.state.dateToday)
+
+        //Sorting elements based on time, earliest first.
+            .sort((a, b) =>
+                parseInt((("" + a.time.slice(0,2)) + a.time.slice(3,6)), 0) -
+                parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0))
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
-                <View style={styles.showAppointments} key={i}>
-                    <Text style={styles.appointmentItem}>{item.time}</Text>
-                    <Text style={styles.appointmentItem}>{item.title}</Text>
-                    <Text style={styles.appointmentItem}>{item.text}</Text>
+                <View key={i}>
+                    <TouchableOpacity onPress={() => {
+                        this.handleRemoveClick(item.uniqueDate);
+                        this.setModalVisible(true);
+                        console.log(item.uniqueDate)}}
+                        style={styles.showAppointments}>
+                        <Text style={styles.appointmentItem}>{item.time}</Text>
+                        <Text style={styles.appointmentItem}>{item.title}</Text>
+                        <Text style={styles.appointmentItem}>{item.text}</Text>
+                    </TouchableOpacity>
                 </View>
             );
 
@@ -64,13 +75,8 @@ export class Calendar extends React.Component {
         let data = this.state;
         data.dateToday = e.props.dateFull;
         this.setState({ dateToday: e.props.dateFull }, () => {
-            this.forceUpdate();
+            this.setStorage(data);
         });
-        try{
-            AsyncStorage.setItem("calendar", JSON.stringify(data));
-        } catch (error){
-            console.log(error);
-        }
     }
 
     async loadData(){
@@ -85,13 +91,17 @@ export class Calendar extends React.Component {
                 this.setState({
                     dateToday: new Date().toISOString().slice(0, 10),
                     children: [],
-                    dateValue: '',
-                    timeValue: '',
-                    titleValue: '',
-                    textValue: '',
                 });
             }
         } catch (error) {
+            console.log(error);
+        }
+    }
+
+    setStorage(data){
+        try{
+            AsyncStorage.setItem("calendar", JSON.stringify(data));
+        } catch (error){
             console.log(error);
         }
     }
@@ -110,10 +120,12 @@ export class Calendar extends React.Component {
             let newStateArray = this.state.children.slice();
 
             //Pushing new child to array.
-            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
+            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue, uniqueDate: new Date()});
 
             //Sorting array with earliest appointments first.
-            newStateArray.sort((a, b) => a.time > b.time);
+            newStateArray.sort((a, b) =>
+                parseInt((("" + a.time.slice(0,2)) + a.time.slice(3,6)), 0) -
+                parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0));
 
             //Creating new updated state.
             let data = {
@@ -122,14 +134,10 @@ export class Calendar extends React.Component {
             };
 
             //Setting state.
-            this.setState(data);
-
-            //Setting updated values to storage.
-            try{
-                AsyncStorage.setItem("calendar", JSON.stringify(data));
-            } catch (error){
-                console.log(error);
-            }
+            this.setState({children: newStateArray,dateToday: new Date().toISOString().slice(0, 10)}, function(){
+                //Setting updated values to storage.
+                this.setStorage(data);
+            });
 
         } else {
             //If there are invalid values.
@@ -138,11 +146,15 @@ export class Calendar extends React.Component {
     }
 
     validateFormDate(date){
-        return (date.length === 10)
+        let lastDate = new Date();
+        lastDate.setDate(lastDate.getDate() + 7);
+        return date.length === 10 && date >= new Date().toISOString().slice(0, 10) && date < lastDate.toISOString().slice(0, 10);
     }
 
     validateFormTime(time){
-        return (time.length === 5)
+        return (time.length === 5 && (parseInt(time.slice(3,6), 0) < 60)
+                && (parseInt(time.slice(3,6), 0) >= 0) && (parseInt(time.slice(0,2), 0) < 25)
+                && (parseInt(time.slice(0,2), 0) >= 0));
     }
 
     validateFormTitle(title){
@@ -150,14 +162,40 @@ export class Calendar extends React.Component {
     }
 
     render(){
-            return(
-                    <View style={styles.container}>
-                            <Week change={this.changeContent} />
-                            <View style={styles.bottomContainer}>
-                                <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
-                                {this.emptyScheduleCheck()}
-                            </View>
-                    </View>
+        return(
+            <View style={styles.container}>
+                <Week change={this.changeContent} />
+                <View style={styles.bottomContainer}>
+                    <AppointmentForm getValues={ arr => this.createAppointment(arr)} styles={this.styles} />
+                    {this.emptyScheduleCheck()}
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {alert("Form has been closed.")}}>
+                        <View style={styles.formContainer}>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible);
+                                    let data = this.state.children;
+                                    data = data.filter(a => String(a.uniqueDate) !== String(this.state.tempUnique));
+                                    this.setState({children: data}, function() {
+                                        this.setStorage(data);
+                                        this.forceUpdate();
+                                    });
+                                }}
+                                text={'Delete'}
+                                backgroundC={'red'}/>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible)
+                                }}
+                                text={'Cancel'}>
+                            </CalendarButton>
+                        </View>
+                    </Modal>
+                </View>
+            </View>
         );
     }
 }
@@ -179,6 +217,12 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
+        marginTop:4,
+        paddingBottom:7,
+        paddingTop:7,
+        marginBottom:4,
+        borderBottomWidth:.5,
+        borderBottomColor:'black',
     },
     appointmentItem: {
         flexBasis:'33%',
@@ -194,10 +238,11 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         height: '100%',
-    }
-
-
+    },
+    formContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        height: '100%',
+    },
 });
-
-
-

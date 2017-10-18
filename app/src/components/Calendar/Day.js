@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export class Day extends React.Component {
     render(){
@@ -11,6 +11,13 @@ export class Day extends React.Component {
         );
     }
 }
+
+Day.PropTypes = {
+    change: React.PropTypes.func.isRequired,
+    dayName: React.PropTypes.string.isRequired,
+    dayDate: React.PropTypes.string.isRequired,
+    dateFull: React.PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
     container: {

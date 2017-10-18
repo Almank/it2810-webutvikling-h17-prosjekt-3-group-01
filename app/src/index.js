@@ -4,6 +4,7 @@ import { TabNavigator } from 'react-navigation';
 import {Calendar} from "./containers/Calendar";
 import {Notes} from './containers/Notes';
 import {Todo} from './containers/Todo';
+import {Platform} from 'react-native';
 
 export class Index extends React.Component {
     render() {
@@ -32,7 +33,7 @@ export const Content = TabNavigator({
                 tabBarIcon: ({focused}) => (
                     <Image
                         source={focused ? require('./assets/calendar_focused.png') : require('./assets/calendar.png')}
-                        style={{width: 60, height: 60}}
+                        style={{width: 30, height: 30}}
                     />
                 ),
             }
@@ -42,7 +43,7 @@ export const Content = TabNavigator({
                 tabBarIcon: ({focused}) => (
                     <Image
                         source={focused ? require('./assets/list-symbol_focused.png') : require('./assets/list-symbol.png')}
-                        style={{width: 60, height: 60}}
+                        style={{width: 30, height: 30}}
                     />
                 ),
             }
@@ -52,12 +53,13 @@ export const Content = TabNavigator({
                 tabBarIcon: ({focused}) => (
                     <Image
                         source={focused ? require('./assets/pencil_focused.png') : require('./assets/pencil.png')}
-                        style={{width: 60, height: 60}}
+                        style={{width: 30, height: 30}}
                     />
                 ),
             }
         }
 }, {
+    tabBarPosition: 'bottom',
     initialRouteName: 'Calendar',
     swipeEnabled: false,
     tabBarOptions: {
@@ -66,11 +68,18 @@ export const Content = TabNavigator({
         inactiveBackgroundColor: '#464a4b',
         activeBackgroundColor: '#35393a',
         style: {
-            flexBasis: 90,
+            flexBasis: 55,
+            backgroundColor: '#464a4b',
         },
-        iconStyle: {
-            height: 45,
-            width: 45,
+        indicatorStyle: {
+            backgroundColor: 'orange',
         },
-    }
+        iconStyle: (Platform.OS === "android") ? {
+            height: 30,
+            width: 30,
+        } : {
+            height: 15,
+            width: 15,
+        },
+    },
 });
