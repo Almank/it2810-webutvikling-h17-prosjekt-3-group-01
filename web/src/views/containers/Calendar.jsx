@@ -2,8 +2,8 @@
  * Created by almank on 02.10.2017.
  */
 import React from 'react';
-import {WeekCal, AppointmentForm, ContentHeader} from '../Components';
 import '../../assets/styles/Calendar.css';
+import {WeekCal, AppointmentForm, ContentHeader} from '../Components';
 
 export class Calendar extends React.Component {
     constructor(props) {

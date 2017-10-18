@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class TodoCatelog extends React.Component {
 	constructor(props){
@@ -45,3 +46,9 @@ export class TodoCatelog extends React.Component {
 		)
 	}
 }
+
+TodoCatelog.PropTypes = {
+    selectedID: PropTypes.string,
+    onClick: PropTypes.func,
+    Todo: PropTypes.array,
+};

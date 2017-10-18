@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 export class TodoCatelogForm extends React.Component {
 	constructor(props){
@@ -36,6 +37,10 @@ export class TodoCatelogForm extends React.Component {
 			</div>
 		)
 	}
-
 }
 
+TodoCatelogForm.PropTypes = {
+    key: PropTypes.number,
+    value: PropTypes.number,
+    onClick: PropTypes.func,
+};

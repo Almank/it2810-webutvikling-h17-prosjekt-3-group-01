@@ -2,6 +2,7 @@
  * Created by martinlunde on 27.09.2017.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 //The NoteContent class renders the content on the right side of the note list.
 export class NoteContent extends React.Component {
@@ -46,3 +47,11 @@ export class NoteContent extends React.Component {
         );
     }
 }
+
+NoteContent.PropTypes = {
+    data: PropTypes.object,
+    onChange: PropTypes.func,
+    update: PropTypes.bool,
+    key: PropTypes.number,
+    id: PropTypes.number,
+};

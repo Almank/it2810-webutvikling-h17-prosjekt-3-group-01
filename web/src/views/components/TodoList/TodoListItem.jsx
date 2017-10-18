@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class ToDoListItem extends React.Component{
 	constructor(props){
@@ -28,3 +29,9 @@ export class ToDoListItem extends React.Component{
 		)
 	}
 }
+
+ToDoListItem.PropTypes = {
+    key: PropTypes.number,
+    value: PropTypes.number,
+    onClick: PropTypes.func,
+};

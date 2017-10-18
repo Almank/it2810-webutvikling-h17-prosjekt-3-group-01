@@ -5,7 +5,6 @@ import React from 'react';
 import '../assets/styles/SideBar.css';
 import {Button} from "./Components";
 
-
 export class SideBar extends React.Component {
     render(){
         return (

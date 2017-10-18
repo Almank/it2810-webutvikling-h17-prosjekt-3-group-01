@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {ToDoListItem} from './TodoListItem';
 
 export class TodoList extends React.Component{
@@ -54,3 +55,10 @@ export class TodoList extends React.Component{
 		)
 	}
 }
+
+TodoList.PropTypes = {
+    items: PropTypes.array,
+    filter: PropTypes.array,
+    onDelete: PropTypes.func,
+    onClick: PropTypes.func,
+};
