@@ -35,7 +35,7 @@ The project is split into to main folders: `app` and `web`, which respectively r
 #### App
 The file structure for the app is mainly the same as the website.
 
-### Setup
+### Setup <a name="Setup"></a>
 #### How to install & run the application
 
 * Website
