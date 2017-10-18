@@ -11,16 +11,14 @@ export class Calendar extends React.Component {
         this.state = {
             dateToday: new Date().toISOString().slice(0, 10),
             modalVisible: false,
-            children: [
-                {date: '2017-10-18', time: '14:15', title: 'Hello World', text: 'This is text', uniqueDate: new Date()},
-            ],
+            children: [],
         };
 
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
         this.setStorage = this.setStorage.bind(this);
-        this.loadData();
+        //this.loadData();
     }
 
     setModalVisible(visible) {
@@ -49,6 +47,33 @@ export class Calendar extends React.Component {
                         <Text style={styles.appointmentItem}>{item.title}</Text>
                         <Text style={styles.appointmentItem}>{item.text}</Text>
                     </TouchableOpacity>
+
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {alert("Form has been closed.")}}>
+                        <View style={styles.formContainer}>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible);
+                                    let data = this.state.children;
+                                    data = data.filter(a => String(a.uniqueDate) !== String(item.uniqueDate));
+                                    this.setState({children: data}, function() {
+                                        this.setStorage(data);
+                                        this.forceUpdate();
+                                    });
+                                }}
+                                text={'Delete'}
+                                backgroundC={'red'}/>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible)
+                                }}
+                                text={'Cancel'}>
+                            </CalendarButton>
+                        </View>
+                    </Modal>
                 </View>
             );
 
@@ -129,10 +154,12 @@ export class Calendar extends React.Component {
             };
 
             //Setting state.
-            this.setState(data);
+            this.setState({children: newStateArray,dateToday: new Date().toISOString().slice(0, 10)}, function(){
+                //Setting updated values to storage.
+                this.setStorage(data);
+            });
 
-            //Setting updated values to storage.
-            this.setStorage(data);
+
 
         } else {
             //If there are invalid values.
@@ -163,31 +190,6 @@ export class Calendar extends React.Component {
                 <View style={styles.bottomContainer}>
                     <AppointmentForm getValues={ arr => this.createAppointment(arr)} styles={this.styles} />
                     {this.emptyScheduleCheck()}
-                    <Modal
-                        animationType="slide"
-                        transparent={false}
-                        visible={this.state.modalVisible}
-                        onRequestClose={() => {alert("Form has been closed.")}}>
-                        <View style={styles.formContainer}>
-                            <CalendarButton
-                                onpress={() => {
-                                    this.setModalVisible(!this.state.modalVisible);
-                                    let data = this.state.children;
-                                    data = data.filter(a => String(a.uniqueDate) !== String(item.uniqueDate));
-                                    this.setState({children: data}, function() {
-                                        this.setStorage(data);
-                                    });
-                                }}
-                                text={'Delete'}
-                                backgroundC={'red'}/>
-                            <CalendarButton
-                                onpress={() => {
-                                    this.setModalVisible(!this.state.modalVisible)
-                                }}
-                                text={'Cancel'}>
-                            </CalendarButton>
-                        </View>
-                    </Modal>
                 </View>
             </View>
         );
@@ -211,10 +213,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop:2,
-        paddingBottom:8,
-        paddingTop:8,
-        marginBottom:2,
+        marginTop:4,
+        paddingBottom:7,
+        paddingTop:7,
+        marginBottom:4,
         borderBottomWidth:.5,
         borderBottomColor:'black',
     },
