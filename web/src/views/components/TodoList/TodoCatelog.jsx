@@ -12,8 +12,8 @@ export class TodoCatelog extends React.Component {
 		this.props.onClick(e.currentTarget.dataset.id);
 	}
 
-	checkActive(i){
-		if(i === this.props.selectedID){
+	checkActive(catelog){
+		if(String(catelog) === this.props.selectedID){
 			return "list-group-item active"
 		} else {
             return "list-group-item"
@@ -21,17 +21,13 @@ export class TodoCatelog extends React.Component {
 	}
 
 	render(){
-		let selectedID = this.props.selectedID;
 		let allitems = this.props.Todos;
 		let items = [];
 
 		for(let i = 0; i < allitems.length; i++){
             let _class = "";
-            if(i === selectedID){
-                _class = "list-group-item active";
-            } else {
-                _class =  "list-group-item ";
-            }
+            _class = this.checkActive(i);
+
 			items.push(
 				<button key={i} data-id={i} className={_class} onClick={this.changeTodo}>
 					<span className="badge">

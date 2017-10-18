@@ -107,7 +107,11 @@
 }
 
 .delete_button{
-    background-color: darkred;
+    background-color: #a41e1e;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    margin: 0 20px 10px 20px;
 }
 
 .addbutton {
