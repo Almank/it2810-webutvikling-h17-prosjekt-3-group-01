@@ -255,9 +255,4 @@ const styles = StyleSheet.create({
     removeButton: {
         backgroundColor:'red',
     }
-
-
 });
-
-
-

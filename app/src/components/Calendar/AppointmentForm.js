@@ -98,6 +98,10 @@ export class AppointmentForm extends React.Component {
     }
 }
 
+AppointmentForm.PropTypes = {
+    getValues: React.PropTypes.array.isRequired,
+};
+
 const styles = StyleSheet.create({
     addAppButton: {
         marginTop: 20,
@@ -146,5 +150,4 @@ const styles = StyleSheet.create({
         fontSize: 25,
         textAlign: 'center',
     }
-
 });
