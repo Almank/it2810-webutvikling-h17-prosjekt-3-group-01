@@ -61,3 +61,6 @@ package-lock.json
 .idea/
 
 #snapshotfolder
+#ignore hastemap in app
+app/react-native-packager-cache*
+app/jest_0/
