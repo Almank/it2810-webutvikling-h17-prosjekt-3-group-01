@@ -114,6 +114,12 @@
     margin: 0 20px 10px 20px;
 }
 
+.delete_button:hover,
+.delete_button:focus,
+.delete_button.focus{
+    background-color: #773b3b;
+}
+
 .addbutton {
     background-color: #FF9505;
     color:white;
