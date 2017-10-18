@@ -23,8 +23,8 @@ export class TodoItemLink extends React.Component {
         this.props.handleTaskChange(title, content);
     }
 
-    onDelete(){
-        this.props.onClick(this.props.title);
+    onDelete(title, category){
+        this.props.onClick(title, category);
     }
 
     render(){

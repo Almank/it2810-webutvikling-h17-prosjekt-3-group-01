@@ -15,6 +15,7 @@ export class TodoItems extends React.Component {
 
         this.addTask = this.addTask.bind(this);
         this.changeTextHandler = this.changeTextHandler.bind(this);
+        this.deleteTask = this.deleteTask.bind(this);
     }
 
     componentDidMount() {
@@ -34,15 +35,29 @@ export class TodoItems extends React.Component {
         let unprocessedData = this.state.todos;
         let data = [];
         for(let key in unprocessedData){
-            console.log(unprocessedData);
             data.push(unprocessedData[key])
         }
         return data;
     }
 
+    deleteTask(item){
+        this.props.navigation.state.params.onPress(item, this.props.navigation.state.params.title);
+        let data = this.state.todos;
+        delete data[item];
+        this.setState(data);
+    }
+
     renderCategoryItem(item){
         return(
-            <Text>{item}</Text>
+            <View>
+                <View style={styles.listItemCont}>
+                    <Text style={styles.listItem}>
+                        {item}
+                    </Text>
+                    <Button color="#FE642E" title="X" onPress={() => this.deleteTask(item)} />
+                </View>
+                <View style={styles.hr} />
+            </View>
         )
     }
 

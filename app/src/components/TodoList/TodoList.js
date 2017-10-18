@@ -16,6 +16,7 @@ export class TodoList extends Component {
         this.changeTextHandler = this.changeTextHandler.bind(this);
         this.addTask = this.addTask.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
+        this.addCategory = this.addCategory.bind(this);
         this.loadData();
     }
 
@@ -71,8 +72,8 @@ export class TodoList extends Component {
         this.updateAsyncStorage();
     };
 
-    deleteTask(title){
-        let data = this.state.categories;
+    deleteTask(title, category){
+        let data = this.state.categories[category].content;
         delete data[title];
         this.setState(data);
         this.updateAsyncStorage();
@@ -105,7 +106,7 @@ export class TodoList extends Component {
                 index={index}
                 key={index}
                 navigation={this.props.navigation}
-                onClick={this.handleRemoveClick}
+                onClick={this.deleteTask}
                 handleTaskChange={this.addTask}
             />
         )
