@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 
 export class NoteLink extends React.Component {
@@ -41,8 +42,17 @@ export class NoteLink extends React.Component {
             </TouchableHighlight>
         )
     }
-
 }
+
+NoteLink.PropTypes = {
+    navigation: PropTypes.navigation,
+    title: PropTypes.string,
+    content: PropTypes.string,
+    index: PropTypes.number,
+    key: PropTypes.number.isRequired,
+    onContentChange: PropTypes.func,
+    onClick: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
     NoteLink: {
