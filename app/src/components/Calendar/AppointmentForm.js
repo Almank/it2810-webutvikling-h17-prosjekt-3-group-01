@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
-        height:'100%',
+        height:'85%',
     },
     inputField: {
         padding: 5,
