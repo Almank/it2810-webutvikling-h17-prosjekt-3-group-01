@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity, Modal, TextInput } from 'react-native';
 import {Week} from '../components/Calendar/Week';
 import {AppointmentForm} from "../components/Calendar/AppointmentForm";
 
@@ -9,15 +9,18 @@ export class Calendar extends React.Component {
 
         this.state = {
             dateToday: new Date().toISOString().slice(0, 10),
+            modalVisible: false,
             children: [
-                {date: '2017-10-15', time: '14:15', title: 'Hello World', text: 'This is text'},
+                {date: '2017-10-18', time: '14:15', title: 'Hello World', text: 'This is text', uniqueDate: new Date()},
             ],
         };
 
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
+        this.setStorage = this.setStorage.bind(this);
         this.loadData();
+
     }
 
     setModalVisible(visible) {
@@ -25,7 +28,6 @@ export class Calendar extends React.Component {
     }
 
     emptyScheduleCheck(){
-
         //Copy of the state children array.
         let myData =[].concat(this.state.children)
 
@@ -39,11 +41,10 @@ export class Calendar extends React.Component {
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
-                <View>
+                <View key={i}>
                     <TouchableOpacity onPress={() => {
                         this.setModalVisible(true)}}
-                        style={styles.showAppointments}
-                        key={i}>
+                        style={styles.showAppointments}>
                         <Text style={styles.appointmentItem}>{item.time}</Text>
                         <Text style={styles.appointmentItem}>{item.title}</Text>
                         <Text style={styles.appointmentItem}>{item.text}</Text>
@@ -54,38 +55,15 @@ export class Calendar extends React.Component {
                         visible={this.state.modalVisible}
                         onRequestClose={() => {alert("Form has been closed.")}}>
                         <View style={styles.formContainer}>
-                            <View>
-                                <Text style={styles.title}>Create new appointment</Text>
-                            </View>
-                            <Text htmlFor="date" style={styles.text}>Date - YYYY-MM-DD</Text>
-                            <TextInput onChangeText={(dateValue) => this.setState({dateValue})}
-                                       value={this.state.dateValue}
-                                       placeholder={'YYYY-MM-DD'}
-                                       style={[styles.inputField, styles.shadow]}/>
-                            <Text htmlFor="time" style={styles.text}>Time - HH:MM</Text>
-                            <TextInput onChangeText={(timeValue) => this.setState({timeValue})}
-                                       value={this.state.timeValue}
-                                       placeholder={'HH:MM'}
-                                       style={[styles.inputField, styles.shadow]}/>
-                            <Text htmlFor="title" style={styles.text}>Title</Text>
-                            <TextInput onChangeText={(titleValue) => this.setState({titleValue})}
-                                       value={this.state.titleValue}
-                                       style={[styles.inputField, styles.shadow]}/>
-                            <Text htmlFor="what" style={styles.text}>What</Text>
-                            <TextInput onChangeText={(textValue) => this.setState({textValue})}
-                                       value={this.state.textValue}
-                                       style={[styles.inputField, styles.shadow]}/>
                             <TouchableOpacity onPress={() => {
                                 this.setModalVisible(!this.state.modalVisible);
-                                //To avoid getting stuck by having alert behind modal.
-                                setTimeout(() => {
-                                    this.submitInput();
-                                }, 100);
-
+                                let data = this.state.children;
+                                data = data.filter(a => String(a.uniqueDate) !== String(item.uniqueDate));
+                                this.setState({children: data});
+                                this.setStorage(data);
                             }}
-                                              title='Submit'
-                                              style={[styles.addAppButton, styles.shadow]}>
-                                <Text style={styles.textButton}>Submit</Text>
+                            style={[styles.addAppButton, styles.shadow]}>
+                                <Text style={styles.textButton}>Delete</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {
                                 this.setModalVisible(!this.state.modalVisible)
@@ -118,11 +96,7 @@ export class Calendar extends React.Component {
         this.setState({ dateToday: e.props.dateFull }, () => {
             this.forceUpdate();
         });
-        try{
-            AsyncStorage.setItem("calendar", JSON.stringify(data));
-        } catch (error){
-            console.log(error);
-        }
+        this.setStorage(data);
     }
 
     async loadData(){
@@ -137,13 +111,17 @@ export class Calendar extends React.Component {
                 this.setState({
                     dateToday: new Date().toISOString().slice(0, 10),
                     children: [],
-                    dateValue: '',
-                    timeValue: '',
-                    titleValue: '',
-                    textValue: '',
                 });
             }
         } catch (error) {
+            console.log(error);
+        }
+    }
+
+    setStorage(data){
+        try{
+            AsyncStorage.setItem("calendar", JSON.stringify(data));
+        } catch (error){
             console.log(error);
         }
     }
@@ -162,7 +140,7 @@ export class Calendar extends React.Component {
             let newStateArray = this.state.children.slice();
 
             //Pushing new child to array.
-            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
+            newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue, uniqueDate: new Date()});
 
             //Sorting array with earliest appointments first.
             newStateArray.sort((a, b) =>
@@ -179,11 +157,7 @@ export class Calendar extends React.Component {
             this.setState(data);
 
             //Setting updated values to storage.
-            try{
-                AsyncStorage.setItem("calendar", JSON.stringify(data));
-            } catch (error){
-                console.log(error);
-            }
+            this.setStorage(data);
 
         } else {
             //If there are invalid values.
@@ -254,7 +228,19 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         height: '100%',
-    }
+    },
+    addAppButton: {
+        marginTop: 20,
+        marginLeft:'15%',
+        marginRight:'15%',
+        flexBasis: 40,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FF9505',
+        borderWidth: 1,
+        borderColor: 'rgba(155,155,155,0.5)',
+    },
 
 
 });
