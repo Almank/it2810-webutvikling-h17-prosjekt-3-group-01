@@ -2,6 +2,7 @@
  * Created by almank on 08.10.2017.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class DayEle extends React.Component {
 
@@ -14,3 +15,10 @@ export class DayEle extends React.Component {
         )
     }
 }
+
+DayEle.PropTypes = {
+    change: PropTypes.func.isRequired,
+    dateFull: PropTypes.string.isRequired,
+    dateName: PropTypes.string.isRequired,
+    dayDate: PropTypes.string.isRequired,
+};

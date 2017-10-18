@@ -2,6 +2,7 @@
  * Created by almank on 14.10.2017.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class AppointmentForm extends React.Component {
 
@@ -66,3 +67,8 @@ export class AppointmentForm extends React.Component {
         );
     }
 }
+
+AppointmentForm.PropTypes = {
+    closeForm: PropTypes.func.isRequired,
+    submitForm: PropTypes.func.isRequired,
+};
