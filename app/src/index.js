@@ -4,6 +4,7 @@ import { TabNavigator } from 'react-navigation';
 import {Calendar} from "./containers/Calendar";
 import {Notes} from './containers/Notes';
 import {Todo} from './containers/Todo';
+import {Platform} from 'react-native';
 
 export class Index extends React.Component {
     render() {
@@ -58,6 +59,7 @@ export const Content = TabNavigator({
             }
         }
 }, {
+    tabBarPosition: 'bottom',
     initialRouteName: 'Calendar',
     swipeEnabled: false,
     tabBarOptions: {
@@ -67,10 +69,17 @@ export const Content = TabNavigator({
         activeBackgroundColor: '#35393a',
         style: {
             flexBasis: 55,
+            backgroundColor: '#464a4b',
         },
-        iconStyle: {
+        indicatorStyle: {
+            backgroundColor: 'orange',
+        },
+        iconStyle: (Platform.OS === "android") ? {
+            height: 30,
+            width: 30,
+        } : {
             height: 15,
             width: 15,
         },
-    }
+    },
 });
