@@ -6,15 +6,10 @@ import PropTypes from 'prop-types';
 import {DayEle} from '../calendar/DayEle';
 
 export class WeekCal extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            dateVal: new Date(),
-        };
-    }
 
     getDateFull(i){
-        let temp = new Date();
+        //Setting time, with Norwegian timezone.
+        let temp = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
         temp.setDate(temp.getDate() + i);
         return temp.toISOString().slice(0, 10);
     }
