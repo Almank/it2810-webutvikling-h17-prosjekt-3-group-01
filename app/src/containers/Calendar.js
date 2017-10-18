@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, AsyncStorage, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity } from 'react-native';
 import {Week} from '../components/Calendar/Week';
 import {AppointmentForm} from "../components/Calendar/AppointmentForm";
 
@@ -31,19 +31,21 @@ export class Calendar extends React.Component {
         //Copy of the state children array.
         let myData =[].concat(this.state.children)
 
-        //Sorting elements based on time, earliest first.
-            .sort((a, b) => a.time > b.time)
-
-            //Filtering out appointments on current day.
+        //Filtering out appointments on current day.
             .filter(child => child.date === this.state.dateToday)
+
+        //Sorting elements based on time, earliest first.
+            .sort((a, b) =>
+                parseInt((("" + a.time.slice(0,2)) + a.time.slice(3,6)), 0) -
+                parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0))
 
             //Mapping items from array giving the html the correct values.
             .map((item,i) =>
-                <View style={styles.showAppointments} key={i}>
+                <TouchableOpacity style={styles.showAppointments} key={i}>
                     <Text style={styles.appointmentItem}>{item.time}</Text>
                     <Text style={styles.appointmentItem}>{item.title}</Text>
                     <Text style={styles.appointmentItem}>{item.text}</Text>
-                </View>
+                </TouchableOpacity>
             );
 
         //If there are no plans that day.
@@ -113,7 +115,9 @@ export class Calendar extends React.Component {
             newStateArray.push({date: dateValue, time: timeValue, title: titleValue, text: textValue});
 
             //Sorting array with earliest appointments first.
-            newStateArray.sort((a, b) => a.time > b.time);
+            newStateArray.sort((a, b) =>
+                parseInt((("" + a.time.slice(0,2)) + a.time.slice(3,6)), 0) -
+                parseInt(("" + b.time.slice(0,2)) + b.time.slice(3,6), 0));
 
             //Creating new updated state.
             let data = {
@@ -181,6 +185,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
+        marginTop:2,
+        paddingBottom:8,
+        paddingTop:8,
+        marginBottom:2,
     },
     appointmentItem: {
         flexBasis:'33%',
