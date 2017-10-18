@@ -219,6 +219,8 @@
 
 /* Mobile - portrait */
 @media only screen and (max-width : 680px) {
+
+
     .dayBox {
         flex-basis: 90px;
         height: 90px;
@@ -234,7 +236,7 @@
     }
 
     .calendarContent .title {
-        font-size: 22px;
+        font-size: 36px;
         padding: 0px 10px;
         margin-bottom: 0;
     }
@@ -313,6 +315,6 @@
     }
 
     .weekBox {
-        padding-top: 10px;
+        padding-top: 35px;
     }
 }
