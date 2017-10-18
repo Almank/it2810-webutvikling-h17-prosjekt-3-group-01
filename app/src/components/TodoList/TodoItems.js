@@ -1,47 +1,23 @@
-import React, { Component } from "react";
-import {StyleSheet, Text, View, FlatList, AsyncStorage, Button, TextInput, Keyboard, Platform, TouchableHighlight} from "react-native";
-import {TodoItemLink} from "./TodoItemLink";
+import React from 'react';
+import {Text, View, FlatList, TextInput, StyleSheet, Platform, Keyboard} from 'react-native';
+import {Button} from 'react-native-elements';
 
 const isAndroid = Platform.OS === "android";
 const viewPadding = 10;
 
-export class TodoList extends Component {
+export class TodoItems extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            categories: {},
-            text: ""
-
+            todos: this.props.navigation.state.params.content,
+            text: "",
+            viewMargin: 0,
         };
-        this.changeTextHandler = this.changeTextHandler.bind(this);
+
         this.addTask = this.addTask.bind(this);
+        this.changeTextHandler = this.changeTextHandler.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
-        this.addCategory = this.addCategory.bind(this);
         this.deleteCategory = this.deleteCategory.bind(this);
-        this.loadData();
-    }
-
-    //Inital async load of data that has to be done outside the constructor
-    async loadData(){
-        let categories;
-        try {
-            categories = await AsyncStorage.getItem('categories');
-            if (categories !== null){
-                categories = JSON.parse(categories);
-                this.setState({categories: categories['categories']});
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    updateAsyncStorage(){
-        let data = this.state;
-        try{
-            AsyncStorage.setItem("categories", JSON.stringify(data));
-        } catch (error){
-            console.log(error);
-        }
     }
 
     componentDidMount() {
@@ -61,35 +37,9 @@ export class TodoList extends Component {
         this.keyboardListener2.remove();
     }
 
-    changeTextHandler(text){
-        this.setState({ text: text });
-    };
-
-    addCategory(){
-        let notEmpty = this.state.text.trim().length > 0;
-        if (notEmpty) {
-            let tasks = this.state.categories;
-            tasks[this.state.text] = {title: this.state.text, content: {}};
-            this.setState({
-                categories: tasks,
-                text: ""
-            });
-        }
-        this.updateAsyncStorage();
-    };
-
-    deleteTask(title, category){
-        let data = this.state.categories[category].content;
-        delete data[title];
-        this.setState(data);
-        this.updateAsyncStorage();
-    };
-
-
-
     //Processes data from state to be used in FlatList
     renderData(){
-        let unprocessedData = this.state.categories;
+        let unprocessedData = this.state.todos;
         let data = [];
         for(let key in unprocessedData){
             data.push(unprocessedData[key])
@@ -97,53 +47,65 @@ export class TodoList extends Component {
         return data;
     }
 
-    addTask(title, content){
-        let data = this.state.categories;
-        data[title] = {
-            title: title,
-            content: content,
-        };
-        this.setState({categories: data});
-        this.updateAsyncStorage();
+    deleteTask(item){
+        this.props.navigation.state.params.onPress(item, this.props.navigation.state.params.title);
+        let data = this.state.todos;
+        delete data[item];
+        this.setState(data);
     }
 
-    deleteCategory(title){
-        let data = this.state.categories;
-        delete data[title];
-        this.setState({categories: data});
-        this.updateAsyncStorage();
+    deleteCategory(){
+        let properties = this.props.navigation.state.params;
+        properties.deleteCategory(properties.title);
+        this.props.navigation.goBack();
     }
 
-    renderCategoryItem(item, index){
-        return(<TodoItemLink
-                title={item.title}
-                content={item.content}
-                index={index}
-                key={index}
-                navigation={this.props.navigation}
-                onClick={this.deleteTask}
-                handleTaskChange={this.addTask}
-                handleCategoryDelete={this.deleteCategory}
-            />
+    renderCategoryItem(item){
+        return(
+            <View>
+                <View style={styles.listItemCont}>
+                    <Text style={styles.listItem}>
+                        {item}
+                    </Text>
+                    <Button title="X" onPress={() => this.deleteTask(item)} />
+                </View>
+                <View style={styles.hr} />
+            </View>
         )
     }
 
+    addTask(){
+        let todo = this.state.text;
+        let todos = this.state.todos;
+        todos[todo] = todo;
+        this.setState({todos: todos});
+
+        let title = this.props.navigation.state.params.title;
+        let content = this.state.todos;
+        this.props.navigation.state.params.handleTaskChange(title, content);
+    }
+
+    changeTextHandler(text){
+        this.setState({ text: text });
+    };
+
     render(){
+        let properties = this.props.navigation.state.params;
         return (
             <View style={[styles.container, { paddingBottom: this.state.viewMargin }]}>
-                 <Text style={styles.title}>    TO-DO Categories    </Text>
+                <Text style={styles.title}>{properties.title}</Text>
                 <FlatList
                     style={styles.list}
                     data={this.renderData()}
                     renderItem={({ item }) => this.renderCategoryItem(item)}
                     keyExtractor={(key, index) => index}
 
-                    />
+                />
                 <View style={styles.inputview}>
                     <TextInput
                         style={styles.textInput}
                         onChangeText={this.changeTextHandler}
-                        onSubmitEditing={this.addCategory}
+                        onSubmitEditing={this.addTask}
                         value={this.state.text}
                         placeholder="Add new task"
                         returnKeyType="done"
@@ -151,11 +113,14 @@ export class TodoList extends Component {
                     />
                     <Button
                         title="Add"
-                        onPress={this.addCategory}
+                        onPress={this.addTask}
                         color="#FF9505"
                         backgroundColor="red"
                     />
                 </View>
+                <Button title="Delete Category"
+                        onPress={this.deleteCategory}
+                />
             </View>
         );
     }
