@@ -25,6 +25,12 @@ export class CalendarButton extends React.Component {
     }
 }
 
+CalendarButton.PropTypes = {
+    onpress: React.PropTypes.func.isRequired,
+    text: React.PropTypes.string.isRequired,
+    backgroundC: React.PropTypes.string,
+};
+
 const styles = StyleSheet.create({
     addAppButton: {
         marginTop: 20,

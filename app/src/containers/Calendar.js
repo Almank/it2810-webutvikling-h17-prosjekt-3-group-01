@@ -49,28 +49,6 @@ export class Calendar extends React.Component {
                         <Text style={styles.appointmentItem}>{item.title}</Text>
                         <Text style={styles.appointmentItem}>{item.text}</Text>
                     </TouchableOpacity>
-                    <Modal
-                        animationType="slide"
-                        transparent={false}
-                        visible={this.state.modalVisible}
-                        onRequestClose={() => {alert("Form has been closed.")}}>
-                        <View style={styles.formContainer}>
-                            <CalendarButton onpress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                                let data = this.state.children;
-                                data = data.filter(a => String(a.uniqueDate) !== String(item.uniqueDate));
-                                this.setState({children: data}, function() {
-                                    this.setStorage(data);
-                                });
-                            }} text={'Delete'}
-                                backgroundC={'red'}/>
-                            <CalendarButton onpress={() => {
-                                this.setModalVisible(!this.state.modalVisible)
-                            }}
-                                text={'Cancel'}>
-                            </CalendarButton>
-                        </View>
-                    </Modal>
                 </View>
             );
 
@@ -185,6 +163,31 @@ export class Calendar extends React.Component {
                 <View style={styles.bottomContainer}>
                     <AppointmentForm getValues={ arr => this.createAppointment(arr)} styles={this.styles} />
                     {this.emptyScheduleCheck()}
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {alert("Form has been closed.")}}>
+                        <View style={styles.formContainer}>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible);
+                                    let data = this.state.children;
+                                    data = data.filter(a => String(a.uniqueDate) !== String(item.uniqueDate));
+                                    this.setState({children: data}, function() {
+                                        this.setStorage(data);
+                                    });
+                                }}
+                                text={'Delete'}
+                                backgroundC={'red'}/>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible)
+                                }}
+                                text={'Cancel'}>
+                            </CalendarButton>
+                        </View>
+                    </Modal>
                 </View>
             </View>
         );
@@ -212,6 +215,8 @@ const styles = StyleSheet.create({
         paddingBottom:8,
         paddingTop:8,
         marginBottom:2,
+        borderBottomWidth:.5,
+        borderBottomColor:'black',
     },
     appointmentItem: {
         flexBasis:'33%',

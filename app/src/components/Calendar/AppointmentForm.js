@@ -70,16 +70,18 @@ export class AppointmentForm extends React.Component {
                         <TextInput onChangeText={(textValue) => this.setState({textValue})}
                                    value={this.state.textValue}
                                    style={[styles.inputField, styles.shadow]}/>
-                        <CalendarButton onpress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
-                            //To avoid getting stuck by having alert behind modal.
-                            setTimeout(() => {
-                                this.submitInput();
-                            }, 100);
+                        <CalendarButton
+                            onpress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                                //To avoid getting stuck by having alert behind modal.
+                                setTimeout(() => {
+                                    this.submitInput();
+                                }, 100);
                             }}
                             text={'Submit'}/>
-                        <CalendarButton onpress={() => {
-                            this.setModalVisible(!this.state.modalVisible)
+                        <CalendarButton
+                            onpress={() => {
+                                this.setModalVisible(!this.state.modalVisible)
                             }}
                             text={'Cancel'}/>
                     </View>
