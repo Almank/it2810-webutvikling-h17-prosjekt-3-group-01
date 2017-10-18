@@ -18,7 +18,7 @@ export class Calendar extends React.Component {
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
         this.setStorage = this.setStorage.bind(this);
-        //this.loadData();
+        this.loadData();
     }
 
     setModalVisible(visible) {
