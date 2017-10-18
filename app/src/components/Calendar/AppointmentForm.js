@@ -19,14 +19,13 @@ export class AppointmentForm extends React.Component {
     submitInput() {
         if (this.state.dateValue !== null && this.state.timeValue !== null && this.state.titleValue !== null){
             this.props.getValues([this.state.dateValue, this.state.timeValue, this.state.titleValue, this.state.textValue]);
-        } else {
-            this.setState({
-                dateValue: new Date().toISOString().slice(0, 10),
-                timeValue: null,
-                titleValue: null,
-                textValue: null,
-            })
         }
+        this.setState({
+            dateValue: new Date().toISOString().slice(0, 10),
+            timeValue: null,
+            titleValue: null,
+            textValue: null,
+        });
     }
 
     //Hide/show form.
