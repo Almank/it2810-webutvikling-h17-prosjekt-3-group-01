@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoApp Should render correctly 1`] = `
+<div
+  class="todo-wrapper"
+>
+  <h1
+    class="title"
+  >
+    To-do list
+  </h1>
+  <div
+    class="bigrow"
+  >
+    <div
+      class="col1"
+    >
+      <h3>
+        To-do lists:
+      </h3>
+      <div
+        class="row"
+      >
+        <form>
+          <div
+            class="form-group "
+          >
+            <input
+              class="todoField"
+              placeholder="Add list"
+              type="text"
+              value=""
+            />
+            <input
+              class="addbutton"
+              type="submit"
+              value="Add"
+            />
+          </div>
+        </form>
+      </div>
+      <div
+        class="list-group"
+      >
+        <a
+          class="list-group-item "
+          data-id="0"
+          href="#"
+        >
+          <span
+            class="badge"
+          >
+            4
+          </span>
+          Primary
+        </a>
+        <a
+          class="list-group-item "
+          data-id="1"
+          href="#"
+        >
+          <span
+            class="badge"
+          >
+            3
+          </span>
+          Secondary
+        </a>
+      </div>
+    </div>
+    <div
+      class="col2"
+    >
+      <h3>
+        What do you want to-do?
+      </h3>
+      <div
+        class="row"
+      >
+        <form>
+          <div
+            class="todoform"
+          >
+            <input
+              class="todoField"
+              placeholder="Add to-do"
+              type="text"
+              value=""
+            />
+            <input
+              class="addbutton"
+              type="submit"
+              value="Add"
+            />
+          </div>
+        </form>
+      </div>
+      <ul>
+        <li
+          data-id="0"
+          id="todoitem"
+        >
+          <button
+            aria-hidden="true"
+            class="close pull-right"
+            type="button"
+          >
+            x
+          </button>
+          <input
+            id="check"
+            type="checkbox"
+          />
+          <span
+            style="text-decoration:none"
+          >
+            Todo item #1
+          </span>
+        </li>
+        <li
+          data-id="1"
+          id="todoitem"
+        >
+          <button
+            aria-hidden="true"
+            class="close pull-right"
+            type="button"
+          >
+            x
+          </button>
+          <input
+            checked=""
+            id="check"
+            type="checkbox"
+          />
+          <span
+            style="text-decoration:line-through"
+          >
+            Todo item #2
+          </span>
+        </li>
+        <li
+          data-id="2"
+          id="todoitem"
+        >
+          <button
+            aria-hidden="true"
+            class="close pull-right"
+            type="button"
+          >
+            x
+          </button>
+          <input
+            checked=""
+            id="check"
+            type="checkbox"
+          />
+          <span
+            style="text-decoration:line-through"
+          >
+            aaaa
+          </span>
+        </li>
+        <li
+          data-id="3"
+          id="todoitem"
+        >
+          <button
+            aria-hidden="true"
+            class="close pull-right"
+            type="button"
+          >
+            x
+          </button>
+          <input
+            checked=""
+            id="check"
+            type="checkbox"
+          />
+          <span
+            style="text-decoration:line-through"
+          >
+            dddd
+          </span>
+        </li>
+      </ul>
+      <div
+        class="row"
+      >
+        <div
+          class="col-filter"
+        >
+          <ul
+            class="todo-filter"
+          >
+            <li>
+              <a
+                class="button button"
+                href="#"
+                id="SHOW_ALL"
+              >
+                All
+              </a>
+            </li>
+            <li>
+              <a
+                class="button "
+                id="false"
+              >
+                Incomplete
+              </a>
+            </li>
+            <li>
+              <a
+                class="button "
+                id="true"
+              >
+                Complete
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="col-search"
+        >
+          <div
+            class="input-group"
+          >
+            <span
+              class="input-group-btn"
+            >
+              <button
+                class="button"
+                type="button"
+              >
+                <span
+                  class="glyphicon glyphicon-search"
+                />
+              </button>
+            </span>
+            <input
+              class="todoField"
+              placeholder="Search"
+              type="search"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Notes /> <NoteList /> should render correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#696969",
+      "display": "flex",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "lightgrey",
+        "borderBottomWidth": 2,
+        "borderColor": "grey",
+        "display": "flex",
+        "justifyContent": "flex-end",
+      }
+    }
+  >
+    <FormLabel
+      labelStyle={
+        Object {
+          "fontSize": 20,
+        }
+      }
+    >
+      Title
+    </FormLabel>
+    <TextInput
+      onChangeText={[Function]}
+      style={
+        Object {
+          "backgroundColor": "white",
+          "marginLeft": 15,
+          "marginRight": 15,
+        }
+      }
+    />
+    <Button
+      backgroundColor="green"
+      color="white"
+      fontSize={20}
+      fontWeight="bold"
+      onPress={[Function]}
+      raised={true}
+      style={
+        Object {
+          "marginBottom": 10,
+          "marginTop": 10,
+        }
+      }
+      title="Create New Note"
+      underlayColor="lightgreen"
+    />
+  </View>
+  <FlatList
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    key="flatList"
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`<Notes /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "marginTop": -65,
+    }
+  }
+>
+  <NavigationContainer />
+</View>
+`;

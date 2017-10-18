@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class TodoFilter extends React.Component {
 	constructor(props){
@@ -30,3 +31,9 @@ export class TodoFilter extends React.Component {
 		)
 	}
 }
+
+TodoFilter.propTypes = {
+    onFilter: PropTypes.func,
+    onSearch: PropTypes.func,
+    filter: PropTypes.array,
+};

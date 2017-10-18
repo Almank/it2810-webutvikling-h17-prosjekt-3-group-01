@@ -6,7 +6,6 @@ import '../../assets/styles/Notes.css';
 import {NoteList, NoteContent} from "../Components";
 import {Route} from 'react-router-dom';
 
-
 export class Notes extends React.Component {
     constructor(props){
         //Initiate local storage if no data is stored.

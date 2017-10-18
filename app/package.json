@@ -3,9 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-native-scripts": "1.5.0",
+    "babel-jest": "^21.2.0",
+    "enzyme": "^3.1.0",
     "jest-expo": "^21.0.2",
-    "react-test-renderer": "16.0.0-alpha.12"
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.0.0",
+    "react-native-scripts": "^1.5.0",
+    "react-test-renderer": "^16.0.0",
+    "enzyme-to-json": "^3.1.2",
+    "enzyme-adapter-react-16": "^1.0.1",
+    "enzyme": "^3.1.0",
+    "babel-jest": "^21.2.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -13,10 +21,20 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch"
+    "test": "jest"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "react-native",
+    "setupFiles": [
+      "./__test_setup__/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "transformIgnorePatterns": [
+      "./node_modules/(?!react-native|react-navigation)/"
+    ],
+    "collectCoverage": true
   },
   "dependencies": {
     "expo": "^21.0.0",
@@ -25,6 +43,7 @@
     "react-native": "^0.48.4",
     "react-native-elements": "^0.17.0",
     "react-navigation": "^1.0.0-beta.13",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-test-renderer": "^16.0.0-alpha.12"
   }
 }

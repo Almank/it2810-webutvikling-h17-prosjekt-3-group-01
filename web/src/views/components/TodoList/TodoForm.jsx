@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 export class TodoForm extends React.Component {
 	constructor(props){
@@ -34,5 +35,8 @@ export class TodoForm extends React.Component {
 			</div>
 		)
 	}
-
 }
+
+TodoForm.propTypes = {
+	onFormSubmit: PropTypes.func,
+};

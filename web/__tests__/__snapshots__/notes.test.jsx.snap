@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notes NoteContent Should render correctly 1`] = `
+<div
+  class="NoteContentContainer"
+>
+  <h1 />
+  <textarea />
+</div>
+`;
+
+exports[`Notes NoteLink Should render correctly 1`] = `
+<div
+  className="NoteLinkContainer"
+>
+  <Link
+    className="NoteButton"
+    replace={false}
+    to="/notebook/Note"
+  >
+    <h1>
+      Note
+    </h1>
+  </Link>
+  <button
+    className="RemoveButton"
+    type="button"
+    value="Note"
+  >
+    <span
+      className="glyphicon glyphicon-minus"
+    />
+  </button>
+</div>
+`;
+
+exports[`Notes NoteList Should render correctly 1`] = `
+<div
+  className="NoteList"
+>
+  <div
+    className="NoteListTitleContainer"
+  >
+    <h1>
+      Add new
+    </h1>
+    <div
+      className="addNewNoteButton"
+      onClick={[Function]}
+    >
+      <span
+        className="glyphicon glyphicon-plus"
+      />
+    </div>
+  </div>
+  <form
+    className="NoteForm"
+    onSubmit={[Function]}
+  >
+    <input
+      className="NoteField"
+      name="title"
+      type="text"
+    />
+    <input
+      className="NoteAdd"
+      type="submit"
+      value="ADD"
+    />
+  </form>
+  <div
+    className="CurrentNotes"
+  />
+</div>
+`;
+
+exports[`Notes Should render correctly 1`] = `
+<div>
+   
+  <h1
+    className="title"
+  >
+    Notes
+  </h1>
+  <div
+    className="NoteBook"
+  >
+    <NoteList
+      notes={
+        Object {
+          "default": Object {
+            "content": "no content",
+            "title": "default",
+          },
+        }
+      }
+      removeClick={[Function]}
+      updateStorage={[Function]}
+    />
+    <div
+      className="NoteEdit"
+    >
+      <div
+        className="NoteEditContent"
+      >
+        <Route
+          exact={true}
+          path="/notebook/:name"
+          render={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
