@@ -95,7 +95,7 @@
 
 .NoteLinkContainer:hover .NoteButton{
     text-decoration: none;
-    color: #FF9505;
+    color: #9e4500;
 }
 
 .NoteButton h1 {
@@ -133,7 +133,7 @@
 
 .NoteAdd{
     margin-right: 5px;
-    background-color: green;
+    background-color: #FF9505;
     color: white;
     border: none;
     border-radius: 0 4px 4px 0;
