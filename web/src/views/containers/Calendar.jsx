@@ -7,23 +7,23 @@ import '../../assets/styles/Calendar.css';
 
 export class Calendar extends React.Component {
     constructor(props) {
-
+        super(props);
         //Setting state if there is none stored.
         if(localStorage.getItem("emptyCalendar") === null){
             let data = {
-                dateToday: new Date().toISOString().slice(0, 10),
+                dateToday: this.getTime(),
                 children: [],
             };
             localStorage.setItem("emptyCalendar", JSON.stringify(data));
         }
-        super(props);
+
 
         //Fetching state from storage.
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
 
-        //Setting dateToday to current date.
-        data.dateToday = new Date().toISOString().slice(0, 10);
+        //Setting time, with Norwegian timezone.
+        data.dateToday = this.getTime();
 
         //Setting state to stored state.
         this.state = data;
@@ -33,6 +33,8 @@ export class Calendar extends React.Component {
         this.changeContent = this.changeContent.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleChangeClick = this.handleChangeClick.bind(this);
+        this.showForm = this.showForm.bind(this);
+        this.getTime = this.getTime.bind(this);
     }
 
     handleRemoveClick(event){
@@ -62,8 +64,9 @@ export class Calendar extends React.Component {
                     data[i].time = event.target.value;
                 else if (type === 'text')
                     data[i].text = event.target.value;
-                this.setState({children: data});
-                localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+                this.setState({children: data}, function(){
+                    localStorage.setItem("emptyCalendar", JSON.stringify(this.state));
+                });
             }
         }
     }
@@ -83,25 +86,23 @@ export class Calendar extends React.Component {
             .map((item,i) =>
             <div className='calendarBoxContent' key={i}>
                 <div className='leftCalendarBoxContent'>
-                    <input onBlur={this.handleChangeClick.bind(this, 'time')}
-                           type='time'
-                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].time}
-                           name={item.uniqueDate}
-                           className='changeField'/>
+                    <h2 type='time'
+                        name={item.uniqueDate}
+                        className='changeField'>{item.time}</h2>
                 </div>
 
                 <div className='middleCalendarBoxContent'>
-                    <input onBlur={this.handleChangeClick.bind(this, 'title')}
+                    <input onChange={this.handleChangeClick.bind(this, 'title')}
                            type='text'
-                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].title}
+                           value={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].title}
                            name={item.uniqueDate}
                            maxLength={10}
                            className='changeField'/>
                 </div>
                 <div className='rightCalendarBoxContent'>
-                    <textarea onBlur={this.handleChangeClick.bind(this, 'text')}
+                    <textarea onChange={this.handleChangeClick.bind(this, 'text')}
                            type='text'
-                           defaultValue={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].text}
+                           value={this.state.children.filter(a => a.uniqueDate === item.uniqueDate)[0].text}
                            name={item.uniqueDate}
                            maxLength={200}
                            className='changeField'/>
@@ -126,6 +127,10 @@ export class Calendar extends React.Component {
                 {myData}
             </div>
         );
+    }
+
+    getTime(){
+        return new Date(Date.now() - new Date().getTimezoneOffset() *60000).toISOString().slice(0, 10)
     }
 
     createAppointment(e) {
@@ -154,14 +159,14 @@ export class Calendar extends React.Component {
             //Creating new updated state.
             let data = {
                 children: newStateArray,
-                dateToday: new Date().toISOString().slice(0, 10),
+                dateToday: this.getTime(),
             };
 
             //Setting state.
-            this.setState(data);
-
-            //Updating localstorage to store new data.
-            localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            this.setState(data, function(){
+                //Updating localstorage to store new data.
+                localStorage.setItem("emptyCalendar", JSON.stringify(data));
+            });
 
             //Resetting form values.
             document.getElementsByClassName('dateInput')[0].value = null;
@@ -194,30 +199,22 @@ export class Calendar extends React.Component {
         //Fetching data from localstorage
         let data = localStorage.getItem("emptyCalendar");
         data = JSON.parse(data);
-
-        //Setting dateToday to current date.
-        data.dateToday = e.props.dateFull;
-
         //Setting state to stored state.
-        this.state = data;
-
-        //Updating localstorage to store new data.
-        localStorage.setItem("emptyCalendar", JSON.stringify(data));
-
-        //Forcing update of the DOM to change content.
-        this.forceUpdate();
+        this.setState({dateToday: e.props.dateFull}, function(){
+            //Updating localstorage to store new data.
+            localStorage.setItem("emptyCalendar", JSON.stringify(data));
+        });
     }
 
     showForm(){
         //Toggle form.
         let element = document.querySelector('.formContainer');
         element.style.display = element.style.display === 'none' ? 'flex' : 'none';
-        let today = new Date().toISOString().slice(0, 10);
-        document.querySelector(".dateInput").value = today;
+        document.querySelector(".dateInput").value = this.state.dateToday;
         let fields = document.querySelectorAll(".inputField");
         for (let i = 0; i < fields.length; i++)
             fields[i].style.border = '1px solid lightgray';
-
+        document.querySelector(".dateInput").style.border = '2px solid green';
     }
 
     render(){

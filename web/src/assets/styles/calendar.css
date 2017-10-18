@@ -204,6 +204,10 @@
     margin: 0;
 }
 
+.leftCalendarBoxContent .changeField {
+    font-size: 20px;
+}
+
 .rightCalendarBoxContent h2 {
     margin: 0 15px;
 }
