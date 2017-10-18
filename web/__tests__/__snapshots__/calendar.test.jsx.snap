@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CALENDAR: AppointmentForm Should render correctly 1`] = `
+<div
+  class="formContainer"
+  style="display:none"
+>
+  <button
+    class="absolute-icon-top-right"
+  >
+    <span
+      class="glyphicon glyphicon-remove"
+    />
+  </button>
+  <form
+    class="form"
+  >
+    <h3>
+      Create new appointment
+    </h3>
+    <label
+      for="date"
+    >
+      Date
+    </label>
+    <input
+      class="dateInput"
+      id="date"
+      name="date"
+      required=""
+      type="date"
+    />
+    <label
+      for="time"
+    >
+      Time
+    </label>
+    <input
+      class="timeInput"
+      id="time"
+      required=""
+      type="time"
+    />
+    <label
+      for="title"
+    >
+      Title
+    </label>
+    <input
+      class="titleInput"
+      id="title"
+      maxlength="19"
+      name="title"
+      type="text"
+    />
+    <label
+      for="what"
+    >
+      What
+    </label>
+    <textarea
+      class="textInput"
+      id="what"
+      maxlength="200"
+      type="text"
+    />
+    <input
+      class="submitButton"
+      type="submit"
+    />
+  </form>
+</div>
+`;
+
+exports[`CALENDAR: ContentHeader Should render correctly 1`] = `
+<div
+  class="calendarBoxContent"
+>
+  <div
+    class="leftCalendarBoxContent"
+  >
+    <h2>
+      When
+    </h2>
+  </div>
+  <div
+    class="middleCalendarBoxContent"
+  >
+    <h2>
+      Title
+    </h2>
+  </div>
+  <div
+    class="rightCalendarBoxContent"
+  >
+    <h2>
+      About
+    </h2>
+  </div>
+  <button
+    class="icon-topright"
+  >
+    <span
+      class="glyphicon glyphicon-plus"
+    />
+  </button>
+</div>
+`;
+
+exports[`CALENDAR: DayEle Should render correctly 1`] = `
+<button
+  class="dayBox"
+>
+  <p
+    class="dayName"
+  >
+    Monday
+  </p>
+  <h1
+    class="dayDate"
+  />
+</button>
+`;
+
+exports[`CALENDAR: WeekCal Should render(shallow) correctly 1`] = `
+<div
+  className="weekBox"
+>
+  <DayEle
+    dateFull="2017-10-17"
+    dateName="TODAY"
+    dayDate={17}
+    key="2017-10-17"
+  />
+  <DayEle
+    dateFull="2017-10-18"
+    dateName="TOMORROW"
+    dayDate={18}
+    key="2017-10-18"
+  />
+  <DayEle
+    dateFull="2017-10-19"
+    dateName="THURSDAY"
+    dayDate={19}
+    key="2017-10-19"
+  />
+  <DayEle
+    dateFull="2017-10-20"
+    dateName="FRIDAY"
+    dayDate={20}
+    key="2017-10-20"
+  />
+  <DayEle
+    dateFull="2017-10-21"
+    dateName="SATURDAY"
+    dayDate={21}
+    key="2017-10-21"
+  />
+  <DayEle
+    dateFull="2017-10-22"
+    dateName="SUNDAY"
+    dayDate={22}
+    key="2017-10-22"
+  />
+  <DayEle
+    dateFull="2017-10-23"
+    dateName="MONDAY"
+    dayDate={23}
+    key="2017-10-23"
+  />
+</div>
+`;

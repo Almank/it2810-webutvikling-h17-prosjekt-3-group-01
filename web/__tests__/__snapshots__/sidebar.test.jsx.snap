@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Should render correctly 1`] = `
+<Link
+  className="Button"
+  replace={false}
+  to="/"
+>
+  <span
+    className="glyphicon image"
+  />
+</Link>
+`;
+
+exports[`SideBar Should render correctly 1`] = `
+<div
+  className="sideBar"
+>
+  <Button
+    icon="glyphicon-home"
+    link="/"
+  />
+  <Button
+    icon="glyphicon-list-alt"
+    link="/todolist"
+  />
+  <Button
+    icon="glyphicon-pencil"
+    link="/notebook"
+  />
+</div>
+`;

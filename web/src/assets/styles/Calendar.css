@@ -9,7 +9,7 @@
 .title {
     text-align: center;
     font-weight: 700;
-    border-bottom:1px solid rgba(155,155,155,0.5);
+    border-bottom: 1px solid rgba(155, 155, 155, 0.5);
     padding-bottom: 15px;
     margin-bottom: 5px;
 }
@@ -26,21 +26,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-basis:100px;
-    margin:15px;
-    border: 1px solid rgba(155,155,155,0.5);
+    flex-basis: 100px;
+    margin: 15px;
+    border: 1px solid rgba(155, 155, 155, 0.5);
     background-color: #FFF;
     height: 100px;
 }
 
 .dayBox p {
-    margin:0;
+    margin: 0;
     margin-top: 21px;
-    font-size:11px;
+    font-size: 11px;
 }
 
 .dayBox h1 {
-    font-size:32px;
+    font-size: 32px;
 }
 
 .dayBox:hover {
@@ -58,8 +58,8 @@
     align-self: center;
     background-color: white;
     width: 80ch;
-    height:auto;
-    margin-top:35px;
+    height: auto;
+    margin-top: 35px;
     margin-bottom: 25px;
     padding: 0 25px;
 }
@@ -92,13 +92,13 @@
 }
 
 .form {
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-self: center;
 }
 
 .form h3 {
-    margin-top:0;
+    margin-top: 0;
     border-bottom: 1px solid #35393a;
     margin-bottom: 15px;
 }
@@ -113,7 +113,7 @@
     resize: none;
 }
 
-.formContainer{
+.formContainer {
     display: none;
     position: absolute;
     left: 50%;
@@ -129,13 +129,13 @@
     padding-bottom: 20px;
     -webkit-box-shadow: -2px 1px 23px -3px #F6F6F6;
     -moz-box-shadow: -2px 1px 23px -3px #F6F6F6;
-    box-shadow: -2px 1px 23000px 1000px rgba(0,0,0,0.5);
+    box-shadow: -2px 1px 23000px 1000px rgba(0, 0, 0, 0.5);
 }
 
 .submitButton {
     background-color: #FF9505;
     color: white;
-    border:none;
+    border: none;
 }
 
 .submitButton:hover {
@@ -144,13 +144,13 @@
 
 .absolute-icon-top-right {
     position: absolute;
-    right:0px;
-    top:0px;
+    right: 0px;
+    top: 0px;
     padding: 7.5px;
     font-size: 23px;
     background-color: transparent;
-    border:none;
-    color:#d9534f;
+    border: none;
+    color: #d9534f;
 }
 
 .absolute-icon-top-right:hover span {
@@ -218,12 +218,11 @@
 }
 
 /* Mobile - portrait */
-@media only screen and (max-width : 680px) {
-
+@media only screen and (max-width: 680px) {
     .dayBox {
         flex-basis: 90px;
         height: 90px;
-        margin:0;
+        margin: 0;
         padding: 0;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
@@ -275,14 +274,14 @@
     }
 
     .formContainer {
-        top:0px;
-        left:0px;
+        top: 0px;
+        left: 0px;
         width: 100vw;
         height: 100vh;
-        margin:0;
+        margin: 0;
         position: fixed;
         -webkit-transform: none;
-        -moz-transform:none;
+        -moz-transform: none;
         transform: none;
         z-index: 1;
     }
@@ -302,7 +301,7 @@
     }
 
     .dateInput, .timeInput {
-        width:65vw;
+        width: 65vw;
     }
 
     .form {
