@@ -40,7 +40,6 @@ export class TodoCatelogForm extends React.Component {
 }
 
 TodoCatelogForm.PropTypes = {
-    key: PropTypes.number,
     value: PropTypes.number,
     onClick: PropTypes.func,
 };

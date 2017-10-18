@@ -31,7 +31,6 @@ export class ToDoListItem extends React.Component{
 }
 
 ToDoListItem.PropTypes = {
-    key: PropTypes.number,
     value: PropTypes.number,
     onClick: PropTypes.func,
 };

@@ -52,6 +52,5 @@ NoteContent.PropTypes = {
     data: PropTypes.object,
     onChange: PropTypes.func,
     update: PropTypes.bool,
-    key: PropTypes.number,
     id: PropTypes.number,
 };

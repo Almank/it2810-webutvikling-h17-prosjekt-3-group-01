@@ -29,7 +29,6 @@ export const NoteLink = ({index, title, onClick}) => {
 NoteLink.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
-    key: PropTypes.number,
     onClick: PropTypes.func,
 };
 
