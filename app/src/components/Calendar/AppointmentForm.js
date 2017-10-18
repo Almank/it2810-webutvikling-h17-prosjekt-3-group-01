@@ -4,7 +4,8 @@
 import React from 'react';
 import {ContentHeader} from "./ContentHeader";
 import {CalendarButton} from "./CalendarButton";
-import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import { View, Text, TextInput, Modal, StyleSheet } from 'react-native';
 
 export class AppointmentForm extends React.Component {
     constructor(props){
@@ -92,7 +93,7 @@ export class AppointmentForm extends React.Component {
 }
 
 AppointmentForm.PropTypes = {
-    getValues: React.PropTypes.array.isRequired,
+    getValues: PropTypes.array.isRequired,
 };
 
 const styles = StyleSheet.create({

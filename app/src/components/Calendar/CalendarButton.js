@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 export class CalendarButton extends React.Component {
@@ -26,9 +27,9 @@ export class CalendarButton extends React.Component {
 }
 
 CalendarButton.PropTypes = {
-    onpress: React.PropTypes.func.isRequired,
-    text: React.PropTypes.string.isRequired,
-    backgroundC: React.PropTypes.string,
+    onpress: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    backgroundC: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
