@@ -3,7 +3,9 @@
  */
 import React from 'react';
 import {ContentHeader} from "./ContentHeader";
-import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import {CalendarButton} from "./CalendarButton";
+import PropTypes from 'prop-types';
+import { View, Text, TextInput, Modal, StyleSheet } from 'react-native';
 
 export class AppointmentForm extends React.Component {
     constructor(props){
@@ -36,14 +38,11 @@ export class AppointmentForm extends React.Component {
     render(){
         return (
             <View>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.setModalVisible(true)
-                        }}
-                        title='Press me'
-                        style={[styles.addAppButton, styles.shadow]}>
-                    <Text style={styles.textButton}>ADD APPOINTMENT</Text>
-                </TouchableOpacity>
+                <CalendarButton onpress={() => {
+                    this.setModalVisible(true)
+                    }}
+                    text='ADD APPOINTMENT'
+                />
                 <ContentHeader />
                 <Modal
                     animationType="slide"
@@ -72,24 +71,20 @@ export class AppointmentForm extends React.Component {
                         <TextInput onChangeText={(textValue) => this.setState({textValue})}
                                    value={this.state.textValue}
                                    style={[styles.inputField, styles.shadow]}/>
-                        <TouchableOpacity onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
-                            //To avoid getting stuck by having alert behind modal.
-                            setTimeout(() => {
-                                this.submitInput();
-                            }, 100);
-
+                        <CalendarButton
+                            onpress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                                //To avoid getting stuck by having alert behind modal.
+                                setTimeout(() => {
+                                    this.submitInput();
+                                }, 100);
                             }}
-                            title='Submit'
-                            style={[styles.addAppButton, styles.shadow]}>
-                            <Text style={styles.textButton}>Submit</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible)
-                        }}
-                                          style={[styles.addAppButton, styles.shadow]}>
-                            <Text style={styles.textButton}>Cancel</Text>
-                        </TouchableOpacity>
+                            text={'Submit'}/>
+                        <CalendarButton
+                            onpress={() => {
+                                this.setModalVisible(!this.state.modalVisible)
+                            }}
+                            text={'Cancel'}/>
                     </View>
                 </Modal>
             </View>
@@ -98,26 +93,10 @@ export class AppointmentForm extends React.Component {
 }
 
 AppointmentForm.PropTypes = {
-    getValues: React.PropTypes.array.isRequired,
+    getValues: PropTypes.array.isRequired,
 };
 
 const styles = StyleSheet.create({
-    addAppButton: {
-        marginTop: 20,
-        marginLeft:'15%',
-        marginRight:'15%',
-        flexBasis: 40,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FF9505',
-        borderWidth: 1,
-        borderColor: 'rgba(155,155,155,0.5)',
-    },
-    textButton: {
-        fontSize:16,
-        color:'white',
-    },
     formContainer: {
         display: 'flex',
         justifyContent: 'center',

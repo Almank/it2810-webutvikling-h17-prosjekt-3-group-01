@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import {Week} from '../components/Calendar/Week';
 import {AppointmentForm} from "../components/Calendar/AppointmentForm";
+import {CalendarButton} from "../components/Calendar/CalendarButton";
 
 export class Calendar extends React.Component {
     constructor(props) {
@@ -10,21 +11,23 @@ export class Calendar extends React.Component {
         this.state = {
             dateToday: new Date().toISOString().slice(0, 10),
             modalVisible: false,
-            children: [
-                {date: '2017-10-18', time: '14:15', title: 'Hello World', text: 'This is text', uniqueDate: new Date()},
-            ],
+            children: [],
         };
 
         //Binding functions
         this.createAppointment = this.createAppointment.bind(this);
         this.changeContent = this.changeContent.bind(this);
         this.setStorage = this.setStorage.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.loadData();
-
     }
 
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
+    }
+
+    handleRemoveClick(uniqueDate){
+        this.setState({tempUnique: uniqueDate});
     }
 
     emptyScheduleCheck(){
@@ -43,36 +46,14 @@ export class Calendar extends React.Component {
             .map((item,i) =>
                 <View key={i}>
                     <TouchableOpacity onPress={() => {
-                        this.setModalVisible(true)}}
+                        this.handleRemoveClick(item.uniqueDate);
+                        this.setModalVisible(true);
+                        console.log(item.uniqueDate)}}
                         style={styles.showAppointments}>
                         <Text style={styles.appointmentItem}>{item.time}</Text>
                         <Text style={styles.appointmentItem}>{item.title}</Text>
                         <Text style={styles.appointmentItem}>{item.text}</Text>
                     </TouchableOpacity>
-                    <Modal
-                        animationType="slide"
-                        transparent={false}
-                        visible={this.state.modalVisible}
-                        onRequestClose={() => {alert("Form has been closed.")}}>
-                        <View style={styles.formContainer}>
-                            <TouchableOpacity onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                                let data = this.state.children;
-                                data = data.filter(a => String(a.uniqueDate) !== String(item.uniqueDate));
-                                this.setState({children: data});
-                                this.setStorage(data);
-                            }}
-                            style={[styles.addAppButton, styles.shadow, styles.removeButton]}>
-                                <Text style={styles.textButton}>Delete</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible)
-                            }}
-                                              style={[styles.addAppButton, styles.shadow]}>
-                                <Text style={styles.textButton}>Cancel</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </Modal>
                 </View>
             );
 
@@ -153,10 +134,10 @@ export class Calendar extends React.Component {
             };
 
             //Setting state.
-            this.setState(data);
-
-            //Setting updated values to storage.
-            this.setStorage(data);
+            this.setState({children: newStateArray,dateToday: new Date().toISOString().slice(0, 10)}, function(){
+                //Setting updated values to storage.
+                this.setStorage(data);
+            });
 
         } else {
             //If there are invalid values.
@@ -185,8 +166,34 @@ export class Calendar extends React.Component {
             <View style={styles.container}>
                 <Week change={this.changeContent} />
                 <View style={styles.bottomContainer}>
-                    <AppointmentForm getValues={ arr => this.createAppointment(arr) } />
+                    <AppointmentForm getValues={ arr => this.createAppointment(arr)} styles={this.styles} />
                     {this.emptyScheduleCheck()}
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {alert("Form has been closed.")}}>
+                        <View style={styles.formContainer}>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible);
+                                    let data = this.state.children;
+                                    data = data.filter(a => String(a.uniqueDate) !== String(this.state.tempUnique));
+                                    this.setState({children: data}, function() {
+                                        this.setStorage(data);
+                                        this.forceUpdate();
+                                    });
+                                }}
+                                text={'Delete'}
+                                backgroundC={'red'}/>
+                            <CalendarButton
+                                onpress={() => {
+                                    this.setModalVisible(!this.state.modalVisible)
+                                }}
+                                text={'Cancel'}>
+                            </CalendarButton>
+                        </View>
+                    </Modal>
                 </View>
             </View>
         );
@@ -210,10 +217,12 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop:2,
-        paddingBottom:8,
-        paddingTop:8,
-        marginBottom:2,
+        marginTop:4,
+        paddingBottom:7,
+        paddingTop:7,
+        marginBottom:4,
+        borderBottomWidth:.5,
+        borderBottomColor:'black',
     },
     appointmentItem: {
         flexBasis:'33%',
@@ -230,29 +239,10 @@ const styles = StyleSheet.create({
     scrollView: {
         height: '100%',
     },
-    addAppButton: {
-        marginTop: 20,
-        marginLeft:'15%',
-        marginRight:'15%',
-        flexBasis: 40,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FF9505',
-        borderWidth: 1,
-        borderColor: 'rgba(155,155,155,0.5)',
-    },
     formContainer: {
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
         height: '100%',
     },
-    textButton: {
-        fontSize:16,
-        color:'white',
-    },
-    removeButton: {
-        backgroundColor:'red',
-    }
 });

@@ -2,6 +2,7 @@
  * Created by martinlunde on 27.09.2017.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -63,13 +64,17 @@ export class NoteContent extends React.Component {
                     <Button title="Delete Note"
                             fontSize={14}
                             onPress={this.handleDelete}
-                            buttonStyle={styles.DeleteButton}
+                            buttonStyle={styles.deleteButton}
                     />
                 </View>
             </View>
         );
     }
 }
+
+NoteContent.PropTypes = {
+    navigation: PropTypes.navigation
+};
 
 const styles = StyleSheet.create({
     header: {
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
         height: 260,
         textAlignVertical: 'top',
     },
-    DeleteButton: {
+    deleteButton: {
         marginTop: 10,
         backgroundColor: '#FF9505',
     }
