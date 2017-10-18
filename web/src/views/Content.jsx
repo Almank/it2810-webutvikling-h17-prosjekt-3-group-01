@@ -9,7 +9,6 @@ import { Notes } from "./containers/Notes";
 import {Calendar} from "./containers/Calendar";
 import {ToDoApp} from "./containers/TodoApp";
 
-
 export class Content extends React.Component {
     render(){
         return (

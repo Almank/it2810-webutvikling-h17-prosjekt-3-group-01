@@ -2,7 +2,7 @@
  * Created by martinlunde on 27.09.2017.
  */
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 //The class NoteLink renders a note-link-object for the parent NoteList.
@@ -27,7 +27,9 @@ export const NoteLink = ({index, title, onClick}) => {
 
 
 NoteLink.propTypes = {
-    title: propTypes.string,
+    title: PropTypes.string,
+    content: PropTypes.string,
+    onClick: PropTypes.func,
 };
 
 NoteLink.defaultProps = {
