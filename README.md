@@ -35,11 +35,26 @@ The project is split into to main folders: `app` and `web`, which respectively r
 #### App
 The file structure for the app is mainly the same as the website.
 
-### Setup <a name="Setup"></a>
-To run the application you need:
-* A web server to host the website
-* A web browser to access the website
+#### How to install & run the application
 
+* Website
+    * Make sure you have node with npm installed.
+    * Clone this Git-repository: https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-3-group-01
+    * Navigate to the projects web folder: "cd it2810-webutvikling-h17-prosjekt-3-group-01/web
+    * Run `npm install` to install the required dependecies
+    * Run `npm start`
+    * Navigate to localhost:8083 in your browser.
+
+* App
+    * Install the Expo application from your phones appstore.
+    * Clone this Git-repository: https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-3-group-01
+    * Navigate to the projects app folder: "cd it2810-webutvikling-h17-prosjekt-3-group-01/app
+    * Run `npm install -g npm@4` as expo recommends npm@4.6.1 to run.    
+    * Run `npm start`
+    * (If you get an error upon startup, run the following commands:
+        - `sudo sysctl -w kern.maxfiles=5242880`
+        - `sudo sysctl -w kern.maxfilesperproc=524288`
+    * Use Expo on your phone to scan the QR code and view the app. (The javascript bundle may take some time to compile)
 
 ##### Website-dependencies:
 
@@ -66,23 +81,3 @@ Dependencies:
     "react-native-elements": "^0.17.0",
     "react-navigation": "^1.0.0-beta.13",
     "react-router-dom": "^4.2.2"
-
-
-#### How to install & run the application
-
-* Website
-    * Make sure you have node.js installed.
-    * Clone this Git-repository: https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-3-group-01
-    * Navigate to the project web folder: "cd it2810-webutvikling-h17-prosjekt-3-group-01/web
-    * Run "npm i».
-    * Run "npm start».
-    * Navigate to localhost:8083 in your browser.
-
-* App
-    * Install the Expo app on your phone.
-    * Clone this Git-repository: https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-3-group-01
-    * Navigate to the project web folder: "cd it2810-webutvikling-h17-prosjekt-3-group-01/app
-    * Run `npm install -g npm@4` as expo requires npm version <5 to run.    
-    * Run `npm start`.
-    * (If required: run: sudo sysctl -w kern.maxfiles=5242880 and run: sudo sysctl -w kern.maxfilesperproc=524288
-    * Use Expo on your phone to view the app.
