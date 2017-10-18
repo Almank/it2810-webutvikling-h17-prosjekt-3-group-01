@@ -62,7 +62,7 @@ export class Calendar extends React.Component {
                                 this.setState({children: data});
                                 this.setStorage(data);
                             }}
-                            style={[styles.addAppButton, styles.shadow]}>
+                            style={[styles.addAppButton, styles.shadow, styles.removeButton]}>
                                 <Text style={styles.textButton}>Delete</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {
@@ -243,6 +243,19 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'rgba(155,155,155,0.5)',
     },
+    formContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        height: '100%',
+    },
+    textButton: {
+        fontSize:16,
+        color:'white',
+    },
+    removeButton: {
+        backgroundColor:'red',
+    }
 
 
 });
