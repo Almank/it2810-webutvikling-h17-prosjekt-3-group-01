@@ -33,12 +33,14 @@ export class ToDoApp extends React.Component{
 	}
 
 	updateItems(newItem){
-		let item = {item:newItem,isDone:false};
-		let newtodo = this.state;
-		let allItems = this.state.Todo[this.state.selectedItem].items.concat([item]);
-		newtodo.Todo[this.state.selectedItem].items = allItems;
-		this.setState(newtodo);
-		localStorage.setItem("todo", JSON.stringify(this.state));
+		if(this.state.selectedItem in this.state.Todo) {
+            let item = {item: newItem, isDone: false};
+            let newtodo = this.state;
+            let allItems = this.state.Todo[this.state.selectedItem].items.concat([item]);
+            newtodo.Todo[this.state.selectedItem].items = allItems;
+            this.setState(newtodo);
+            localStorage.setItem("todo", JSON.stringify(this.state));
+        }
 	}
 
 	deleteItem(index){
@@ -68,7 +70,7 @@ export class ToDoApp extends React.Component{
 
 	AddCatalog(newCatalog){
 		if(newCatalog) {
-            let Catalog = {name: newCatalog, items: [{item: 'Todo item #1', isDone: false}]};
+            let Catalog = {name: newCatalog, items: []};
             let newtodo = this.state.Todo.concat([Catalog]);
             this.setState({Todo: newtodo});
             localStorage.setItem("todo", JSON.stringify(this.state));
@@ -91,13 +93,11 @@ export class ToDoApp extends React.Component{
 	render(){
         let todoItems;
 		if(this.state.selectedItem in this.state.Todo){
-			console.log("yay");
 			todoItems = this.state.Todo[this.state.selectedItem].items;
 		} else {
 			todoItems = [];
 		}
 
-		console.log(todoItems);
 		return (
 			<div className="todo-wrapper">
 				<h1 className={'title'} >To-do list</h1>
