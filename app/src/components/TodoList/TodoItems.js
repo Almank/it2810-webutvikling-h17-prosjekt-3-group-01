@@ -3,7 +3,6 @@ import {Text, View, FlatList, TextInput, StyleSheet, Platform, Keyboard} from 'r
 import {Button} from 'react-native-elements';
 
 const isAndroid = Platform.OS === "android";
-const viewPadding = 10;
 
 export class TodoItems extends React.Component {
     constructor(props){
@@ -23,12 +22,12 @@ export class TodoItems extends React.Component {
     componentDidMount() {
         this.keyboardListener1 = Keyboard.addListener(
             isAndroid ? "keyboardDidShow" : "keyboardWillShow",
-            e => this.setState({ viewMargin: e.endCoordinates.height + viewPadding })
+            e => this.setState({ viewMargin: e.endCoordinates.height - 40})
         );
 
         this.keyboardListener2 = Keyboard.addListener(
             isAndroid ? "keyboardDidHide" : "keyboardWillHide",
-            () => this.setState({ viewMargin: viewPadding })
+            () => this.setState({ viewMargin: 10 })
         );
     }
 
@@ -67,7 +66,11 @@ export class TodoItems extends React.Component {
                     <Text style={styles.listItem}>
                         {item}
                     </Text>
-                    <Button title="X" onPress={() => this.deleteTask(item)} />
+                    <Button title="X"
+                            onPress={() => this.deleteTask(item)}
+                            backgroundColor={'transparent'}
+                            color={'rgba(0,0,0,0.3)'}
+                    />
                 </View>
                 <View style={styles.hr} />
             </View>
@@ -114,12 +117,14 @@ export class TodoItems extends React.Component {
                     <Button
                         title="Add"
                         onPress={this.addTask}
-                        color="#FF9505"
-                        backgroundColor="red"
+                        color="white"
+                        backgroundColor="#FF9505"
                     />
                 </View>
                 <Button title="Delete Category"
                         onPress={this.deleteCategory}
+                        backgroundColor={'transparent'}
+                        color={'rgba(255,0,0,0.4)'}
                 />
             </View>
         );
@@ -139,11 +144,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",
-        padding: viewPadding,
+        padding: 10,
         paddingTop: 20
     },
     list: {
-        width: "100%"
+        width: "100%",
+        flexBasis:'20%',
     },
     listItem: {
         paddingTop: 2,
@@ -151,11 +157,10 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     inputview:{
-        flex: 1,
+        flexBasis:60,
         flexDirection: 'row',
         alignItems: 'flex-end'
     },
-
     hr: {
         height: 1,
         backgroundColor: "grey"
@@ -171,6 +176,12 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         borderColor: "#FF9505",
         borderWidth: isAndroid ? 0 : 1,
-        width: "90%",
+        width: "80%",
+        marginLeft:5,
+        backgroundColor:'white',
     },
+    delBtn: {
+        backgroundColor: 'transparent',
+        color:'black',
+    }
 });

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import {StyleSheet, Text, View, FlatList, AsyncStorage, Button, TextInput, Keyboard, Platform, TouchableHighlight} from "react-native";
 import {TodoItemLink} from "./TodoItemLink";
-
 const isAndroid = Platform.OS === "android";
-const viewPadding = 10;
 
 export class TodoList extends Component {
     constructor(props){
@@ -47,12 +45,12 @@ export class TodoList extends Component {
     componentDidMount() {
         this.keyboardListener1 = Keyboard.addListener(
             isAndroid ? "keyboardDidShow" : "keyboardWillShow",
-            e => this.setState({ viewMargin: e.endCoordinates.height + viewPadding })
+            e => this.setState({ viewMargin: e.endCoordinates.height - 40})
         );
 
         this.keyboardListener2 = Keyboard.addListener(
             isAndroid ? "keyboardDidHide" : "keyboardWillHide",
-            () => this.setState({ viewMargin: viewPadding })
+            () => this.setState({ viewMargin: 10 })
         );
     }
 
@@ -174,11 +172,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",
-        padding: viewPadding,
+        padding: 10,
         paddingTop: 20
     },
     list: {
-        width: "100%"
+        width: "100%",
+        flexBasis:'20%',
     },
     listItem: {
         paddingTop: 2,
@@ -186,7 +185,7 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     inputview:{
-        flex: 1,
+        flexBasis:60,
         flexDirection: 'row',
         alignItems: 'flex-end'
     },
