@@ -80,6 +80,7 @@
 
 .col1{
     height: auto;
+    min-width: 226px;
 }
 
 .col2{
@@ -103,6 +104,14 @@
     background-color: white;
     border: 0 solid #35393a;
     border-radius: 0 4px 4px 0;
+}
+
+.delete_button{
+    background-color: #a41e1e;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    margin: 0 20px 10px 20px;
 }
 
 .addbutton {

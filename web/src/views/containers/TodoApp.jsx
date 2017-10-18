@@ -8,9 +8,14 @@ export class ToDoApp extends React.Component{
 		super(props);
 
 		if(localStorage.getItem("todo") === null){
-			let data = {Todo: [{name:"Primary",
-                items:[]}],
-								selectedItem: "0"};
+			let data = {Todo: [
+							{name:"Primary",
+								items:[]
+							}
+						],
+						selectedItem: "0",
+						filter:[{keyword:'',Status:"SHOW_ALL"}]
+						};
 			localStorage.setItem("todo", JSON.stringify(data));
 		}
 		let todo = localStorage.getItem("todo");
@@ -24,15 +29,18 @@ export class ToDoApp extends React.Component{
 		this.searchItem = this.searchItem.bind(this);
 		this.filterItem = this.filterItem.bind(this);
 		this.setSelectedCatalog = this.setSelectedCatalog.bind(this);
+		this.DeleteCatalog = this.DeleteCatalog.bind(this);
 	}
 
 	updateItems(newItem){
-		let item = {item:newItem,isDone:false};
-		let newtodo = this.state;
-		let allItems = this.state.Todo[this.state.selectedItem].items.concat([item]);
-		newtodo.Todo[this.state.selectedItem].items = allItems;
-		this.setState(newtodo);
-		localStorage.setItem("todo", JSON.stringify(this.state));
+		if(this.state.selectedItem in this.state.Todo) {
+            let item = {item: newItem, isDone: false};
+            let newtodo = this.state;
+            let allItems = this.state.Todo[this.state.selectedItem].items.concat([item]);
+            newtodo.Todo[this.state.selectedItem].items = allItems;
+            this.setState(newtodo);
+            localStorage.setItem("todo", JSON.stringify(this.state));
+        }
 	}
 
 	deleteItem(index){
@@ -61,9 +69,18 @@ export class ToDoApp extends React.Component{
 	}
 
 	AddCatalog(newCatalog){
-		let Catalog = {name:newCatalog,items:[{item:'Todo item #1',isDone:false}]};
-		let newtodo = this.state.Todo.concat([Catalog]);
-		this.setState({Todo: newtodo});
+		if(newCatalog) {
+            let Catalog = {name: newCatalog, items: []};
+            let newtodo = this.state.Todo.concat([Catalog]);
+            this.setState({Todo: newtodo});
+            localStorage.setItem("todo", JSON.stringify(this.state));
+        }
+	}
+
+	DeleteCatalog(){
+		let allCatalogs = this.state.Todo;
+		allCatalogs.splice(this.state.selectedItem, 1);
+		this.setState({Todo: allCatalogs});
 		localStorage.setItem("todo", JSON.stringify(this.state));
 	}
 
@@ -74,6 +91,13 @@ export class ToDoApp extends React.Component{
 	}
 
 	render(){
+        let todoItems;
+		if(this.state.selectedItem in this.state.Todo){
+			todoItems = this.state.Todo[this.state.selectedItem].items;
+		} else {
+			todoItems = [];
+		}
+
 		return (
 			<div className="todo-wrapper">
 				<h1 className={'title'} >To-do list</h1>
@@ -82,12 +106,13 @@ export class ToDoApp extends React.Component{
 						<h3>To-do lists:</h3>
 						<TodoCatelogForm onFormSubmit = {this.AddCatalog} />
 						<TodoCatelog selectedID={this.state.selectedItem} onClick={this.setSelectedCatalog} Todos = {this.state.Todo} />
+						<input className="delete_button" type="submit" value="Delete Selected" onClick={this.DeleteCatalog}/>
 					</div>
 					<div className="col2">
 						<h3>What do you want to-do?</h3>
 						<TodoFilter onFilter = {this.filterItem} onSearch = {this.searchItem} filter={this.state.filter}/>
 						<TodoForm onFormSubmit = {this.updateItems} />
-						<TodoList  items = {this.state.Todo[this.state.selectedItem].items} filter = {this.state.filter} onDelete={this.deleteItem}/>
+						<TodoList  items = {todoItems} filter = {this.state.filter} onDelete={this.deleteItem}/>
 					</div>
 				</div>
 			</div>
