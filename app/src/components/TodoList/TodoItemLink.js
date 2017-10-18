@@ -1,13 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 
-export class NoteLink extends React.Component {
+export class TodoItemLink extends React.Component {
     constructor(props){
         super(props);
         this.navigateToContent = this.navigateToContent.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onChildContentChange = this.onChildContentChange.bind(this);
+        this.onCategoryDelete = this.onCategoryDelete.bind(this);
     }
 
     navigateToContent(){
@@ -16,16 +16,21 @@ export class NoteLink extends React.Component {
             content: this.props.content,
             navigation: this.props.navigation,
             onPress: this.onDelete,
-            onContentChange: this.onChildContentChange,
+            handleTaskChange: this.onChildContentChange,
+            deleteCategory: this.onCategoryDelete,
         });
     }
 
-    onChildContentChange(title, text){
-        this.props.onContentChange(title, text);
+    onCategoryDelete(title){
+        this.props.handleCategoryDelete(title);
     }
 
-    onDelete(){
-        this.props.onClick(this.props.title);
+    onChildContentChange(title, content){
+        this.props.handleTaskChange(title, content);
+    }
+
+    onDelete(title, category){
+        this.props.onClick(title, category);
     }
 
     render(){
@@ -33,7 +38,7 @@ export class NoteLink extends React.Component {
             <TouchableHighlight onPress={this.navigateToContent}>
                 <View style={styles.NoteLink}>
                     <Text style={styles.Title}>
-                          {this.props.title}
+                        {this.props.title}
                     </Text>
                     <Text style={styles.Title}>
                         >
@@ -42,17 +47,8 @@ export class NoteLink extends React.Component {
             </TouchableHighlight>
         )
     }
-}
 
-NoteLink.PropTypes = {
-    navigation: PropTypes.navigation,
-    title: PropTypes.string,
-    content: PropTypes.string,
-    index: PropTypes.number,
-    key: PropTypes.number.isRequired,
-    onContentChange: PropTypes.func,
-    onClick: PropTypes.func,
-};
+}
 
 const styles = StyleSheet.create({
     NoteLink: {
